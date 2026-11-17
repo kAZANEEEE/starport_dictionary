@@ -7,7 +7,7 @@ name = "starport-dictionary"
 version = "0.1.0"
 description = "用自然语言描述需求，从本地知识库找现成解决方案"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["PyYAML>=6.0"]
 
 [project.optional-dependencies]
 dev = ["pytest"]
