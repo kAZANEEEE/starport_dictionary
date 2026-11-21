@@ -31,10 +31,10 @@ utterances:
     - 两边都有的那些给我挑出来
     - 有哪些是只在 A 里没有的
   technical:
-    - set 运算
-    - & | -
-    - frozenset
-    - 为什么 set 不能保序
+    - "set 运算"
+    - "& | - 运算符"
+    - "frozenset"
+    - "为什么 set 不能保序"
   short_queries:
     - 交集
     - 并集
