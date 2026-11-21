@@ -15,6 +15,7 @@ r"""基线检索器：只靠 object/action 的别名去够用户那串字。
 
 from __future__ import annotations
 
+import math
 import re
 from dataclasses import dataclass
 
@@ -54,15 +55,22 @@ def _strength(term: str, query_n: str) -> int:
     return 0
 
 
-def _best(terms, query_n: str, weight: int) -> tuple[int, list[str]]:
-    """一组同类的词（如某对象的所有别名），返回该组能拿到的最高分和命中的词。"""
+def _best(terms, query_n: str, weight: int, df: dict[str, int], n_entries: int) -> tuple[int, list[str]]:
+    """一组同类的词（如某对象的所有别名），返回该组能拿到的最高分和命中的词。
+
+    IDF 加权：像「文件」「列表」这种几乎每条条目都收的词，区分度为零，
+    权重必须压低；「isfile」「md5」这种只有一条收的词，命中就是强信号。
+    没有 IDF 的话，任何一句话都会命中一堆条目，最后靠 id 字母序决定胜负。
+    """
     best_score = 0
     hits: list[str] = []
     for term in terms:
         s = _strength(term, query_n)
         if s == 0:
             continue
-        score = weight if s == 2 else int(weight * SHORT_QUERY_FACTOR)
+        base = weight if s == 2 else int(weight * SHORT_QUERY_FACTOR)
+        idf = math.log(1 + n_entries / max(1, df.get(normalize(term), 1)))
+        score = round(base * idf)
         if score > best_score:
             best_score = score
             hits = [term]
@@ -88,10 +96,13 @@ def _action_terms(entry: Entry) -> tuple[str, ...]:
     return tuple(dict.fromkeys(merged))
 
 
-def score_entry(entry: Entry, query: str) -> Hit | None:
+def score_entry(entry: Entry, query: str, df: dict[str, int] | None = None, n_entries: int = 1) -> Hit | None:
     q = normalize(query)
     if not q:
         return None
+    df = df or {}
+    if not df:
+        n_entries = max(1, n_entries)
 
     score = 0
     matched: list[str] = []
@@ -102,7 +113,7 @@ def score_entry(entry: Entry, query: str) -> Hit | None:
         (_action_terms(entry), WEIGHT_ACTION),
         (entry.targets, WEIGHT_TARGET),
     ):
-        s, hits = _best(terms, q, weight)
+        s, hits = _best(terms, q, weight, df, n_entries)
         score += s
         matched.extend(hits)
 
@@ -111,7 +122,19 @@ def score_entry(entry: Entry, query: str) -> Hit | None:
     return Hit(entry.id, score, tuple(matched))
 
 
+def _document_frequency(entries: list[Entry]) -> dict[str, int]:
+    """每个词被多少条条目收录——用来算 IDF。"""
+    df: dict[str, int] = {}
+    for e in entries:
+        terms = {normalize(t) for t in (e.title, *_object_terms(e), *_action_terms(e), *e.targets) if t}
+        for t in terms:
+            df[t] = df.get(t, 0) + 1
+    return df
+
+
 def search(query: str, entries: list[Entry], limit: int = 5) -> list[Hit]:
-    hits = [h for h in (score_entry(e, query) for e in entries) if h is not None]
+    df = _document_frequency(entries)
+    n = max(1, len(entries))
+    hits = [h for h in (score_entry(e, query, df, n) for e in entries) if h is not None]
     hits.sort(key=lambda h: (-h.score, h.entry_id))
     return hits[:limit]
