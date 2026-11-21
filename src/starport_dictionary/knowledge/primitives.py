@@ -31,7 +31,7 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "file.content": (
         "文件内容",
-        ("内容", "文件数据", "读文件", "file content"),
+        ("内容", "文件数据", "读文件", "文本文件", "file content"),
         "文件里存的字节/文本，和后缀无关",
     ),
     "file.size": (
@@ -56,17 +56,17 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "dir.list": (
         "目录内容",
-        ("目录列表", "文件夹里有什么", "listdir"),
+        ("目录列表", "文件夹里有什么", "listdir", "rglob", "glob", "遍历目录"),
         "某个目录下有哪些文件和子目录",
     ),
     "list.element": (
         "列表元素",
-        ("元素", "某项", "item", "list item"),
+        ("元素", "某项", "列表", "值", "item", "list item"),
         "列表中的一项",
     ),
     "list.duplicate": (
         "列表重复元素",
-        ("重复项", "重复值", "重复元素", "duplicate"),
+        ("重复项", "重复值", "重复元素", "重复", "去重", "duplicate"),
         "列表里出现多次的值",
     ),
     "dict.value": (
@@ -76,7 +76,7 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "string.text": (
         "字符串",
-        ("文本", "字串", "string", "text"),
+        ("文本", "字串", "字符串", "string", "text", "文字"),
         "一段字符序列",
     ),
     "json.object": (
@@ -86,7 +86,7 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "net.connection": (
         "网络连接",
-        ("连接", "网络", "端口", "socket", "connect"),
+        ("连接", "网络", "端口", "socket", "connect", "ping", "连通"),
         "到某个地址端口的连接状态",
     ),
     "process.info": (
@@ -119,12 +119,12 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
 ACTIONS: dict[str, tuple[str, tuple[str, ...], str]] = {
     "inspect.check": (
         "判断",
-        ("检查", "验证", "确认", "判断是否", "看看是不是", "检测", "check", "verify"),
+        ("检查", "验证", "确认", "判断是否", "看看是不是", "检测", "check", "verify", "通不通", "可达"),
         "回答一个是非问题，返回值多为布尔",
     ),
     "get.obtain": (
         "获取",
-        ("取", "拿到", "读取", "得到", "get", "read", "fetch"),
+        ("取", "拿", "拿到", "读取", "读出", "读成", "读进来", "得到", "get", "read", "fetch"),
         "从某个对象上取出信息，不改变它",
     ),
     "create.new": (
@@ -144,7 +144,7 @@ ACTIONS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "search.find": (
         "查找",
-        ("搜索", "找", "定位", "search", "find", "lookup"),
+        ("搜索", "找", "定位", "在不在", "有没有", "search", "find", "lookup", "index", "in"),
         "在一堆东西里定位目标，不修改它们",
     ),
     "filter.select": (
@@ -154,7 +154,7 @@ ACTIONS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "traverse.walk": (
         "遍历",
-        ("循环", "递归", "逐个处理", "walk", "iterate"),
+        ("循环", "递归", "逐个处理", "列出", "列出来", "扫一遍", "walk", "iterate"),
         "按顺序访问集合里的每一个元素",
     ),
     "convert.transform": (
@@ -169,7 +169,7 @@ ACTIONS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "sort.order": (
         "排序",
-        ("排", "顺序", "sort", "order"),
+        ("排", "顺序", "升序", "降序", "从小到大", "从大到小", "sort", "order"),
         "按某个规则重新排列集合",
     ),
     "run.execute": (

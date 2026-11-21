@@ -50,6 +50,7 @@ for q in queries:
     hits = search(q, entries)
     if hits:
         top = hits[0]
-        print(f"  {q!r:32} → {top.entry_id}  (score {top.score}, 命中词 {top.matched_term!r})")
+        terms = "、".join(top.matched_terms)
+        print(f"  {q!r:32} → {top.entry_id}  (分数 {top.score}, 命中 {terms})")
     else:
         print(f"  {q!r:32} → 没找到")
