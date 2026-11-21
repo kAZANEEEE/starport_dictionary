@@ -3,7 +3,7 @@
 > 由 `tools/gen_primitives_doc.py` 从 `src/starport_dictionary/knowledge/primitives.py` 生成。
 > 要改就改那个 .py 文件，然后重跑脚本。手改这份会在下次生成时被覆盖。
 
-## Object（41 个）
+## Object（45 个）
 
 | ID | 标准名称 | 别名 | 说明 |
 |---|---|---|---|
@@ -47,6 +47,10 @@
 | `audio.speech` | 语音 | 语音、声音、录音、音频、speech、audio | 音频数据，或识别/合成出来的语音 |
 | `hash.digest` | 哈希值 | 哈希、摘要、校验值、md5、sha256、hash | 对内容算出的定长摘要，用来校验完整性 |
 | `random.number` | 随机数 | 随机、随机数、抽样、random | 按某种分布取出的随机值 |
+| `error.condition` | 异常 | 异常、错误、报错、出错、error、exception | 程序执行中出现的非正常状态 |
+| `log.record` | 日志 | 日志、记录、输出信息、打印日志、logging、log | 程序运行时留下的记录，比 print 更可控 |
+| `cli.args` | 命令行参数 | 命令行参数、参数、启动参数、argv、argparse | 程序启动时从命令行传进来的值 |
+| `type.annotation` | 类型标注 | 类型标注、类型提示、注解、typing、annotation | 写在函数和变量上的类型说明，供人和工具检查 |
 | `program.external` | 外部程序 | 子进程、命令行、subprocess、外部命令 | 由当前程序启动的另一个程序 |
 
 ## Action（12 个）

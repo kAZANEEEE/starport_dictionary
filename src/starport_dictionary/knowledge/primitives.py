@@ -214,6 +214,26 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
         ("随机", "随机数", "抽样", "random"),
         "按某种分布取出的随机值",
     ),
+    "error.condition": (
+        "异常",
+        ("异常", "错误", "报错", "出错", "error", "exception"),
+        "程序执行中出现的非正常状态",
+    ),
+    "log.record": (
+        "日志",
+        ("日志", "记录", "输出信息", "打印日志", "logging", "log"),
+        "程序运行时留下的记录，比 print 更可控",
+    ),
+    "cli.args": (
+        "命令行参数",
+        ("命令行参数", "参数", "启动参数", "argv", "argparse"),
+        "程序启动时从命令行传进来的值",
+    ),
+    "type.annotation": (
+        "类型标注",
+        ("类型标注", "类型提示", "注解", "typing", "annotation"),
+        "写在函数和变量上的类型说明，供人和工具检查",
+    ),
     "program.external": (
         "外部程序",
         ("子进程", "命令行", "subprocess", "外部命令"),
