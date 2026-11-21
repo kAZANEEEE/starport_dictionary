@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "knowledge-packs"
 
 VISIBLE = 5          # 界面上一次显示几条
-MIN_RECALL = 0.80    # 防回归基线（37 条条目时实测 81%）
+MIN_RECALL = 0.77    # 防回归基线（48 条条目时实测 77.7%）
 
 # 这个数会随条目变多而下降——候选变多，同一句话能命中的条目也变多。
 # 它是「防回归」用的：加册之后手动把基线更新到实测值，别让它变成假门槛。

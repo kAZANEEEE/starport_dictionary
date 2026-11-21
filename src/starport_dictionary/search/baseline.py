@@ -106,6 +106,7 @@ def score_entry(entry: Entry, query: str, df: dict[str, int] | None = None, n_en
 
     score = 0
     matched: list[str] = []
+    obj_score = act_score = 0
 
     for terms, weight in (
         ((entry.title,), WEIGHT_TITLE),
@@ -114,6 +115,10 @@ def score_entry(entry: Entry, query: str, df: dict[str, int] | None = None, n_en
         (entry.targets, WEIGHT_TARGET),
     ):
         s, hits = _best(terms, q, weight, df, n_entries)
+        if weight == WEIGHT_OBJECT:
+            obj_score = s
+        elif weight == WEIGHT_ACTION:
+            act_score = s
         score += s
         matched.extend(hits)
 
