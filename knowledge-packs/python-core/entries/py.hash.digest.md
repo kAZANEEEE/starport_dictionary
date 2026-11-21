@@ -4,6 +4,7 @@ title: 计算文件哈希
 description: 算文件的 MD5/SHA256，用来校验是否被改过
 language: python
 category_id: programming.filesystem
+module: hashlib
 
 object:
   id: hash.digest

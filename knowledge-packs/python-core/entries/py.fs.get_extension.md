@@ -4,6 +4,7 @@ title: 获取文件后缀
 description: 把文件名最后那一截后缀取出来
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: file.extension

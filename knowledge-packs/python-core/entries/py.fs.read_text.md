@@ -4,6 +4,7 @@ title: 读取文本文件
 description: 把一个文本文件的内容读成字符串
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: file.content

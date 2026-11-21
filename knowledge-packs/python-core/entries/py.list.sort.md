@@ -4,6 +4,7 @@ title: 给列表排序
 description: 按数值、按字符串、或按自定义规则排列表
 language: python
 category_id: programming.algorithms
+module: list
 
 object:
   id: list.element

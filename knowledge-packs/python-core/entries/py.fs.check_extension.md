@@ -4,6 +4,7 @@ title: 判断文件后缀
 description: 只看文件名后缀，判断是不是某一种格式
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: file.extension

@@ -4,6 +4,7 @@ title: 列表去重
 description: 去掉列表里重复的元素，保留原来的顺序
 language: python
 category_id: programming.algorithms
+module: list
 
 object:
   id: list.duplicate

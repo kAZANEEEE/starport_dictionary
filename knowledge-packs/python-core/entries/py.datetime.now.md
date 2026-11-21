@@ -4,6 +4,7 @@ title: 获取当前时间
 description: 拿到现在的时间，并格式化成字符串
 language: python
 category_id: programming.basics
+module: datetime
 
 object:
   id: datetime.time

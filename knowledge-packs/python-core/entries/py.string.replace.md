@@ -4,6 +4,7 @@ title: 字符串替换
 description: 把字符串里的一段换成另一段
 language: python
 category_id: programming.basics
+module: str
 
 object:
   id: string.text

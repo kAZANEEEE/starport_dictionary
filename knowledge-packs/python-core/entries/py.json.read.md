@@ -4,6 +4,7 @@ title: 读取 JSON 文件
 description: 把 JSON 文件读成字典或列表
 language: python
 category_id: programming.filesystem
+module: json
 
 object:
   id: json.object

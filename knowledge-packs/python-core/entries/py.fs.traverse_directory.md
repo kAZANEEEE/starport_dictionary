@@ -4,6 +4,7 @@ title: 遍历文件夹里所有文件
 description: 递归找出一个目录下的全部文件
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: dir.list

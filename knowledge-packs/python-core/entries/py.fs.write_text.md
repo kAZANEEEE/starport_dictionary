@@ -4,6 +4,7 @@ title: 写入文本文件
 description: 把一段字符串写进文件，覆盖或追加
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: file.content

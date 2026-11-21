@@ -61,6 +61,7 @@ class Entry:
     scenario: str
 
     # 可选
+    module: str = ""  # os / time / random / pathlib / PySide6 …（按库分册用）
     targets: tuple[str, ...] = ()
     constraints: tuple[Constraint, ...] = ()
     related_ids: tuple[str, ...] = ()

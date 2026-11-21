@@ -4,6 +4,7 @@ title: 判断文件或目录是否存在
 description: 看一个路径到底有没有东西
 language: python
 category_id: programming.filesystem
+module: pathlib
 
 object:
   id: file.exists

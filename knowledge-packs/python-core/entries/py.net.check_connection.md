@@ -4,6 +4,7 @@ title: 检查网络能不能连上
 description: 试着连一个地址端口，判断通不通
 language: python
 category_id: programming.filesystem
+module: socket
 
 object:
   id: net.connection
