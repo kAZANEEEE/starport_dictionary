@@ -219,6 +219,11 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
         ("异常", "错误", "报错", "出错", "error", "exception"),
         "程序执行中出现的非正常状态",
     ),
+    "cache.result": (
+        "缓存",
+        ("缓存", "计算结果", "中间结果", "cache", "记忆化"),
+        "把算过的结果先存起来，下次直接用",
+    ),
     "log.record": (
         "日志",
         ("日志", "记录", "输出信息", "打印日志", "logging", "log"),
