@@ -109,6 +109,11 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
         ("记录", "行", "row", "record"),
         "数据库表里的一行",
     ),
+    "regex.pattern": (
+        "正则表达式",
+        ("正则", "规则", "模式", "匹配规则", "正则表达式", "regex", "pattern"),
+        "一段用来描述文本形状的规则",
+    ),
     "http.response": (
         "HTTP 响应",
         ("响应", "接口返回", "请求结果", "接口数据", "response", "接口"),

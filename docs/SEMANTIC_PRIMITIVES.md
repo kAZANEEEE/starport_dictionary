@@ -3,7 +3,7 @@
 > 由 `tools/gen_primitives_doc.py` 从 `src/starport_dictionary/knowledge/primitives.py` 生成。
 > 要改就改那个 .py 文件，然后重跑脚本。手改这份会在下次生成时被覆盖。
 
-## Object（40 个）
+## Object（41 个）
 
 | ID | 标准名称 | 别名 | 说明 |
 |---|---|---|---|
@@ -26,6 +26,7 @@
 | `datetime.time` | 时间 | 时间戳、当前时间、datetime、timestamp | 某个时间点或时间间隔 |
 | `env.variable` | 环境变量 | 环境、env、环境配置 | 进程可见的键值配置 |
 | `db.record` | 数据库记录 | 记录、行、row、record | 数据库表里的一行 |
+| `regex.pattern` | 正则表达式 | 正则、规则、模式、匹配规则、正则表达式、regex、pattern | 一段用来描述文本形状的规则 |
 | `http.response` | HTTP 响应 | 响应、接口返回、请求结果、接口数据、response、接口 | 一次 HTTP 请求拿回来的状态码、头和正文 |
 | `sql.connection` | 数据库连接 | 连接数据库、数据库连接、conn、cursor、connection | 程序和数据库之间的一条会话 |
 | `csv.table` | 表格数据 | 表格、csv、数据表、行列数据、table | 按行列组织的数据，来自 CSV 或 DataFrame |
