@@ -86,10 +86,24 @@ print(json.dumps(data, ensure_ascii=False, sort_keys=True))
 
 ## 原理解释
 
-JSON 只支持有限的类型：对象、数组、字符串、数字、布尔、null。
-`dumps` 会把 Python 的 dict/list/str/int/float/bool/None 映射过去；
-遇到 `datetime`、`set`、自定义对象会抛 `TypeError`，需要 `default=` 提供转换函数。
+**一句话：** 把 Python 的字典/列表翻译成一段文本，方便存或者传。
 
+**执行逻辑：**
+
+1. 看对象类型：字典 → 输出 `{}` 结构，列表 → 输出 `[]`
+2. 逐个处理里面的值：字符串加引号并转义、数字原样、True/False/None → `true`/`false`/`null`
+3. 遇到不认识的对象类型就停下并报错（除非你提供了转换函数）
+4. 按 `indent` 决定要不要换行缩进
+5. 拼成一整段字符串返回
+
+**机器层（可跳过）：** 纯字符串拼接，不联网、不写文件。
+
+**边界（从逻辑推出来）：**
+
+- 第 2 步对中文默认做 `\uXXXX` 转义，所以要 `ensure_ascii=False` 才保持原样
+- 第 3 步说明 `datetime`、`set`、自定义对象都不能直接转，得先自己换成字符串/列表
+- 因为结果是一段文本，`dumps` 后再 `loads` 会得到**新对象**，和原来没有关联
+- 循环引用的结构在第 2 步会无限递归，Python 会检测并报错
 ## 注意事项
 
 - 中文必须 `ensure_ascii=False`，否则全是转义序列。
