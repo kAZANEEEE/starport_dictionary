@@ -43,7 +43,7 @@ utterances:
 status: tested
 tested_versions: ["3.10", "3.11", "3.12", "3.13", "3.14"]
 min_version: "3.7"
-version_note: @dataclass 从 3.7 起；frozen / slots 参数在 3.10 起可用
+version_note: "dataclass 装饰器从 3.7 起；frozen / slots 参数在 3.10 起可用"
 sources:
   - Python 官方文档 dataclasses
 ---
