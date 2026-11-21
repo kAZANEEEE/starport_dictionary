@@ -15,10 +15,10 @@
 | `file.mtime` | 文件修改时间 | 修改时间、最后修改、mtime、updated time | 文件内容最后一次被改动的时间 |
 | `file.exists` | 文件是否存在 | 在不在、有没有这个文件、exist、exists、isfile、isdir、is_file、is_dir | 路径指向的东西是否存在 |
 | `file.real_type` | 文件真实类型 | 真实格式、MIME、文件签名、magic number | 根据文件头判断的类型，和后缀不是一回事 |
-| `dir.list` | 目录内容 | 目录列表、文件夹里有什么、listdir、rglob、glob、遍历目录 | 某个目录下有哪些文件和子目录 |
+| `dir.list` | 目录内容 | 目录列表、文件夹里有什么、listdir、rglob、glob、遍历目录、makedirs、mkdir、scandir | 某个目录下有哪些文件和子目录 |
 | `list.element` | 列表元素 | 元素、某项、列表、值、item、list item | 列表中的一项 |
 | `list.duplicate` | 列表重复元素 | 重复项、重复值、重复元素、重复、去重、duplicate | 列表里出现多次的值 |
-| `dict.value` | 字典值 | 键值、字典里的值、dict value、key value | 字典中某个键对应的值 |
+| `dict.value` | 字典值 | 键值、字典里的值、items、keys、values、dict value、key value | 字典中某个键对应的值 |
 | `string.text` | 字符串 | 文本、字串、字符串、string、text、文字 | 一段字符序列 |
 | `json.object` | JSON 数据 | json、json 对象、json 文件 | JSON 格式的结构化数据 |
 | `net.connection` | 网络连接 | 连接、网络、端口、socket、connect、ping、连通 | 到某个地址端口的连接状态 |

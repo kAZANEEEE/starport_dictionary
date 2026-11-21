@@ -56,7 +56,7 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "dir.list": (
         "目录内容",
-        ("目录列表", "文件夹里有什么", "listdir", "rglob", "glob", "遍历目录"),
+        ("目录列表", "文件夹里有什么", "listdir", "rglob", "glob", "遍历目录", "makedirs", "mkdir", "scandir"),
         "某个目录下有哪些文件和子目录",
     ),
     "list.element": (
@@ -71,7 +71,7 @@ OBJECTS: dict[str, tuple[str, tuple[str, ...], str]] = {
     ),
     "dict.value": (
         "字典值",
-        ("键值", "字典里的值", "dict value", "key value"),
+        ("键值", "字典里的值", "items", "keys", "values", "dict value", "key value"),
         "字典中某个键对应的值",
     ),
     "string.text": (
