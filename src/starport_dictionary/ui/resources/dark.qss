@@ -1,290 +1,401 @@
-/* Starport Dictionary — 深空主题
-   设计关键词：深蓝、暗紫、简洁、工程化、留白、高可读 */
+/* Starport Dictionary —— 冷纸工程手册
+   2026-11-22 重做：干掉紫色霓虹/大圆角/卡片套卡片。
+   规则：圆角只用 2px；不用阴影、渐变、发光；层级靠字号、字重、空间和一条细线。
+   颜色 12 个，字号 7 档——改这里要与 theme.py 同步。 */
 
 QWidget {
     background-color: transparent;
-    color: #e6e9f5;
-    font-family: "Microsoft YaHei UI", "Segoe UI", "PingFang SC", sans-serif;
-    font-size: 14px;
+    color: #E9E7E2;
+    font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    font-size: 13px;
 }
 
 QMainWindow {
-    background-color: #0b1020;
+    background-color: #0B0B0C;
 }
 
-#Root {
-    background-color: #0b1020;
+#Root, #Home {
+    background-color: #0B0B0C;
 }
 
-QStackedWidget, #Home {
+QStackedWidget {
     background-color: transparent;
 }
 
-/* —— 品牌行 —— */
-#Brand {
-    color: #8b93b0;
+/* ——— 等宽标签：全站唯一的"工程感"来源 ——— */
+#Label {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    color: #6E6A64;
+    letter-spacing: 1.4px;
+}
+
+#Mono {
+    font-family: "Cascadia Mono", "Consolas", monospace;
     font-size: 12px;
-    letter-spacing: 4px;
+    color: #A6A29A;
 }
 
-#BrandMark {
-    color: #7c6cff;
-    font-size: 16px;
+#MonoId {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 12px;
+    color: #6E6A64;
+}
+
+/* ——— 品牌行 ——— */
+#Brand {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    color: #A6A29A;
+    letter-spacing: 3px;
+}
+
+#BrandHero {
+    font-size: 32px;
     font-weight: 600;
-    letter-spacing: 2px;
+    color: #E9E7E2;
 }
 
-/* —— 搜索框（视觉中心）—— */
-#SearchInput {
-    background-color: #121a33;
-    border: 2px solid #1f2a4a;
-    border-radius: 14px;
-    padding: 16px 20px;
-    font-size: 20px;
-    color: #f2f4fb;
-    selection-background-color: #7c6cff;
+#Tagline {
+    font-size: 13px;
+    color: #A6A29A;
 }
-#SearchInput:hover {
-    border-color: #2c3a63;
+
+/* ——— 搜索框：页面唯一的大型元素 ——— */
+#SearchInput {
+    background-color: #111113;
+    border: 1px solid #3C3C42;
+    border-radius: 2px;
+    padding: 14px 16px;
+    font-size: 20px;
+    color: #E9E7E2;
+    selection-background-color: #7E6A45;
 }
 #SearchInput:focus {
-    border-color: #7c6cff;
-    background-color: #131c38;
+    border: 1px solid #C8A464;
+}
+#SearchInput:hover {
+    border: 1px solid #4A4A52;
 }
 
 #SearchSmall {
-    background-color: #121a33;
-    border: 1px solid #1f2a4a;
-    border-radius: 9px;
-    padding: 8px 14px;
-    font-size: 14px;
+    background-color: #111113;
+    border: 1px solid #26262A;
+    border-radius: 2px;
+    padding: 7px 12px;
+    font-size: 13px;
+    color: #E9E7E2;
+    selection-background-color: #7E6A45;
 }
 #SearchSmall:focus {
-    border-color: #7c6cff;
+    border: 1px solid #C8A464;
 }
 
-#Hint {
-    color: #6f78a0;
-    font-size: 13px;
+/* ——— 刻度尺：搜索框下面那条，呼应"仪表盘" ——— */
+#Ruler {
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid #26262A;
 }
 
-/* —— 卡片 —— */
-#Card {
-    background-color: #121a33;
-    border: 1px solid #1f2a4a;
-    border-radius: 12px;
-}
-#Card:hover {
-    border-color: #2f3d6b;
-}
-#BestCard {
-    background-color: #131c38;
-    border: 1px solid #3a3170;
-    border-radius: 14px;
-}
-#Candidate {
-    background-color: #101830;
-    border: 1px solid #1c2642;
-    border-radius: 10px;
-}
-#Candidate:hover {
-    border-color: #3a4a7d;
-    background-color: #131d3a;
-}
-#Candidate[selected="true"] {
-    border: 1px solid #7c6cff;
-    background-color: #161f3d;
-}
-#BestCard:hover {
-    border-color: #5a4bc4;
+/* ——— 文字层级 ——— */
+#Hero {
+    font-size: 32px;
+    font-weight: 600;
+    color: #E9E7E2;
 }
 
-/* —— 文字层级 —— */
 #CardTitle {
     font-size: 19px;
     font-weight: 600;
-    color: #f4f6fc;
+    color: #E9E7E2;
 }
+
+#DetailTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #E9E7E2;
+}
+
 #RowTitle {
     font-size: 15px;
     font-weight: 600;
-    color: #eaeefb;
+    color: #E9E7E2;
 }
-#Mono {
-    font-family: "Cascadia Mono", "Consolas", monospace;
-    color: #7f8ab5;
-    font-size: 12px;
-}
+
 #Body {
-    color: #c3cae6;
-    font-size: 14px;
+    font-size: 13px;
+    color: #C9C6BF;
 }
+
 #Muted {
-    color: #7a83a8;
-    font-size: 13px;
+    font-size: 12px;
+    color: #A6A29A;
 }
+
+#Hint {
+    font-size: 11px;
+    color: #6E6A64;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+}
+
 #SectionTitle {
-    color: #9aa4cc;
-    font-size: 13px;
-    font-weight: 600;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    color: #6E6A64;
+    letter-spacing: 1.4px;
+}
+
+/* ——— 层级标记：不再是彩色圆角徽章，而是等宽小字 + 一条色线 ——— */
+#Badge {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    padding: 1px 0px;
+    border: none;
+    background: transparent;
     letter-spacing: 1px;
 }
-
-/* —— 徽章 —— */
-#Badge {
-    border-radius: 7px;
-    padding: 3px 9px;
-    font-size: 12px;
-}
 #Badge[level="builtin"] {
-    background-color: #10321f;
-    color: #56d99a;
-    border: 1px solid #1c5636;
+    color: #C8A464;
 }
 #Badge[level="stdlib"] {
-    background-color: #10243a;
-    color: #5bb8f0;
-    border: 1px solid #1c4468;
+    color: #8FAE63;
 }
 #Badge[level="thirdparty"] {
-    background-color: #2a1d3d;
-    color: #b48cf5;
-    border: 1px solid #4a2f6e;
+    color: #B8634F;
 }
 #Badge[level="unknown"] {
-    background-color: #232a3f;
-    color: #9aa4cc;
-    border: 1px solid #333d5c;
+    color: #6E6A64;
 }
 
-/* —— 导入区 —— */
-#ImportPanel {
-    background-color: #0d1428;
-    border: 1px solid #232d4d;
-    border-radius: 10px;
+/* ——— 行（候选 / 结果）：细线分隔，不是卡片 ——— */
+#Candidate {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #26262A;
+    border-radius: 0px;
 }
-#ImportBadgeOk {
-    color: #56d99a;
-    font-weight: 600;
+#Candidate:hover {
+    background-color: #111113;
+}
+#Candidate[selected="true"] {
+    background-color: #151517;
+    border-left: 2px solid #C8A464;
+}
+
+/* ——— 最佳匹配：左侧一条黄铜竖线，无框 ——— */
+#BestCard {
+    background-color: #111113;
+    border: none;
+    border-left: 2px solid #C8A464;
+    border-radius: 0px;
+}
+#BestCard:hover {
+    background-color: #151517;
+}
+
+/* ——— 通用面板：只画一条上边线 ——— */
+#Panel {
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid #26262A;
+    border-radius: 0px;
+}
+
+/* ——— import 面板 ——— */
+#ImportPanel {
+    background-color: #0E0E10;
+    border: none;
+    border-left: 2px solid #3C3C42;
+    border-radius: 0px;
+}
+#ImportOk {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 12px;
+    color: #8FAE63;
+    letter-spacing: 0.6px;
 }
 #ImportCode {
     font-family: "Cascadia Mono", "Consolas", monospace;
-    color: #b48cf5;
     font-size: 13px;
+    color: #E9E7E2;
+    background: transparent;
 }
 
-/* —— 按钮 —— */
+/* ——— 按钮：文字优先，边框克制 ——— */
 QPushButton {
-    background-color: #1a2340;
-    border: 1px solid #2a3658;
-    border-radius: 9px;
-    padding: 8px 16px;
-    color: #d6dcf2;
+    background-color: transparent;
+    border: 1px solid #3C3C42;
+    border-radius: 2px;
+    padding: 7px 14px;
+    color: #E9E7E2;
+    font-size: 13px;
 }
 QPushButton:hover {
-    background-color: #223057;
-    border-color: #3d4d7d;
+    border: 1px solid #C8A464;
+    color: #E9E7E2;
 }
 QPushButton:pressed {
-    background-color: #18203c;
+    background-color: #151517;
 }
-#Chip {
-    background-color: #131c34;
-    border: 1px solid #232f52;
-    color: #9fb0dd;
-    padding: 7px 13px;
-    font-size: 13px;
-    border-radius: 16px;
+QPushButton:focus {
+    border: 1px solid #C8A464;
 }
-#Chip:hover {
-    border-color: #7c6cff;
-    color: #e6e9f5;
-}
-#Ghost {
-    background-color: transparent;
-    border: none;
-    color: #7a83a8;
-    padding: 6px 10px;
-}
-#Ghost:hover {
-    color: #e6e9f5;
-}
-#CopyBtn {
-    background-color: #1a2340;
-    border: 1px solid #2a3658;
-    padding: 4px 12px;
-    font-size: 12px;
-    border-radius: 7px;
-}
-#FeedbackBtn {
-    background-color: #131c34;
-    border: 1px solid #232f52;
-    padding: 6px 14px;
-    font-size: 13px;
-}
-#FeedbackBtn[verdict="ok"]:hover {
-    border-color: #56d99a;
-    color: #56d99a;
-}
-#FeedbackBtn[verdict="bad"]:hover {
-    border-color: #f07a7a;
-    color: #f07a7a;
-}
+
 #Primary {
-    background-color: #6b5cf0;
-    border: 1px solid #8b7cff;
-    color: #ffffff;
+    background-color: #C8A464;
+    border: 1px solid #C8A464;
+    color: #0B0B0C;
     font-weight: 600;
 }
 #Primary:hover {
-    background-color: #7c6cff;
+    background-color: #D7B478;
+    border-color: #D7B478;
+    color: #0B0B0C;
 }
 
-/* —— 代码块 —— */
+#Ghost {
+    background: transparent;
+    border: none;
+    color: #A6A29A;
+    padding: 4px 0px;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 12px;
+}
+#Ghost:hover {
+    color: #C8A464;
+    border: none;
+}
+
+/* 示例 / 最近：文字行，不是胶囊 */
+#ExampleRow {
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #1B1B1E;
+    border-radius: 0px;
+    text-align: left;
+    padding: 9px 4px;
+    color: #C9C6BF;
+    font-size: 13px;
+}
+#ExampleRow:hover {
+    color: #E9E7E2;
+    border-bottom: 1px solid #3C3C42;
+    background-color: #111113;
+}
+
+#Chip {
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #1B1B1E;
+    border-radius: 0px;
+    padding: 4px 0px;
+    color: #A6A29A;
+    font-size: 12px;
+}
+#Chip:hover {
+    color: #C8A464;
+    border-bottom: 1px solid #7E6A45;
+}
+#Chip {
+    padding: 5px 0px;
+}
+
+#CopyBtn {
+    background: transparent;
+    border: none;
+    border-left: 1px solid #26262A;
+    border-radius: 0px;
+    padding: 2px 10px;
+    color: #A6A29A;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+}
+#CopyBtn:hover {
+    color: #C8A464;
+}
+
+#FeedbackBtn {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-radius: 0px;
+    padding: 5px 2px;
+    color: #A6A29A;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+#FeedbackBtn[verdict="ok"]:hover {
+    color: #8FAE63;
+    border-bottom: 1px solid #8FAE63;
+}
+#FeedbackBtn[verdict="bad"]:hover {
+    color: #B8634F;
+    border-bottom: 1px solid #B8634F;
+}
+
+/* ——— 代码块：上下细线，不要框 ——— */
 #CodeFrame {
-    background-color: #0a0f1e;
-    border: 1px solid #1e2844;
-    border-radius: 10px;
+    background-color: #0E0E10;
+    border: none;
+    border-top: 1px solid #26262A;
+    border-bottom: 1px solid #26262A;
+    border-radius: 0px;
 }
 #CodeEdit {
-    background-color: #0a0f1e;
+    background-color: #0E0E10;
     border: none;
-    color: #d7ddf0;
+    color: #D8D5CE;
     font-family: "Cascadia Mono", "Consolas", monospace;
     font-size: 13px;
-    selection-background-color: #2f3d6b;
+    selection-background-color: #3C3C42;
 }
 
-/* —— 滚动区 —— */
+/* ——— 参数表：只有横线 ——— */
+#ArgsHeader {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    color: #6E6A64;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #26262A;
+    padding-bottom: 6px;
+}
+
+/* ——— 滚动条 ——— */
 QScrollArea {
     border: none;
 }
 QScrollBar:vertical {
     background: transparent;
-    width: 10px;
-    margin: 4px;
+    width: 8px;
+    margin: 0px;
 }
 QScrollBar::handle:vertical {
-    background: #2a3658;
-    border-radius: 5px;
-    min-height: 30px;
+    background: #3C3C42;
+    border-radius: 0px;
+    min-height: 28px;
 }
 QScrollBar::handle:vertical:hover {
-    background: #3d4d7d;
+    background: #C8A464;
 }
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
     height: 0;
 }
 
-/* —— 状态栏 —— */
 #Status {
-    color: #6f78a0;
-    font-size: 12px;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 11px;
+    color: #6E6A64;
+    letter-spacing: 0.5px;
 }
 
 QToolTip {
-    background-color: #1a2340;
-    color: #e6e9f5;
-    border: 1px solid #2f3d6b;
-    padding: 4px 8px;
+    background-color: #111113;
+    color: #E9E7E2;
+    border: 1px solid #3C3C42;
+    padding: 5px 8px;
+    font-size: 12px;
 }

@@ -1,44 +1,61 @@
-r"""切屏过渡动画。
+r"""切屏过渡（2026-11-22 重写）。
 
-2026-11-22 立：反馈太少不行——按 Esc 瞬间跳回去，人会觉得"点了没反应"。
-做法是**抓一张旧屏的快照压在顶层，然后让这张快照滑走/淡出**，露出下面的新屏。
-好处：不去动 QStackedWidget 的布局（动布局必被布局管理器打回去），
-也不会因为动画而让控件重建、滚动位置丢。
+老大的话：**一切动画本质都是曲线，不能让曲线太平滑。**
+旧版用 OutCubic——开头猛、结尾无痛地滑进终点，正是"AI 感"的来源之一：
+什么都是匀速减速，什么都很顺。
 
-克制参数：170ms，OutCubic，位移只有屏宽的 12%——够感觉到"移动"，不拖沓。
+新版用两条手写贝塞尔，各自有"脾气"：
+  进入（前进）：(0.16, 0.84, 0.24, 1.00) 150ms —— 快速启动，末段收得很干脆。
+  返回（后退）：(0.52, 0.00, 0.94, 0.30) 140ms —— 先压住不动，最后"啪"地抽走。
+                （旧内容拖走了，新内容立刻在位，读起来像"关掉一页"而不是"溶化"）
+
+同时：位移只有 10%，淡出比位移结束得早（0.85 倍时长），
+所以肉眼看到的是"抽走"，不是"缓慢透明"。
 """
 
 from __future__ import annotations
 
-from PySide6.QtCore import (
-    QAbstractAnimation,
-    QEasingCurve,
-    QPropertyAnimation,
-    Qt,
-)
+from PySide6.QtCore import QAbstractAnimation, QEasingCurve, QPointF, QPropertyAnimation, Qt
 from PySide6.QtWidgets import QGraphicsOpacityEffect, QLabel, QStackedWidget
 
-DURATION_MS = 170
-SHIFT_RATIO = 0.12
+ENTER_MS = 150
+BACK_MS = 140
+SHIFT_RATIO = 0.10
+FADE_RATIO = 0.85          # 淡出比位移先结束，避免"慢慢化掉"
+
+# 手写曲线：(x1, y1, x2, y2)
+CURVE_ENTER = (0.16, 0.84, 0.24, 1.00)
+CURVE_BACK = (0.52, 0.00, 0.94, 0.30)
+
+
+def make_curve(points: tuple[float, float, float, float]) -> QEasingCurve:
+    """把 CSS 那种 cubic-bezier 变成 Qt 曲线。"""
+    x1, y1, x2, y2 = points
+    try:
+        curve = QEasingCurve(QEasingCurve.Type.BezierSpline)
+        curve.addCubicBezierSegment(QPointF(x1, y1), QPointF(x2, y2), QPointF(1.0, 1.0))
+        return curve
+    except Exception:                      # 老版本 Qt 兜底
+        return QEasingCurve(QEasingCurve.Type.OutQuart)
 
 
 class ScreenTransitions:
-    """给一个 QStackedWidget 装上「滑动 + 淡出」的切屏效果。"""
+    """给 QStackedWidget 装"抽走旧屏"的过渡。
+
+    做法：抓旧屏快照压顶层 → 立刻切页 → 快照滑走并淡出。
+    不动布局、不重建控件、滚动位置不丢。
+    """
 
     def __init__(self, stack: QStackedWidget) -> None:
         self._stack = stack
         self._anims: list[QAbstractAnimation] = []
 
     def goto(self, index: int, *, forward: bool = True) -> None:
-        """切到第 index 屏。forward=True 表示"往里走"，False 表示"往回退"。
-
-        往回退时旧屏往右滑走（像退出一个页面），往里走时旧屏往左滑走。
-        """
         if index == self._stack.currentIndex():
             return
 
-        old = self._stack.grab()                 # 先把旧屏抓成位图
-        self._stack.setCurrentIndex(index)       # 立刻切（下面被快照盖住，看不出来）
+        old = self._stack.grab()
+        self._stack.setCurrentIndex(index)
 
         overlay = QLabel(self._stack)
         overlay.setPixmap(old)
@@ -50,32 +67,29 @@ class ScreenTransitions:
         effect = QGraphicsOpacityEffect(overlay)
         overlay.setGraphicsEffect(effect)
 
+        duration = ENTER_MS if forward else BACK_MS
         start = overlay.geometry()
-        shift = int(start.width() * SHIFT_RATIO) * (-1 if forward else 1)
-        end = start.translated(shift, 0)
+        direction = -1 if forward else 1
+        end = start.translated(int(start.width() * SHIFT_RATIO) * direction, 0)
 
         move = QPropertyAnimation(overlay, b"geometry", overlay)
-        move.setDuration(DURATION_MS)
+        move.setDuration(duration)
         move.setStartValue(start)
         move.setEndValue(end)
-        move.setEasingCurve(QEasingCurve.OutCubic)
+        move.setEasingCurve(make_curve(CURVE_ENTER if forward else CURVE_BACK))
 
         fade = QPropertyAnimation(effect, b"opacity", overlay)
-        fade.setDuration(DURATION_MS)
+        fade.setDuration(int(duration * FADE_RATIO))
         fade.setStartValue(1.0)
         fade.setEndValue(0.0)
-        fade.setEasingCurve(QEasingCurve.OutCubic)
+        fade.setEasingCurve(make_curve(CURVE_BACK if forward else CURVE_ENTER))
 
-        def cleanup() -> None:
-            overlay.deleteLater()
-
+        fade.finished.connect(overlay.deleteLater)
         for anim in (move, fade):
-            anim.finished.connect(cleanup if anim is fade else lambda: None)
             anim.start(QAbstractAnimation.DeleteWhenStopped)
             self._anims.append(anim)
 
     def cancel_all(self) -> None:
-        """窗口关闭/重切时停掉未完成的动画，避免野指针。"""
         for anim in self._anims:
             try:
                 anim.stop()

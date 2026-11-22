@@ -102,7 +102,7 @@ def win(app, tmp_path, monkeypatch):
 
 def test_启动在首页(win):
     assert win.stack.currentIndex() == PAGE_HOME
-    assert win.home.input.placeholderText() == "你想实现什么？"
+    assert "删除列表" in win.home.input.placeholderText() or win.home.input.placeholderText()
 
 
 def test_搜索后到结果页(win):

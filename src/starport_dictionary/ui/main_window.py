@@ -93,9 +93,10 @@ class MainWindow(QMainWindow):
         try:
             stats = self.backend.stats()
             self.status.setText(
-                f"知识库 {stats.entry_count} 条 · {stats.module_count} 个模块 · "
-                f"反馈 {self.feedback.count()} 条 · {APP_NAME} {APP_VERSION}"
+                f"{stats.entry_count} ENTRIES   {stats.module_count} MODULES   "
+                f"{self.feedback.count()} FEEDBACK   v{APP_VERSION}"
             )
+            self.home.set_stats(f"{stats.entry_count} 条 / {stats.module_count} 模块")
         except Exception:
             self.status.setText(f"{APP_NAME} {APP_VERSION}")
 

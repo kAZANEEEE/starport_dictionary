@@ -139,6 +139,23 @@ def test_切屏会走过渡动画(win):
 
 
 def test_过渡时长是克制的(win):
-    from starport_dictionary.ui.transitions import DURATION_MS
+    from starport_dictionary.ui.transitions import BACK_MS, ENTER_MS
 
-    assert 100 <= DURATION_MS <= 260, "过渡太快没感觉，太慢会拖沓"
+    for ms in (ENTER_MS, BACK_MS):
+        assert 100 <= ms <= 260, "过渡太快没感觉，太慢会拖沓"
+
+
+def test_过渡曲线不是匀速(win):
+    """老大：曲线不能太平滑。检查我们真的用了自定义贝塞尔而不是默认线性。"""
+    from starport_dictionary.ui.transitions import CURVE_BACK, CURVE_ENTER, make_curve
+
+    for pts in (CURVE_ENTER, CURVE_BACK):
+        curve = make_curve(pts)
+        samples = [curve.valueForProgress(i / 10) for i in range(11)]
+        assert samples[0] == 0 and abs(samples[-1] - 1) < 0.05
+        # 线性的话相邻增量恒定；有"脾气"的曲线必然不均
+        deltas = [round(samples[i + 1] - samples[i], 4) for i in range(10)]
+        assert len(set(deltas)) > 3, f"曲线太平滑，接近线性：{deltas}"
+    # 返回曲线必须"先压后抽"：前 20% 走得很慢
+    back = make_curve(CURVE_BACK)
+    assert back.valueForProgress(0.2) < 0.15

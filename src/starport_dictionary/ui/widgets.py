@@ -1,6 +1,9 @@
-r"""可复用控件：徽章、代码块（含 Python 高亮）、区块、候选行。
+r"""可复用控件（冷纸工程手册版）。
 
-刻意做得"薄"：控件只负责显示，不碰后端、不存状态。
+2026-11-22 重做要点：
+- 徽章不再是彩色圆角块，改成等宽小字（层级用颜色，不用形状）
+- 候选行不是卡片，是"一行字 + 一条细线"
+- 代码块去掉圆角与外框，只留上下两条线
 """
 
 from __future__ import annotations
@@ -21,18 +24,40 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from starport_dictionary.ui.theme import ACCENT, ACCENT_2, OK, TEXT, TEXT_MUTED
+from starport_dictionary.ui.theme import (
+    ACCENT,
+    ACCENT_DIM,
+    CODE_BG,
+    FS_MICRO,
+    OK,
+    TEXT,
+    TEXT_2,
+    TEXT_3,
+)
 
 
-# ---------------- 徽章 ----------------
+def mono_label(text: str, parent: QWidget | None = None) -> QLabel:
+    """等宽大写小标签——全站"工程感"的主要来源。"""
+    lab = QLabel(text, parent)
+    lab.setObjectName("Label")
+    return lab
+
+
 class Badge(QLabel):
-    """小徽章。level 决定配色（builtin/stdlib/thirdparty/unknown）。"""
+    """层级标记：等宽小字，颜色区分，不加底色/圆角。"""
+
+    LEVELS = {
+        "builtin": "BUILTIN",
+        "stdlib": "STDLIB",
+        "thirdparty": "3RD-PARTY",
+        "unknown": "UNSET",
+    }
 
     def __init__(self, text: str, level: str = "unknown", parent: QWidget | None = None) -> None:
         super().__init__(text, parent)
         self.setObjectName("Badge")
         self.setProperty("level", level)
-        self.setAlignment(Qt.AlignCenter)
+        self.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
 
 # ---------------- Markdown → 富文本 ----------------
@@ -41,7 +66,6 @@ _BOLD_RE = re.compile(r"\*\*([^*]+)\*\*")
 
 
 def first_sentence(text: str, limit: int = 70) -> str:
-    """描述取第一句并截断——候选行只需要「这条大概是干嘛的」。"""
     t = (text or "").strip().replace("\n", " ")
     t = t.replace("**", "").replace("`", "")
     if not t:
@@ -51,25 +75,23 @@ def first_sentence(text: str, limit: int = 70) -> str:
 
 
 def md_to_html(text: str) -> str:
-    """把知识条目里的轻量 markdown 转成富文本（只支持 **粗体** 和 `代码`）。"""
     if not text:
         return ""
     out = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     out = _BOLD_RE.sub(r"<b>\1</b>", out)
     out = _CODE_RE.sub(
-        r'<span style="font-family:Consolas,monospace;color:%s;background:#0a0f1e;">\1</span>'
-        % ACCENT_2,
+        '<span style="font-family:Consolas,monospace;color:%s;">\\1</span>' % ACCENT,
         out,
     )
     lines = []
     for raw in out.split("\n"):
         line = raw.rstrip()
         if line.startswith("- "):
-            lines.append(
-                '<div style="margin-left:6px;">&nbsp;·&nbsp;' + line[2:] + "</div>"
-            )
+            lines.append('<div style="margin-left:8px;color:%s;">·&nbsp;' % TEXT_2 + line[2:] + "</div>")
+        elif re.match(r"^\d+\.", line):
+            lines.append('<div style="margin-left:2px;">' + line + "</div>")
         elif line:
-            lines.append(line + "<br/>")
+            lines.append('<div style="margin:0 0 6px 0;">' + line + "</div>")
         else:
             lines.append("")
     return "".join(lines)
@@ -77,46 +99,42 @@ def md_to_html(text: str) -> str:
 
 # ---------------- Python 高亮 ----------------
 class PythonHighlighter(QSyntaxHighlighter):
-    """极简 Python 高亮：关键字、字符串、注释、数字、内置函数。"""
+    """低饱和高亮：关键字黄铜、字符串橄榄、注释灰、数字暖黄。"""
 
     def __init__(self, document) -> None:
         super().__init__(document)
+        rules: list[tuple[re.Pattern, QTextCharFormat]] = []
+
         kw = QTextCharFormat()
         kw.setForeground(QColor(ACCENT))
         kw.setFontWeight(QFont.DemiBold)
-        self._rules: list[tuple[re.Pattern, QTextCharFormat]] = [
-            (
-                re.compile(
-                    r"\b(def|class|return|if|elif|else|for|while|try|except|finally|with|as|"
-                    r"import|from|in|not|and|or|is|None|True|False|lambda|yield|pass|break|"
-                    r"continue|raise|global|assert|del|await|async)\b"
-                ),
-                kw,
-            )
-        ]
+        rules.append((
+            re.compile(
+                r"\b(def|class|return|if|elif|else|for|while|try|except|finally|with|as|"
+                r"import|from|in|not|and|or|is|None|True|False|lambda|yield|pass|break|"
+                r"continue|raise|global|assert|del|await|async)\b"
+            ),
+            kw,
+        ))
+
         string_fmt = QTextCharFormat()
         string_fmt.setForeground(QColor(OK))
-        self._rules.append((re.compile(r'"[^"\n]*"|\'[^\'\n]*\''), string_fmt))
+        rules.append((re.compile(r'"[^"\n]*"|\'[^\'\n]*\''), string_fmt))
 
         comment_fmt = QTextCharFormat()
-        comment_fmt.setForeground(QColor(TEXT_MUTED))
-        self._rules.append((re.compile(r"#[^\n]*"), comment_fmt))
+        comment_fmt.setForeground(QColor(TEXT_3))
+        comment_fmt.setFontItalic(True)
+        rules.append((re.compile(r"#[^\n]*"), comment_fmt))
 
         num_fmt = QTextCharFormat()
-        num_fmt.setForeground(QColor("#f0c674"))
-        self._rules.append((re.compile(r"\b\d+(\.\d+)?\b"), num_fmt))
+        num_fmt.setForeground(QColor("#D2B27A"))
+        rules.append((re.compile(r"\b\d+(\.\d+)?\b"), num_fmt))
 
-        builtin_fmt = QTextCharFormat()
-        builtin_fmt.setForeground(QColor(ACCENT_2))
-        self._rules.append(
-            (
-                re.compile(
-                    r"\b(print|len|str|int|float|list|dict|set|tuple|open|range|enumerate|"
-                    r"zip|sorted|sum|min|max|any|all|isinstance|type|super)\b"
-                ),
-                builtin_fmt,
-            )
-        )
+        fn_fmt = QTextCharFormat()
+        fn_fmt.setForeground(QColor(TEXT))
+        rules.append((re.compile(r"\b(print|len|str|int|float|list|dict|set|tuple|open|"
+                                 r"range|enumerate|zip|sorted|sum|min|max|any|all)\b"), fn_fmt))
+        self._rules = rules
 
     def highlightBlock(self, text: str) -> None:  # noqa: N802
         for pattern, fmt in self._rules:
@@ -126,8 +144,6 @@ class PythonHighlighter(QSyntaxHighlighter):
 
 # ---------------- 代码块 ----------------
 class CodeBlock(QFrame):
-    """只读代码块 + 复制按钮 + 语言标签。"""
-
     def __init__(self, code: str, language: str = "python", parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self.setObjectName("CodeFrame")
@@ -139,12 +155,11 @@ class CodeBlock(QFrame):
 
         header = QWidget(self)
         hb = QHBoxLayout(header)
-        hb.setContentsMargins(12, 8, 10, 4)
-        lang = QLabel(language.upper(), header)
-        lang.setObjectName("Mono")
-        hb.addWidget(lang)
+        hb.setContentsMargins(12, 8, 6, 6)
+        hb.setSpacing(8)
+        hb.addWidget(mono_label(language.upper(), header))
         hb.addStretch(1)
-        self.copy_btn = QPushButton("复制代码", header)
+        self.copy_btn = QPushButton("COPY", header)
         self.copy_btn.setObjectName("CopyBtn")
         self.copy_btn.setCursor(Qt.PointingHandCursor)
         self.copy_btn.clicked.connect(self._copy)
@@ -156,36 +171,32 @@ class CodeBlock(QFrame):
         self.editor.setPlainText(self._code)
         self.editor.setReadOnly(True)
         self.editor.setLineWrapMode(QPlainTextEdit.NoWrap)
-        self.editor.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.editor.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         lines = max(1, self._code.count("\n") + 1)
         line_h = self.editor.fontMetrics().lineSpacing()
-        self.editor.setFixedHeight(min(lines + 1, 22) * line_h + 16)
+        self.editor.setFixedHeight(min(lines + 1, 24) * line_h + 14)
         root.addWidget(self.editor)
 
         self._highlighter = PythonHighlighter(self.editor.document())
 
     def _copy(self) -> None:
         QApplication.clipboard().setText(self._code)
-        self.copy_btn.setText("已复制 ✓")
+        self.copy_btn.setText("COPIED")
         from PySide6.QtCore import QTimer
 
-        QTimer.singleShot(1200, lambda: self.copy_btn.setText("复制代码"))
+        QTimer.singleShot(1200, lambda: self.copy_btn.setText("COPY"))
 
 
 # ---------------- 区块 ----------------
 class Section(QWidget):
-    """一个带标题的正文区块。"""
+    """标题（等宽小字）+ 正文。区块之间靠间距和一条线分开，不套盒子。"""
 
     def __init__(self, title: str, body: str, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         lay = QVBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
-        lay.setSpacing(6)
+        lay.setSpacing(8)
 
-        t = QLabel(title, self)
-        t.setObjectName("SectionTitle")
-        lay.addWidget(t)
+        lay.addWidget(mono_label(title, self))
 
         b = QLabel(md_to_html(body), self)
         b.setObjectName("Body")
@@ -195,10 +206,17 @@ class Section(QWidget):
         lay.addWidget(b)
 
 
-# ---------------- 可点的卡片基类 ----------------
-class ClickableFrame(QFrame):
-    """整块可点。父类只管发出 clicked，视觉高亮靠 QSS 的 [selected] 属性。"""
+class Rule(QFrame):
+    """一条 1px 横线，用来分组。"""
 
+    def __init__(self, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self.setFixedHeight(1)
+        self.setStyleSheet("background-color:#26262A;")
+
+
+# ---------------- 可点区块 ----------------
+class ClickableFrame(QFrame):
     clicked = Signal()
 
     def __init__(self, parent: QWidget | None = None) -> None:
@@ -219,51 +237,48 @@ class ClickableFrame(QFrame):
 
 # ---------------- 候选行 ----------------
 class CandidateRow(ClickableFrame):
-    """结果页的一条候选：标题 + 层级徽章 + ID + 一句话效果。
-
-    分数不再显示——它对用户没意义；换成「这条是干嘛的」。
-    """
+    """一行：序号（等宽）+ 标题 + 层级 + ID + 一句话效果。"""
 
     chosen = Signal(str)
 
     def __init__(self, entry_id: str, title: str, description: str, origin: str,
-                 terms: tuple[str, ...] = (), parent: QWidget | None = None) -> None:
+                 index: int = 0, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self.setObjectName("Candidate")
-        self.setFocusPolicy(Qt.NoFocus)   # 焦点留在结果页，方向键才连续
+        self.setFocusPolicy(Qt.NoFocus)
         self.entry_id = entry_id
 
         lay = QVBoxLayout(self)
-        lay.setContentsMargins(14, 10, 14, 10)
-        lay.setSpacing(4)
+        lay.setContentsMargins(12, 9, 12, 9)
+        lay.setSpacing(3)
 
         top = QHBoxLayout()
-        top.setSpacing(8)
+        top.setSpacing(10)
+        idx = QLabel(f"{index:02d}", self)
+        idx.setObjectName("MonoId")
+        idx.setFixedWidth(20)
+        top.addWidget(idx)
+
         name = QLabel(title, self)
         name.setObjectName("RowTitle")
         top.addWidget(name)
+
         top.addWidget(Badge(
-            {"builtin": "内置", "stdlib": "标准库", "thirdparty": "第三方"}.get(origin, "未标注"),
-            origin or "unknown",
-            self,
+            Badge.LEVELS.get(origin, "UNSET"), origin or "unknown", self,
         ))
         top.addStretch(1)
+
         ident = QLabel(entry_id, self)
-        ident.setObjectName("Mono")
+        ident.setObjectName("MonoId")
         top.addWidget(ident)
         lay.addLayout(top)
 
-        desc = first_sentence(description)
+        desc = first_sentence(description, 80)
         if desc:
             d = QLabel(desc, self)
             d.setObjectName("Muted")
             d.setWordWrap(True)
+            d.setContentsMargins(30, 0, 0, 0)
             lay.addWidget(d)
-        else:
-            uniq = list(dict.fromkeys(terms))
-            if uniq:
-                d = QLabel("命中：" + "、".join(uniq[:4]), self)
-                d.setObjectName("Muted")
-                lay.addWidget(d)
 
         self.clicked.connect(lambda: self.chosen.emit(self.entry_id))
