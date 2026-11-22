@@ -8,6 +8,18 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.get"
+signature: "d.get(key, default=None)"
+args:
+  - name: "key"
+    required: true
+    accepts: "要查的键"
+    nesting: "可以，可以是变量"
+  - name: "default"
+    required: false
+    default: "None"
+    accepts: "键不存在时返回什么，什么类型都行"
+    nesting: "可以，但表达式会先求值，别写重逻辑"
+returns: "键存在返回值本身，不存在返回 default（默认 None）；不报错、也不写入字典"
 
 object:
   id: dict.value

@@ -8,6 +8,13 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.exists"
+signature: "Path(path).exists() / .is_file() / .is_dir()"
+args:
+  - name: "path"
+    required: true
+    accepts: "要检查的路径"
+    nesting: "可以"
+returns: "True/False：exists 只看有没有；is_file / is_dir 才区分类型"
 
 object:
   id: file.exists

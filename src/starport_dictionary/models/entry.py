@@ -21,6 +21,17 @@ class Semantic:
 
 
 @dataclass(frozen=True)
+class Argument:
+    """一个参数的契约：必填吗、能填什么、能不能嵌套。"""
+
+    name: str
+    required: bool = True
+    default: str = ""
+    accepts: str = ""
+    nesting: str = ""
+
+
+@dataclass(frozen=True)
 class Constraint:
     """附加条件。values 为空表示这是个开关型约束（只判断有没有）。"""
 
@@ -64,7 +75,10 @@ class Entry:
     module: str = ""
     origin: str = ""        # builtin / stdlib / thirdparty
     import_stmt: str = ""   # 要写的 import 语句，内置能力留空
-    qualname: str = ""      # 准确技术全名，如 dict.get / pathlib.Path.suffix  # os / time / random / pathlib / PySide6 …（按库分册用）
+    qualname: str = ""      # 准确技术全名，如 dict.get / pathlib.Path.suffix
+    signature: str = ""     # 调用形状，如 sorted(iterable, *, key=None)
+    args: tuple[Argument, ...] = ()   # 参数契约：填什么、能不能省、能不能嵌套
+    returns: str = ""       # 返回什么：类型 + 一句话说明  # os / time / random / pathlib / PySide6 …（按库分册用）
     targets: tuple[str, ...] = ()
     constraints: tuple[Constraint, ...] = ()
     related_ids: tuple[str, ...] = ()

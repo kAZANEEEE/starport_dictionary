@@ -7,8 +7,24 @@ category_id: programming.algorithms
 module: list
 origin: builtin
 import: ""
-qualname: "list.sort"
-
+qualname: "sorted() / list.sort()"
+signature: "sorted(iterable, *, key=None, reverse=False)；list.sort(key=None, reverse=False)"
+args:
+  - name: "iterable"
+    required: true
+    accepts: "任何可迭代对象：列表、元组、生成器、字典的键、字符串"
+    nesting: "可以——变量、函数调用、列表推导式都行，例如 sorted(d.items())"
+  - name: "key"
+    required: false
+    default: "None"
+    accepts: "一个「收一个元素、返回排序依据」的函数"
+    nesting: "可以，最常见是 lambda：key=lambda p: p[\"age\"]"
+  - name: "reverse"
+    required: false
+    default: "False"
+    accepts: "True 或 False"
+    nesting: "一般直接写字面量"
+returns: "sorted 返回排好序的新列表；list.sort 原地改并返回 None"
 object:
   id: list.element
   name: 列表元素

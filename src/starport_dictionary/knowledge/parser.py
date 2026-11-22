@@ -31,6 +31,9 @@ ALLOWED_TOP_FIELDS = {
     "origin",
     "import",
     "qualname",
+    "signature",
+    "args",
+    "returns",
     "object",
     "action",
     "targets",
@@ -222,6 +225,30 @@ def _extract_code(path: Path, text: str) -> str:
     return match.group(1).strip("\n")
 
 
+def _parse_args(path: Path, raw) -> tuple:
+    """参数契约。宽校验：只要每项是含 name 的对象即可，其余字段自由填。"""
+    from starport_dictionary.models.entry import Argument
+
+    if raw is None:
+        return ()
+    if not isinstance(raw, list):
+        raise EntryFormatError(f"{path.name}: args 必须是数组")
+    out = []
+    for i, item in enumerate(raw):
+        if not isinstance(item, dict) or not str(item.get("name", "")).strip():
+            raise EntryFormatError(f"{path.name}: args[{i}] 必须含非空 name")
+        out.append(
+            Argument(
+                name=str(item["name"]).strip(),
+                required=bool(item.get("required", True)),
+                default=str(item.get("default", "")),
+                accepts=str(item.get("accepts", "")),
+                nesting=str(item.get("nesting", "")),
+            )
+        )
+    return tuple(out)
+
+
 def _parse_constraints(path: Path, raw) -> tuple[Constraint, ...]:
     if raw is None:
         return ()
@@ -280,6 +307,9 @@ def _build(path, meta, obj, action, utterances, sections) -> Entry:
         origin=str(meta.get("origin") or "").strip(),
         import_stmt=str(meta.get("import") or "").strip(),
         qualname=str(meta.get("qualname") or "").strip(),
+        signature=str(meta.get("signature") or "").strip(),
+        args=_parse_args(path, meta.get("args")),
+        returns=str(meta.get("returns") or "").strip(),
         status=meta["status"],
         obj=obj,
         action=action,

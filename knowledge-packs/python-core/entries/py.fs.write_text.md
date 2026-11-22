@@ -8,6 +8,22 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.write_text"
+signature: "Path(path).write_text(text, encoding=\"utf-8\")"
+args:
+  - name: "path"
+    required: true
+    accepts: "要写的文件路径；不存在会新建"
+    nesting: "可以"
+  - name: "text"
+    required: true
+    accepts: "要写进去的字符串"
+    nesting: "可以，可以是拼好的字符串、读出来的内容"
+  - name: "encoding"
+    required: false
+    default: "\"utf-8\""
+    accepts: "编码名"
+    nesting: "一般直接写字面量"
+returns: "整数：写入了多少个字符（平时不用管）；副作用是把文件内容整体覆盖"
 
 object:
   id: file.content

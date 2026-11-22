@@ -8,6 +8,17 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.suffix"
+signature: "Path(path).suffix.lower() == 目标后缀"
+args:
+  - name: "path"
+    required: true
+    accepts: "文件路径，字符串或 Path 都行"
+    nesting: "可以，常见是直接写字符串，或传循环变量"
+  - name: "目标后缀"
+    required: true
+    accepts: "带点的后缀字符串，如 \".py\"；注意要带点"
+    nesting: "可以，可以是变量"
+returns: "True/False：名字最后那一段后缀是不是等于目标"
 
 object:
   id: file.extension

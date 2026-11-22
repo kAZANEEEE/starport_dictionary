@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "dict.fromkeys()"
+signature: "list(dict.fromkeys(items))"
+args:
+  - name: "items"
+    required: true
+    accepts: "可迭代对象；元素必须能当字典键（数字、字符串、元组）"
+    nesting: "可以"
+returns: "列表：去重后的新列表，保持第一次出现的顺序"
 
 object:
   id: list.duplicate

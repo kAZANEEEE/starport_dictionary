@@ -8,6 +8,13 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.suffix"
+signature: "Path(path).suffix"
+args:
+  - name: "path"
+    required: true
+    accepts: "文件路径，字符串或 Path"
+    nesting: "可以，可以是变量或函数返回值"
+returns: "字符串：带点的后缀，如 \".gz\"；没有后缀时返回空字符串"
 
 object:
   id: file.extension

@@ -8,6 +8,18 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.read_text"
+signature: "Path(path).read_text(encoding=\"utf-8\")"
+args:
+  - name: "path"
+    required: true
+    accepts: "要读的文件路径"
+    nesting: "可以，常配合 Path(__file__).parent / \"x.txt\""
+  - name: "encoding"
+    required: false
+    default: "\"utf-8\""
+    accepts: "编码名，如 \"utf-8\"、\"gbk\""
+    nesting: "一般直接写字面量"
+returns: "字符串：整个文件的内容，一次读完"
 
 object:
   id: file.content
