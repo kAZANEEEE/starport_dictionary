@@ -45,7 +45,7 @@ def run_code(code: str) -> tuple[str, str]:
 
         try:
             proc = subprocess.run(
-                [sys.executable, "-I", str(script)],
+                [sys.executable, "-I", "-X", "utf8", str(script)],
                 cwd=tmp,
                 env=env,
                 capture_output=True,

@@ -70,8 +70,11 @@ print(len(s))            # 2 —— 2 个字符
 
 print(b.decode("utf-8")) # 中文
 
-# 编码猜错时：要么忽略坏字节，要么替换成分号
-print(b.decode("gbk", errors="replace"))
+# 编码猜错会直接报错——这是最常见的乱码来源
+try:
+    b.decode("gbk")
+except UnicodeDecodeError as exc:
+    print("编码不对:", type(exc).__name__)
 ```
 
 ## 语句解释
