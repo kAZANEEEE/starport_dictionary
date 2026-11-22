@@ -8,6 +8,17 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.rename"
+signature: "os.rename(src, dst) / Path(src).rename(dst)"
+args:
+  - name: "src"
+    required: true
+    accepts: "原路径（文件或目录）"
+    nesting: "可以"
+  - name: "dst"
+    required: true
+    accepts: "新路径：只改名字就写同目录；换目录就写完整目标路径"
+    nesting: "可以，常配合 os.path.join / Path 拼接"
+returns: "None（os.rename）或新的 Path 对象（Path.rename）；副作用是改名/移动"
 
 object:
   id: file.path

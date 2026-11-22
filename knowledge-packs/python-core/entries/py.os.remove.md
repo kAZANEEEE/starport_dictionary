@@ -8,6 +8,18 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.remove() / os.unlink()"
+signature: "os.remove(path) / Path(path).unlink(missing_ok=False)"
+args:
+  - name: "path"
+    required: true
+    accepts: "要删的文件路径（不能是目录）"
+    nesting: "可以"
+  - name: "missing_ok"
+    required: false
+    default: "False"
+    accepts: "True = 文件本来不在也不报错（仅 Path.unlink 支持）"
+    nesting: "一般直接写 True"
+returns: "None：没有返回值；副作用是文件被删除（进不了回收站）"
 
 object:
   id: file.path

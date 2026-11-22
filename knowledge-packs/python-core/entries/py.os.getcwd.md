@@ -8,6 +8,9 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.getcwd"
+signature: "os.getcwd() / Path.cwd()"
+args: []
+returns: "字符串（os.getcwd）或 Path 对象（Path.cwd）：当前工作目录的绝对路径"
 
 object:
   id: file.path

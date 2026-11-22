@@ -8,6 +8,14 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.listdir"
+signature: "os.listdir(path=\".\")"
+args:
+  - name: "path"
+    required: false
+    default: "\".\""
+    accepts: "目录路径；默认当前目录"
+    nesting: "可以，可以是变量"
+returns: "列表：里面的文件和子目录名（只有名字、不含路径，且不递归）"
 
 object:
   id: dir.list

@@ -8,6 +8,13 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.path_join"
+signature: "os.path.join(a, b, ...) / Path(a) / b"
+args:
+  - name: "片段"
+    required: true
+    accepts: "任意多个路径片段；后面出现绝对路径会丢弃前面部分"
+    nesting: "可以，但注意绝对路径会“重置”结果"
+returns: "字符串：用当前系统分隔符接好的路径（不检查是否存在）"
 
 object:
   id: file.path

@@ -8,6 +8,18 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.makedirs"
+signature: "os.makedirs(path, exist_ok=False)"
+args:
+  - name: "path"
+    required: true
+    accepts: "要创建的目录路径，可以带多层如 a/b/c"
+    nesting: "可以"
+  - name: "exist_ok"
+    required: false
+    default: "False"
+    accepts: "True = 目录已存在也不报错；False = 已存在就抛异常"
+    nesting: "一般直接写 True/False"
+returns: "None：没有返回值，副作用是在磁盘上建出目录（已存在时行为看 exist_ok）"
 
 object:
   id: dir.list

@@ -8,6 +8,23 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "builtins.open()"
+signature: "open(path, mode=\"r\", encoding=\"utf-8\")"
+args:
+  - name: "path"
+    required: true
+    accepts: "要打开的文件路径"
+    nesting: "可以"
+  - name: "mode"
+    required: false
+    default: "\"r\""
+    accepts: "\"r\" 读、\"w\" 覆盖写、\"a\" 追加写、\"rb\" 二进制读"
+    nesting: "一般直接写字面量"
+  - name: "encoding"
+    required: false
+    default: "\"utf-8\""
+    accepts: "编码名；二进制模式（带 b）时不能给"
+    nesting: "一般直接写字面量"
+returns: "文件对象：可以直接 for 循环逐行读，出 with 块自动关闭"
 
 object:
   id: file.content

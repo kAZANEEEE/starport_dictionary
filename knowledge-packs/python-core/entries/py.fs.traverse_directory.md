@@ -8,6 +8,18 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.rglob"
+signature: "Path(root).rglob(\"*\")"
+args:
+  - name: "root"
+    required: true
+    accepts: "要开始遍历的目录路径"
+    nesting: "可以，常见是 Path.cwd() 或用户输入的目录"
+  - name: "pattern"
+    required: false
+    default: "\"*\""
+    accepts: "匹配模式，如 \"*\"、\"*.py\"、\"**/*.txt\""
+    nesting: "一般直接写字面量"
+returns: "生成器：一个个吐出 Path 对象（含目录）；要列表得 list(...)"
 
 object:
   id: dir.list
