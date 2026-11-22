@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 113 条**
+**共 115 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 47 |
-| 标准库（要 import） | 66 |
+| 内置能力（不用 import） | 48 |
+| 标准库（要 import） | 67 |
 
-## 内置能力（不用 import） — 47 条
+## 内置能力（不用 import） — 48 条
 
 _Python 自带，直接写就行_
 
@@ -67,7 +67,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 14 条
+### str — 15 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -77,6 +77,7 @@ _Python 自带，直接写就行_
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
 | `str.isdigit() / str.isnumeric() / str.isdecimal()` | 判断字符串是不是数字 | 输入字符串，输出它是否**全部由数字字符组成**；负号、小数点、空格都会让它判为 False | — | `py.string.isdigit` |
 | `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
+| `str.ljust() / str.rjust() / str.center()` | 字符串对齐（补空格） | 输入字符串 + 目标宽度，输出补齐到该宽度的新字符串；够长就原样返回，不截断 | — | `py.string.align` |
 | `str.partition()` | 按分隔符切成三段 | 输入分隔符，输出**固定三个**元素：分隔符左边、分隔符本身、分隔符右边 | — | `py.string.partition` |
 | `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
 | `str.split()` | 分割字符串 | 按分隔符把字符串切成列表 | — | `py.string.split` |
@@ -87,7 +88,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 66 条
+## 标准库（要 import） — 67 条
 
 _标准库里现成的，import 之后可用_
 
@@ -159,11 +160,12 @@ _标准库里现成的，import 之后可用_
 | `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 11 条
+### os — 12 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `os.chdir()` | 切换工作目录 | 输入一个目录路径，把它设成当前工作目录；之后的相对路径都以它为基准 | `import os` | `py.os.chdir` |
+| `os.environ` | 列出所有环境变量 | 输入无（`os.environ` 本身就是映射对象），输出「变量名 → 字符串值」的完整列表 | `import os` | `py.os.env_all` |
 | `os.getcwd` | 获取当前工作目录 | 问程序“我现在站在哪个目录” | `import os` | `py.os.getcwd` |
 | `os.getenv` | 读取环境变量 | 输入变量名，输出它的值（字符串）；不存在时返回 `None` 或你给的默认值 | `import os` | `py.os.getenv` |
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
