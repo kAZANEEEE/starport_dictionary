@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 115 条**
+**共 118 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 48 |
-| 标准库（要 import） | 67 |
+| 内置能力（不用 import） | 50 |
+| 标准库（要 import） | 68 |
 
-## 内置能力（不用 import） — 48 条
+## 内置能力（不用 import） — 50 条
 
 _Python 自带，直接写就行_
 
@@ -40,13 +40,14 @@ _Python 自带，直接写就行_
 | `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
 
-### list — 15 条
+### list — 16 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `any() / all()` | 判断有没有 / 是不是全都满足 | 输入一批真假值，输出一个布尔：`any` = 至少一个真，`all` = 全为真 | — | `py.list.any_all` |
 | `dict.fromkeys()` | 列表去重 | 把列表里重复的值去掉，只留第一次出现的位置，顺序不变 | — | `py.list.dedupe` |
 | `filter() / 列表推导式` | 按条件筛选列表 | 输入列表 + 一个判断条件，输出**只包含通过条件的元素的新列表**，原列表不变 | — | `py.list.filter` |
+| `items.index(max(items))` | 找最大值在第几个 | 输入一个列表，输出最大值的下标；Python **没有内置的 argmax**，所以要用 `index(max(...))` 组合 | — | `py.list.max_index` |
 | `list.copy() / copy.deepcopy()` | 复制列表（浅拷贝的坑） | 输入列表，输出一个新列表；**只复制最外层**，里面的可变元素仍和原列表共享 | — | `py.list.copy` |
 | `list.count()` | 数某个值出现几次 | 输入一个值，输出它在列表里出现了几次；找不到返回 0，不报错 | — | `py.list.count` |
 | `list.extend()` | 往列表里追加多个元素 | 输入可迭代对象，把它里面的元素**逐个**接到列表末尾；原地修改，返回 None | — | `py.list.extend` |
@@ -67,11 +68,12 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 15 条
+### str — 16 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `f-string / str.format()` | 格式化字符串 | 输入模板 + 变量，输出拼好的字符串 | — | `py.string.format` |
+| `str.casefold() 后比较` | 忽略大小写比较 | 输入两个字符串，先把它们都转成「统一的小写形式」，再比是否相等；`casefold()` 比 `lower()` 更彻底 | — | `py.string.case_compare` |
 | `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
 | `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
@@ -88,7 +90,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 67 条
+## 标准库（要 import） — 68 条
 
 _标准库里现成的，import 之后可用_
 
@@ -218,12 +220,13 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 12 条
+### sqlite3 — 13 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `CREATE INDEX` | 给字段建索引 | 输入表名 + 列名，建立一个「值的排好序的对照表」，之后按这列查询不用扫全表 | `import sqlite3` | `py.sqlite.create_index` |
 | `DROP TABLE` | 删除表 | 输入表名，把整张表（结构 + 所有数据）从数据库删掉；只想清数据不删表用 `DELETE FROM 表` | `import sqlite3` | `py.sqlite.drop_table` |
+| `SELECT ... LIMIT ? OFFSET ?` | 分页查询 | 输入「每页几条 + 跳过几条」，输出这一页的数据；**必须配 `ORDER BY`**，否则每次翻页顺序都可能变 | `import sqlite3` | `py.sqlite.pagination` |
 | `SELECT COUNT(*)` | 统计表里有多少行 | 输入表名（可带条件），输出行数；只返回一个数字，不把数据取出来 | `import sqlite3` | `py.sqlite.count_rows` |
 | `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
 | `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
