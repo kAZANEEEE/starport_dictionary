@@ -76,6 +76,8 @@ class LocalKnowledgeBackend:
                 title=getattr(self._by_id.get(h.entry_id), "title", h.entry_id),
                 score=h.score,
                 matched_terms=tuple(h.matched_terms),
+                description=getattr(self._by_id.get(h.entry_id), "description", ""),
+                origin=getattr(self._by_id.get(h.entry_id), "origin", ""),
             )
             for h in hits
         )

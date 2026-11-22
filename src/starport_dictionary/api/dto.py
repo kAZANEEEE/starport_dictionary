@@ -112,6 +112,8 @@ class HitDTO:
     title: str
     score: int
     matched_terms: tuple[str, ...] = ()
+    description: str = ""      # 一句话效果，候选行要显示它
+    origin: str = ""           # builtin / stdlib / thirdparty
 
 
 @dataclass(frozen=True)
