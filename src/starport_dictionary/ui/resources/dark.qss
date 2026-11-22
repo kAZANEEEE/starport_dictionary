@@ -1,0 +1,290 @@
+/* Starport Dictionary — 深空主题
+   设计关键词：深蓝、暗紫、简洁、工程化、留白、高可读 */
+
+QWidget {
+    background-color: transparent;
+    color: #e6e9f5;
+    font-family: "Microsoft YaHei UI", "Segoe UI", "PingFang SC", sans-serif;
+    font-size: 14px;
+}
+
+QMainWindow {
+    background-color: #0b1020;
+}
+
+#Root {
+    background-color: #0b1020;
+}
+
+QStackedWidget, #Home {
+    background-color: transparent;
+}
+
+/* —— 品牌行 —— */
+#Brand {
+    color: #8b93b0;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+#BrandMark {
+    color: #7c6cff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* —— 搜索框（视觉中心）—— */
+#SearchInput {
+    background-color: #121a33;
+    border: 2px solid #1f2a4a;
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 20px;
+    color: #f2f4fb;
+    selection-background-color: #7c6cff;
+}
+#SearchInput:hover {
+    border-color: #2c3a63;
+}
+#SearchInput:focus {
+    border-color: #7c6cff;
+    background-color: #131c38;
+}
+
+#SearchSmall {
+    background-color: #121a33;
+    border: 1px solid #1f2a4a;
+    border-radius: 9px;
+    padding: 8px 14px;
+    font-size: 14px;
+}
+#SearchSmall:focus {
+    border-color: #7c6cff;
+}
+
+#Hint {
+    color: #6f78a0;
+    font-size: 13px;
+}
+
+/* —— 卡片 —— */
+#Card {
+    background-color: #121a33;
+    border: 1px solid #1f2a4a;
+    border-radius: 12px;
+}
+#Card:hover {
+    border-color: #2f3d6b;
+}
+#BestCard {
+    background-color: #131c38;
+    border: 1px solid #3a3170;
+    border-radius: 14px;
+}
+#Candidate {
+    background-color: #101830;
+    border: 1px solid #1c2642;
+    border-radius: 10px;
+}
+#Candidate:hover {
+    border-color: #3a4a7d;
+    background-color: #131d3a;
+}
+#Candidate[selected="true"] {
+    border: 1px solid #7c6cff;
+    background-color: #161f3d;
+}
+#BestCard:hover {
+    border-color: #5a4bc4;
+}
+
+/* —— 文字层级 —— */
+#CardTitle {
+    font-size: 19px;
+    font-weight: 600;
+    color: #f4f6fc;
+}
+#RowTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #eaeefb;
+}
+#Mono {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    color: #7f8ab5;
+    font-size: 12px;
+}
+#Body {
+    color: #c3cae6;
+    font-size: 14px;
+}
+#Muted {
+    color: #7a83a8;
+    font-size: 13px;
+}
+#SectionTitle {
+    color: #9aa4cc;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* —— 徽章 —— */
+#Badge {
+    border-radius: 7px;
+    padding: 3px 9px;
+    font-size: 12px;
+}
+#Badge[level="builtin"] {
+    background-color: #10321f;
+    color: #56d99a;
+    border: 1px solid #1c5636;
+}
+#Badge[level="stdlib"] {
+    background-color: #10243a;
+    color: #5bb8f0;
+    border: 1px solid #1c4468;
+}
+#Badge[level="thirdparty"] {
+    background-color: #2a1d3d;
+    color: #b48cf5;
+    border: 1px solid #4a2f6e;
+}
+#Badge[level="unknown"] {
+    background-color: #232a3f;
+    color: #9aa4cc;
+    border: 1px solid #333d5c;
+}
+
+/* —— 导入区 —— */
+#ImportPanel {
+    background-color: #0d1428;
+    border: 1px solid #232d4d;
+    border-radius: 10px;
+}
+#ImportBadgeOk {
+    color: #56d99a;
+    font-weight: 600;
+}
+#ImportCode {
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    color: #b48cf5;
+    font-size: 13px;
+}
+
+/* —— 按钮 —— */
+QPushButton {
+    background-color: #1a2340;
+    border: 1px solid #2a3658;
+    border-radius: 9px;
+    padding: 8px 16px;
+    color: #d6dcf2;
+}
+QPushButton:hover {
+    background-color: #223057;
+    border-color: #3d4d7d;
+}
+QPushButton:pressed {
+    background-color: #18203c;
+}
+#Chip {
+    background-color: #131c34;
+    border: 1px solid #232f52;
+    color: #9fb0dd;
+    padding: 7px 13px;
+    font-size: 13px;
+    border-radius: 16px;
+}
+#Chip:hover {
+    border-color: #7c6cff;
+    color: #e6e9f5;
+}
+#Ghost {
+    background-color: transparent;
+    border: none;
+    color: #7a83a8;
+    padding: 6px 10px;
+}
+#Ghost:hover {
+    color: #e6e9f5;
+}
+#CopyBtn {
+    background-color: #1a2340;
+    border: 1px solid #2a3658;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 7px;
+}
+#FeedbackBtn {
+    background-color: #131c34;
+    border: 1px solid #232f52;
+    padding: 6px 14px;
+    font-size: 13px;
+}
+#FeedbackBtn[verdict="ok"]:hover {
+    border-color: #56d99a;
+    color: #56d99a;
+}
+#FeedbackBtn[verdict="bad"]:hover {
+    border-color: #f07a7a;
+    color: #f07a7a;
+}
+#Primary {
+    background-color: #6b5cf0;
+    border: 1px solid #8b7cff;
+    color: #ffffff;
+    font-weight: 600;
+}
+#Primary:hover {
+    background-color: #7c6cff;
+}
+
+/* —— 代码块 —— */
+#CodeFrame {
+    background-color: #0a0f1e;
+    border: 1px solid #1e2844;
+    border-radius: 10px;
+}
+#CodeEdit {
+    background-color: #0a0f1e;
+    border: none;
+    color: #d7ddf0;
+    font-family: "Cascadia Mono", "Consolas", monospace;
+    font-size: 13px;
+    selection-background-color: #2f3d6b;
+}
+
+/* —— 滚动区 —— */
+QScrollArea {
+    border: none;
+}
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #2a3658;
+    border-radius: 5px;
+    min-height: 30px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #3d4d7d;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+/* —— 状态栏 —— */
+#Status {
+    color: #6f78a0;
+    font-size: 12px;
+}
+
+QToolTip {
+    background-color: #1a2340;
+    color: #e6e9f5;
+    border: 1px solid #2f3d6b;
+    padding: 4px 8px;
+}
