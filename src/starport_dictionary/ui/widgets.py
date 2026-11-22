@@ -37,10 +37,48 @@ from starport_dictionary.ui.theme import (
 
 
 def mono_label(text: str, parent: QWidget | None = None) -> QLabel:
-    """等宽大写小标签——全站"工程感"的主要来源。"""
+    """等宽小标签。
+
+    2026-11-22 修正：给拉丁字母加字距好看，但中文会被撑成"其 他 相 关"。
+    所以只用等宽字体、不加字距（字距交给 QSS 的 0.5px 统一处理）。
+    """
     lab = QLabel(text, parent)
     lab.setObjectName("Label")
     return lab
+
+
+class Wordmark(QWidget):
+    """扁平的黄铜四角星标——替代原来那个 3D 发光图标。
+
+    新设计是冷纸手册，3D 暗紫图标是另一套语言；这里用 1px 线条画标，
+    和全站的细线、黄铜色是同一套语法。窗口/任务栏图标仍用 PNG。
+    """
+
+    def __init__(self, size: int = 16, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self._size = size
+        self.setFixedSize(size, size)
+
+    def paintEvent(self, event) -> None:  # noqa: N802
+        from PySide6.QtCore import QPointF
+        from PySide6.QtGui import QColor, QPainter, QPen
+
+        p = QPainter(self)
+        p.setRenderHint(QPainter.Antialiasing, True)
+        p.setPen(QPen(QColor(200, 164, 100, 235), 1.4))
+        c = self._size / 2.0
+        long_r = self._size / 2.0 - 0.8
+        short_r = long_r * 0.22
+        pts = []
+        for i in range(8):                      # 四角星：长短交替的 8 个顶点
+            ang = i * 3.14159265 / 4.0
+            r = long_r if i % 2 == 0 else short_r
+            import math
+
+            pts.append(QPointF(c + r * math.cos(ang), c + r * math.sin(ang)))
+        for i in range(len(pts)):
+            p.drawLine(pts[i], pts[(i + 1) % len(pts)])
+        p.end()
 
 
 class Badge(QLabel):
@@ -89,7 +127,9 @@ def md_to_html(text: str) -> str:
         if line.startswith("- "):
             lines.append('<div style="margin-left:8px;color:%s;">·&nbsp;' % TEXT_2 + line[2:] + "</div>")
         elif re.match(r"^\d+\.", line):
-            lines.append('<div style="margin-left:2px;">' + line + "</div>")
+            lines.append(
+                '<div style="margin:0 0 5px 2px;">' + line + "</div>"
+            )
         elif line:
             lines.append('<div style="margin:0 0 6px 0;">' + line + "</div>")
         else:

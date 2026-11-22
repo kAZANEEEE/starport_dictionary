@@ -27,6 +27,7 @@ from starport_dictionary.api.dto import EntryDTO, SearchResponse
 from starport_dictionary.ui.theme import FS_HERO, icon_path
 from starport_dictionary.ui.widgets import (
     Badge,
+    Wordmark,
     CandidateRow,
     ClickableFrame,
     CodeBlock,
@@ -108,12 +109,8 @@ class HomeView(QWidget):
         # —— 顶行：图标 + 品牌 + 右侧统计 ——
         top = QHBoxLayout()
         top.setSpacing(10)
-        logo_file = icon_path()
-        if logo_file.is_file():
-            logo = QLabel(self)
-            pix = QPixmap(str(logo_file))
-            logo.setPixmap(pix.scaled(22, 22, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            top.addWidget(logo)
+        top.addWidget(Wordmark(14, self))
+        top.addSpacing(4)
         brand = QLabel("STARPORT DICTIONARY", self)
         brand.setObjectName("Brand")
         top.addWidget(brand)
@@ -190,6 +187,12 @@ class HomeView(QWidget):
         root.addLayout(cols)
         root.addStretch(1)
 
+        root.addWidget(Rule(self))
+        steps = QLabel("问一句  →  看候选  →  读原理  →  抄代码", self)
+        steps.setObjectName("Steps")
+        steps.setContentsMargins(0, 8, 0, 6)
+        root.addWidget(steps)
+
         self.status = QLabel("", self)
         self.status.setObjectName("Status")
         root.addWidget(self.status)
@@ -223,6 +226,7 @@ class HomeView(QWidget):
             b = QPushButton(q, self.recent_box)
             b.setObjectName("Chip")
             b.setCursor(Qt.PointingHandCursor)
+            b.setContentsMargins(30, 0, 0, 0)      # 和 01/02 的编号列对齐
             b.clicked.connect(lambda _=False, t=q: self._submit(t))
             self.recent_lay.addWidget(b)
         self.recent_box.setVisible(True)
@@ -284,18 +288,31 @@ class ResultsView(QWidget):
         root.addWidget(self.best_card)
         root.addSpacing(18)
 
-        self.others_title = mono_label("OTHERS / 其他相关", self)
-        root.addWidget(self.others_title)
-        root.addSpacing(2)
+        self.list_scroll = QScrollArea(self)
+        self.list_scroll.setWidgetResizable(True)
+        self.list_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.list_scroll.setFrameShape(QFrame.NoFrame)
+        list_host = QWidget(self.list_scroll)
+        host_lay = QVBoxLayout(list_host)
+        host_lay.setContentsMargins(0, 0, 8, 0)
+        host_lay.setSpacing(0)
+
+        self.others_title = mono_label("OTHERS / 其他相关", list_host)
+        host_lay.addWidget(self.others_title)
+        host_lay.addSpacing(2)
 
         self.others_box = QVBoxLayout()
         self.others_box.setSpacing(0)
-        root.addLayout(self.others_box)
+        host_lay.addLayout(self.others_box)
+        host_lay.addStretch(1)
+
+        self.list_scroll.setWidget(list_host)
+        root.addWidget(self.list_scroll, 1)
+        root.addSpacing(10)
 
         self.kbd_hint = QLabel("↑↓ 选候选      ENTER 打开      ESC 返回", self)
         self.kbd_hint.setObjectName("Hint")
         root.addWidget(self.kbd_hint)
-        root.addStretch(1)
 
     # ---- 渲染 ----
     def show_response(self, resp: SearchResponse) -> None:
