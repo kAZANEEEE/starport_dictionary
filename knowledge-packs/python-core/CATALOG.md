@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 81 条**
+**共 84 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 33 |
-| 标准库（要 import） | 48 |
+| 内置能力（不用 import） | 34 |
+| 标准库（要 import） | 50 |
 
-## 内置能力（不用 import） — 33 条
+## 内置能力（不用 import） — 34 条
 
 _Python 自带，直接写就行_
 
@@ -58,7 +58,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 9 条
+### str — 10 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -71,9 +71,10 @@ _Python 自带，直接写就行_
 | `str.startswith() / str.endswith()` | 判断开头或结尾 | 输入字符串 + 一个或多个候选，输出 `True/False`：是不是以它们开头（或结尾） | — | `py.string.startswith` |
 | `str.strip()` | 去掉首尾空白 | 输入一个字符串，输出**首尾**空白被删掉的版本（中间的空格保留），返回新字符串 | — | `py.string.strip` |
 | `str.upper() / str.lower()` | 转换大小写 | 输入字符串，输出大小写变换后的**新字符串**；原字符串不变 | — | `py.string.upper_lower` |
+| `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 48 条
+## 标准库（要 import） — 50 条
 
 _标准库里现成的，import 之后可用_
 
@@ -140,7 +141,7 @@ _标准库里现成的，import 之后可用_
 | `logging.basicConfig()` | 输出日志（比 print 规范） | 输入一条消息 + 级别，输出到控制台（或文件）；低于设定级别的消息**直接丢弃不处理** | `import logging` | `py.logging.basic` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 7 条
+### os — 8 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -151,6 +152,7 @@ _标准库里现成的，import 之后可用_
 | `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
 | `os.remove() / os.unlink()` | 删除文件 | 输入文件路径，把它从磁盘上移除；文件不存在抛 `FileNotFoundError`，路径是目录则抛 `IsADirectoryError` | `import os` | `py.os.remove` |
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
+| `os.walk()` | 递归遍历目录树（os.walk） | 输入根目录，逐个产出 `(当前目录路径, 子目录名列表, 文件名列表)` 三元组；默认自顶向下 | `import os` | `py.os.walk` |
 
 ### pathlib — 6 条
 
@@ -163,11 +165,12 @@ _标准库里现成的，import 之后可用_
 | `pathlib.Path.suffix` | 获取文件后缀 | 从路径里取出最后一个后缀，返回带点号的字符串，比如 `".py"` | `from pathlib import Path` | `py.fs.get_extension` |
 | `pathlib.Path.write_text` | 写入文本文件 | 把字符串写进文件 | `from pathlib import Path` | `py.fs.write_text` |
 
-### random — 2 条
+### random — 3 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `random.choice` | 随机选一个 | 从序列里随机挑一个元素，或者生成一个随机整数 | `import random` | `py.random.choice` |
+| `random.randint()` | 生成随机整数 | 输入下界、上界，输出它们之间（**含两端**）的一个随机整数；要「不含右端」用 `randrange` | `import random` | `py.random.randint` |
 | `random.shuffle` | 打乱列表顺序 | 把列表里元素的顺序随机重排 | `import random` | `py.random.shuffle` |
 
 ### re — 3 条
