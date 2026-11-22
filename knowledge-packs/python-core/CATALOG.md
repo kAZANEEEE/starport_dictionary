@@ -3,12 +3,13 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 130 条**
+**共 132 条**
 
 | 层 | 条数 |
 |---|---|
 | 内置能力（不用 import） | 56 |
 | 标准库（要 import） | 74 |
+| 第三方库（要 pip 装） | 2 |
 
 ## 内置能力（不用 import） — 56 条
 
@@ -268,3 +269,15 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `X ｜ None / typing.Optional` | 参数默认写 None 的套路 | 输入「参数名 + 类型 + 默认 None」，输出一个可选参数；函数体里再用 `if x is None` 换成真正的默认值 | `from typing import Optional` | `py.typing.default_none` |
 | `typing 类型标注` | 类型标注 | 输入函数/变量的声明，输出带类型说明的代码；**运行时不做检查**，只是给人和工具看的说明 | `from typing import Optional` | `py.typing.annotate` |
+
+
+## 第三方库（要 pip 装） — 2 条
+
+_需要先 pip install 才能用_
+
+### requests — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `requests.get()` | 发 GET 请求 | 输入地址（+ 可选参数、超时），输出响应对象；**必须检查状态码**，因为 4xx/5xx 不会抛异常 | `import requests` | `py.http.get` |
+| `requests.post(json=...)` | 发 POST 并传 JSON | 输入地址 + 数据，发 POST 请求；`json=` 自动转 JSON 并设好头，`data=` 是表单提交 | `import requests` | `py.http.post_json` |
