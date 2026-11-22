@@ -5,6 +5,9 @@ description: 对每个元素做同一个操作，得到新列表
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "map() / 列表推导式"
 
 object:
   id: list.element

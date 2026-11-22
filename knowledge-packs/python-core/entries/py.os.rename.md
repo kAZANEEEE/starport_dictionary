@@ -5,6 +5,9 @@ description: 改文件名，或者挪到别的目录
 language: python
 category_id: programming.filesystem
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.rename"
 
 object:
   id: file.path

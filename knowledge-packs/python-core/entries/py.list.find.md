@@ -5,6 +5,9 @@ description: 判断某个值在不在列表里，以及它第一次出现的位�
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "list.index() / in"
 
 object:
   id: list.element

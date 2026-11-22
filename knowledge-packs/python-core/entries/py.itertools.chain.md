@@ -5,6 +5,9 @@ description: 把几个列表接成一条流水，挨个处理
 language: python
 category_id: programming.basics
 module: itertools
+origin: stdlib
+import: "from itertools import chain"
+qualname: "itertools.chain"
 
 object:
   id: list.element

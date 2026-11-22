@@ -5,6 +5,9 @@ description: 按分隔符把一行字切成若干段
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.split()"
 
 object:
   id: string.text

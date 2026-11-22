@@ -5,6 +5,9 @@ description: 把列表里元素顺序随机重排
 language: python
 category_id: programming.basics
 module: random
+origin: stdlib
+import: "import random"
+qualname: "random.shuffle"
 
 object:
   id: list.element

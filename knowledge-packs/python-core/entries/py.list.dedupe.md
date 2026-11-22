@@ -5,6 +5,9 @@ description: 去掉列表里重复的元素，保留原来的顺序
 language: python
 category_id: programming.algorithms
 module: list
+origin: builtin
+import: ""
+qualname: "dict.fromkeys()"
 
 object:
   id: list.duplicate

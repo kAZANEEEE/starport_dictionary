@@ -5,6 +5,9 @@ description: 按下标把两个列表成对取出来
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "zip"
 
 object:
   id: list.element

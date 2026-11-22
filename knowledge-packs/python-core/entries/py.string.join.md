@@ -5,6 +5,9 @@ description: 用分隔符把多个字符串连成一个
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.join()"
 
 object:
   id: string.text

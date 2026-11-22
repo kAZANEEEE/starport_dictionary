@@ -5,6 +5,9 @@ description: 拿到从 1970 年到现在过了多少秒
 language: python
 category_id: programming.basics
 module: time
+origin: stdlib
+import: "import time"
+qualname: "time.timestamp"
 
 object:
   id: datetime.time

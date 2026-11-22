@@ -5,6 +5,9 @@ description: 把字典或列表变成 JSON 文本
 language: python
 category_id: programming.filesystem
 module: json
+origin: stdlib
+import: "import json"
+qualname: "json.dumps"
 
 object:
   id: json.object

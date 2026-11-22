@@ -5,6 +5,9 @@ description: 一行算出频次表，找最高频也在里面
 language: python
 category_id: programming.basics
 module: collections
+origin: stdlib
+import: "from collections import Counter, defaultdict"
+qualname: "collections.counter"
 
 object:
   id: dict.value

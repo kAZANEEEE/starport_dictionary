@@ -5,6 +5,9 @@ description: 某个词在第几个字符出现，找不到返回 -1
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.find() / str.index()"
 
 object:
   id: string.text

@@ -5,6 +5,9 @@ description: 出错时不让程序崩，接住并处理
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "try / except"
 
 object:
   id: error.condition

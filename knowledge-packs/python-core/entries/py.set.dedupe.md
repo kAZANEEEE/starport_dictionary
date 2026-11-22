@@ -5,6 +5,9 @@ description: 最快去重的写法，代价是不保序
 language: python
 category_id: programming.basics
 module: set
+origin: builtin
+import: ""
+qualname: "set()"
 
 object:
   id: list.duplicate

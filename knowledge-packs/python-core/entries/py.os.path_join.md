@@ -5,6 +5,9 @@ description: 把目录和文件名安全地接起来，自动处理分隔符
 language: python
 category_id: programming.filesystem
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.path_join"
 
 object:
   id: file.path

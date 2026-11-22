@@ -5,6 +5,9 @@ description: 同样的参数只算一次，后面直接拿缓存
 language: python
 category_id: programming.basics
 module: functools
+origin: stdlib
+import: "from functools import lru_cache"
+qualname: "functools.lru_cache"
 
 object:
   id: cache.result

@@ -5,6 +5,9 @@ description: 安全地按键取值，键不存在时给默认值
 language: python
 category_id: programming.basics
 module: dict
+origin: builtin
+import: ""
+qualname: "dict.get"
 
 object:
   id: dict.value

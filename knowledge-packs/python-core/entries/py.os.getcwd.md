@@ -5,6 +5,9 @@ description: 程序现在站在哪个目录里
 language: python
 category_id: programming.filesystem
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.getcwd"
 
 object:
   id: file.path

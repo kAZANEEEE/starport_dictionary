@@ -5,6 +5,9 @@ description: 建目录，父目录不存在就一起建
 language: python
 category_id: programming.filesystem
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.makedirs"
 
 object:
   id: dir.list

@@ -5,6 +5,9 @@ description: 改表里已有行的字段值
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.update"
 
 object:
   id: db.record

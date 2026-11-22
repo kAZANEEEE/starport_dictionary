@@ -5,6 +5,9 @@ description: 递归找出一个目录下的全部文件
 language: python
 category_id: programming.filesystem
 module: pathlib
+origin: stdlib
+import: "from pathlib import Path"
+qualname: "pathlib.Path.rglob"
 
 object:
   id: dir.list

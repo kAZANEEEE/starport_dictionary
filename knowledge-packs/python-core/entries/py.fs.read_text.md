@@ -5,6 +5,9 @@ description: 把一个文本文件的内容读成字符串
 language: python
 category_id: programming.filesystem
 module: pathlib
+origin: stdlib
+import: "from pathlib import Path"
+qualname: "pathlib.Path.read_text"
 
 object:
   id: file.content

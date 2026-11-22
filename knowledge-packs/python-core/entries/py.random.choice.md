@@ -5,6 +5,9 @@ description: 从列表里随机挑一个元素
 language: python
 category_id: programming.basics
 module: random
+origin: stdlib
+import: "import random"
+qualname: "random.choice"
 
 object:
   id: random.number

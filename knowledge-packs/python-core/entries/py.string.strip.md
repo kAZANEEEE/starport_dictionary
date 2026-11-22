@@ -5,6 +5,9 @@ description: 清掉字符串两端的空格、换行、制表符
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.strip()"
 
 object:
   id: string.text

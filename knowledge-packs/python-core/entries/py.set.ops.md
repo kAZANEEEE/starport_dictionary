@@ -5,6 +5,9 @@ description: 求两个集合的公共部分、合并、差集
 language: python
 category_id: programming.basics
 module: set
+origin: builtin
+import: ""
+qualname: "set 运算 & | -"
 
 object:
   id: list.duplicate

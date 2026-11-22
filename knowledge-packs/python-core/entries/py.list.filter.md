@@ -5,6 +5,9 @@ description: 留下满足条件的元素，组成新列表
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "filter() / 列表推导式"
 
 object:
   id: list.element

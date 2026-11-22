@@ -5,6 +5,9 @@ description: 从表里按条件读出数据
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.select"
 
 object:
   id: db.record

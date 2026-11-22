@@ -61,7 +61,10 @@ class Entry:
     scenario: str
 
     # 可选
-    module: str = ""  # os / time / random / pathlib / PySide6 …（按库分册用）
+    module: str = ""
+    origin: str = ""        # builtin / stdlib / thirdparty
+    import_stmt: str = ""   # 要写的 import 语句，内置能力留空
+    qualname: str = ""      # 准确技术全名，如 dict.get / pathlib.Path.suffix  # os / time / random / pathlib / PySide6 …（按库分册用）
     targets: tuple[str, ...] = ()
     constraints: tuple[Constraint, ...] = ()
     related_ids: tuple[str, ...] = ()

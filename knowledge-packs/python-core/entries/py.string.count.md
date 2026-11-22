@@ -5,6 +5,9 @@ description: 一段文字里某个词出现了多少回
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.count()"
 
 object:
   id: string.text

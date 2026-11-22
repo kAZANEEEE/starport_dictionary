@@ -5,6 +5,9 @@ description: 一行算出总和、最大值、最小值
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "sum() / max() / min()"
 
 object:
   id: list.element

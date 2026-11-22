@@ -5,6 +5,9 @@ description: 发现问题时自己报错，别让坏数据继续往后走
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "raise"
 
 object:
   id: error.condition

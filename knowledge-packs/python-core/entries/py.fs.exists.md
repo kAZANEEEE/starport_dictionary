@@ -5,6 +5,9 @@ description: 看一个路径到底有没有东西
 language: python
 category_id: programming.filesystem
 module: pathlib
+origin: stdlib
+import: "from pathlib import Path"
+qualname: "pathlib.Path.exists"
 
 object:
   id: file.exists

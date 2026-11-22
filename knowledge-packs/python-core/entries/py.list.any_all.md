@@ -5,6 +5,9 @@ description: 一批条件里，任意一个成立、或者全部成立
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "any() / all()"
 
 object:
   id: list.element

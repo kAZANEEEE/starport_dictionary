@@ -5,6 +5,9 @@ description: 把文件名最后那一截后缀取出来
 language: python
 category_id: programming.filesystem
 module: pathlib
+origin: stdlib
+import: "from pathlib import Path"
+qualname: "pathlib.Path.suffix"
 
 object:
   id: file.extension

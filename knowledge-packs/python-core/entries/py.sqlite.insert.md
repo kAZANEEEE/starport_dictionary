@@ -5,6 +5,9 @@ description: 安全地写入一行记录，避免 SQL 注入
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.insert"
 
 object:
   id: db.record

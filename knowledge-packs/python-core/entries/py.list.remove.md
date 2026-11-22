@@ -5,6 +5,9 @@ description: 知道值不知道下标，怎么把它从列表里拿掉
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "list.remove"
 
 object:
   id: list.element

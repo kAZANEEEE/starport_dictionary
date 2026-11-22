@@ -5,6 +5,9 @@ description: 按下标切出一部分元素，含头不含尾
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "切片 list[a:b]"
 
 object:
   id: list.element

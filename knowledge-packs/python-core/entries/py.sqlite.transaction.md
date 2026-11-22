@@ -5,6 +5,9 @@ description: 一批操作要么全成功要么全回滚
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.transaction"
 
 object:
   id: db.record

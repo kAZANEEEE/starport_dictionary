@@ -5,6 +5,9 @@ description: 一行写清「对每个元素做什么」，还能带条件
 language: python
 category_id: programming.basics
 module: list
+origin: builtin
+import: ""
+qualname: "列表推导式"
 
 object:
   id: list.element

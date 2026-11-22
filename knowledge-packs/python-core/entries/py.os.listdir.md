@@ -5,6 +5,9 @@ description: 看一眼某个目录下有哪些文件和子目录
 language: python
 category_id: programming.filesystem
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.listdir"
 
 object:
   id: dir.list

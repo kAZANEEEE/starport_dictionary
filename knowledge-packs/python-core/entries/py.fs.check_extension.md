@@ -5,6 +5,9 @@ description: 只看文件名后缀，判断是不是某一种格式
 language: python
 category_id: programming.filesystem
 module: pathlib
+origin: stdlib
+import: "from pathlib import Path"
+qualname: "pathlib.Path.suffix"
 
 object:
   id: file.extension

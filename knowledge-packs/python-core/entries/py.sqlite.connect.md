@@ -5,6 +5,9 @@ description: 打开一个数据库文件，拿到连接和游标
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.connect"
 
 object:
   id: sql.connection

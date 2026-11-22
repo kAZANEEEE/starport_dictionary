@@ -5,6 +5,9 @@ description: 一次性完成「查、没有就建」，常用来分组和计数
 language: python
 category_id: programming.basics
 module: dict
+origin: builtin
+import: ""
+qualname: "dict.setdefault"
 
 object:
   id: dict.value

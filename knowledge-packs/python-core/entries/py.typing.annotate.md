@@ -5,6 +5,9 @@ description: 给函数和变量写上类型，方便人看和工具检查
 language: python
 category_id: programming.basics
 module: typing
+origin: stdlib
+import: "from typing import Optional"
+qualname: "typing 类型标注"
 
 object:
   id: type.annotation

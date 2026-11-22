@@ -5,6 +5,9 @@ description: 拿到用户启动程序时敲的那些参数
 language: python
 category_id: programming.basics
 module: argparse
+origin: stdlib
+import: "import argparse"
+qualname: "argparse.ArgumentParser"
 
 object:
   id: cli.args

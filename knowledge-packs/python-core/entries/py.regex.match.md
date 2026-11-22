@@ -5,6 +5,9 @@ description: 用规则检查一段文本的形状对不对
 language: python
 category_id: programming.basics
 module: re
+origin: stdlib
+import: "import re"
+qualname: "re.fullmatch() / re.match()"
 
 object:
   id: regex.pattern

@@ -5,6 +5,9 @@ description: 把字符串里的一段换成另一段
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.replace()"
 
 object:
   id: string.text

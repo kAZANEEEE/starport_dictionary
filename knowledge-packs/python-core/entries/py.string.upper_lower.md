@@ -5,6 +5,9 @@ description: 全部变大写、变小写，或者首字母大写
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.upper() / str.lower()"
 
 object:
   id: string.text

@@ -5,6 +5,9 @@ description: 定义一张表的字段和类型，不存在就创建
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.create_table"
 
 object:
   id: db.record

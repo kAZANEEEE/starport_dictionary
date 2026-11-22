@@ -5,6 +5,9 @@ description: 从系统环境里取一个配置值，取不到就用默认值
 language: python
 category_id: programming.basics
 module: os
+origin: stdlib
+import: "import os"
+qualname: "os.getenv"
 
 object:
   id: env.variable

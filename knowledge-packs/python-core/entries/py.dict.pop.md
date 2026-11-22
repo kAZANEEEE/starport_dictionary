@@ -5,6 +5,9 @@ description: 拿走一个键的值，同时把它从字典里删掉
 language: python
 category_id: programming.basics
 module: dict
+origin: builtin
+import: ""
+qualname: "dict.pop"
 
 object:
   id: dict.value

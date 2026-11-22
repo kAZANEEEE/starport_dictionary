@@ -5,6 +5,9 @@ description: 出不出错都要关文件、断开连接
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "try / finally"
 
 object:
   id: error.condition

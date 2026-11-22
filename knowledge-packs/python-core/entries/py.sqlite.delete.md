@@ -5,6 +5,9 @@ description: 按条件删掉表里的行
 language: python
 category_id: programming.database
 module: sqlite3
+origin: stdlib
+import: "import sqlite3"
+qualname: "sqlite.delete"
 
 object:
   id: db.record

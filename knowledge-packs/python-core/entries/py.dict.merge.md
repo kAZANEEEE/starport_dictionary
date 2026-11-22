@@ -5,6 +5,9 @@ description: 把另一个字典的键值合进来，重复键谁覆盖
 language: python
 category_id: programming.basics
 module: dict
+origin: builtin
+import: ""
+qualname: "dict.update() / dict | dict"
 
 object:
   id: dict.value

@@ -5,6 +5,9 @@ description: 试着连一个地址端口，判断通不通
 language: python
 category_id: programming.filesystem
 module: socket
+origin: stdlib
+import: "import socket"
+qualname: "socket.create_connection()"
 
 object:
   id: net.connection

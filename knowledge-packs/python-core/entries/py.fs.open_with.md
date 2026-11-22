@@ -5,6 +5,9 @@ description: 一行一行处理，不把整个文件读进内存
 language: python
 category_id: programming.filesystem
 module: builtins
+origin: builtin
+import: ""
+qualname: "builtins.open()"
 
 object:
   id: file.content

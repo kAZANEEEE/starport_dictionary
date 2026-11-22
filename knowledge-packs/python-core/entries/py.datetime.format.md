@@ -5,6 +5,9 @@ description: 时间对象转成 2026-11-22 10:30:00 这样的文本
 language: python
 category_id: programming.basics
 module: datetime
+origin: stdlib
+import: "from datetime import datetime"
+qualname: "datetime.format"
 
 object:
   id: datetime.time

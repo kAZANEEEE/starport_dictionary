@@ -5,6 +5,9 @@ description: 暂停几秒再继续，常用于重试和限速
 language: python
 category_id: programming.basics
 module: time
+origin: stdlib
+import: "import time"
+qualname: "time.sleep"
 
 object:
   id: datetime.time

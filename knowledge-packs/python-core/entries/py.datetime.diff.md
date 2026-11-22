@@ -5,6 +5,9 @@ description: 两个时间相减，得到多少天、多少秒
 language: python
 category_id: programming.basics
 module: datetime
+origin: stdlib
+import: "from datetime import datetime"
+qualname: "datetime.diff"
 
 object:
   id: datetime.time

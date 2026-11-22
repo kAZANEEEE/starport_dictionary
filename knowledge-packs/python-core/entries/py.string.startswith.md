@@ -5,6 +5,9 @@ description: 看字符串是不是以某段内容开始或结束
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "str.startswith() / str.endswith()"
 
 object:
   id: string.text

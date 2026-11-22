@@ -5,6 +5,9 @@ description: 「2026-11-22 10:30」这样的文本转成时间对象
 language: python
 category_id: programming.basics
 module: datetime
+origin: stdlib
+import: "from datetime import datetime"
+qualname: "datetime.parse"
 
 object:
   id: datetime.time

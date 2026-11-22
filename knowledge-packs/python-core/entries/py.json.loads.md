@@ -5,6 +5,9 @@ description: 接口返回的一串 JSON 文本，直接变成字典
 language: python
 category_id: programming.filesystem
 module: json
+origin: stdlib
+import: "import json"
+qualname: "json.loads"
 
 object:
   id: json.object

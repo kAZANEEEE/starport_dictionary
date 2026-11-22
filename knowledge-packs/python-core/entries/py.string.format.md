@@ -5,6 +5,9 @@ description: 把变量嵌进文本里（f-string / format / %）
 language: python
 category_id: programming.basics
 module: str
+origin: builtin
+import: ""
+qualname: "f-string / str.format()"
 
 object:
   id: string.text

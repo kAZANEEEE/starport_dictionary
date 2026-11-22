@@ -5,6 +5,9 @@ description: 访问不存在的键时自动建一个，省掉判空
 language: python
 category_id: programming.basics
 module: collections
+origin: stdlib
+import: "from collections import Counter, defaultdict"
+qualname: "collections.defaultdict"
 
 object:
   id: dict.value

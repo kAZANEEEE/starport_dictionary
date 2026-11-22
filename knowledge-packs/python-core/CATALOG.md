@@ -1,0 +1,208 @@
+# Python 知识目录（自动生成，别手改）
+
+> 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
+> 手改这份会在下次生成时被覆盖。
+
+**共 78 条**
+
+| 层 | 条数 |
+|---|---|
+| 内置能力（不用 import） | 33 |
+| 标准库（要 import） | 45 |
+
+## 内置能力（不用 import） — 33 条
+
+_Python 自带，直接写就行_
+
+### builtins — 7 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `builtins.open()` | 逐行读取大文件 | 输入文件路径，逐行产出内容（含行尾换行符），内存占用与文件大小无关 | — | `py.fs.open_with` |
+| `enumerate` | 遍历时带上下标 | 输入可迭代对象，输出「(序号, 元素)」对；序号默认从 0 开始，可用 `start=` 改 | — | `py.list.enumerate` |
+| `raise` | 主动抛出异常 | 输入一个异常对象，输出「立刻中断当前函数」；调用方要么接住，要么继续往上抛 | — | `py.exceptions.raise` |
+| `sum() / max() / min()` | 求和 / 最大 / 最小 | 输入一组数，输出总和 / 最大值 / 最小值；**空序列求 sum 得 0，求 max/min 抛 `ValueError`** | — | `py.list.sum_max` |
+| `try / except` | 捕获异常 | 输入一段可能出错的代码 + 一个异常类型，出错时接住并执行处理分支；类型不匹配就照常抛出 | — | `py.exceptions.try` |
+| `try / finally` | 无论如何都要执行的清理 | 输入一段代码 + 一段收尾代码，输出「收尾代码一定会跑」；即使中间 `return`、抛异常也都跑 | — | `py.exceptions.finally` |
+| `zip` | 同时遍历两个列表 | 输入两个（或多个）可迭代对象，输出「(第一个的第 i 个, 第二个的第 i 个)」这样的元组；**长度不同时按最短的截断** | — | `py.list.zip` |
+
+### dict — 5 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `dict.get` | 取字典里的值 | 按键取值 | — | `py.dict.get` |
+| `dict.items()` | 遍历字典 | 输入字典，逐个访问它的键、值或键值对；顺序等于插入顺序（3.7+） | — | `py.dict.iterate` |
+| `dict.pop` | 取出并删除字典里的项 | 输入键（+ 可选默认值），输出它的值并从字典移除；键不存在时：给了默认值就返回默认值，没给就抛 `KeyError` | — | `py.dict.pop` |
+| `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
+| `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
+
+### list — 10 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `any() / all()` | 判断有没有 / 是不是全都满足 | 输入一批真假值，输出一个布尔：`any` = 至少一个真，`all` = 全为真 | — | `py.list.any_all` |
+| `dict.fromkeys()` | 列表去重 | 把列表里重复的值去掉，只留第一次出现的位置，顺序不变 | — | `py.list.dedupe` |
+| `filter() / 列表推导式` | 按条件筛选列表 | 输入列表 + 一个判断条件，输出**只包含通过条件的元素的新列表**，原列表不变 | — | `py.list.filter` |
+| `list.extend()` | 往列表里追加多个元素 | 输入可迭代对象，把它里面的元素**逐个**接到列表末尾；原地修改，返回 None | — | `py.list.extend` |
+| `list.index() / in` | 查找列表里的元素 | 判断某个值在不在列表里（`in`），或者取它第一次出现的下标（`index`） | — | `py.list.find` |
+| `list.remove` | 按值删除列表元素 | 输入一个值，`remove` 删掉**第一个相等**的元素（原地改，返回 None）；`pop` 按**下标**删并返回被删的元素 | — | `py.list.remove` |
+| `list.sort` | 给列表排序 | 把列表排成升序或降序，也能按自定义规则（比如字典的某个键）排 | — | `py.list.sort` |
+| `map() / 列表推导式` | 批量转换列表元素 | 输入列表 + 一个转换操作，输出**每个元素都被转换过的新列表**，元素个数不变 | — | `py.list.map` |
+| `切片 list[a:b]` | 取列表的一段 | 输入列表 + 起止下标（可带步长），输出**新列表**；起始含、结束不含，越界自动截断不报错 | — | `py.list.slice` |
+| `列表推导式` | 用推导式生成列表 | 输入“表达式 + 遍历 + 可选条件”，输出一个新列表，等价于 `for` 循环 + `append` | — | `py.list.comprehension` |
+
+### set — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
+| `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
+
+### str — 9 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `f-string / str.format()` | 格式化字符串 | 输入模板 + 变量，输出拼好的字符串 | — | `py.string.format` |
+| `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
+| `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
+| `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
+| `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
+| `str.split()` | 分割字符串 | 按分隔符把字符串切成列表 | — | `py.string.split` |
+| `str.startswith() / str.endswith()` | 判断开头或结尾 | 输入字符串 + 一个或多个候选，输出 `True/False`：是不是以它们开头（或结尾） | — | `py.string.startswith` |
+| `str.strip()` | 去掉首尾空白 | 输入一个字符串，输出**首尾**空白被删掉的版本（中间的空格保留），返回新字符串 | — | `py.string.strip` |
+| `str.upper() / str.lower()` | 转换大小写 | 输入字符串，输出大小写变换后的**新字符串**；原字符串不变 | — | `py.string.upper_lower` |
+
+
+## 标准库（要 import） — 45 条
+
+_标准库里现成的，import 之后可用_
+
+### argparse — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `argparse.ArgumentParser` | 解析命令行参数 | 输入「参数定义」+ 实际的命令行字符串，输出一个带属性的对象（如 `args.name`）；格式不对会自动报错并打印帮助 | `import argparse` | `py.argparse.parse` |
+
+### collections — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `collections.counter` | 统计每个元素出现几次 | 输入可迭代对象，输出一个“元素 → 次数”的字典，还带取 Top N 的方法 | `from collections import Counter, defaultdict` | `py.collections.counter` |
+| `collections.defaultdict` | 带默认值的字典 | 输入「默认值工厂」，输出一个字典：读不存在的键时**自动建一个默认值并写回字典**，所以能直接 `d[k].append(x)` | `from collections import Counter, defaultdict` | `py.collections.defaultdict` |
+
+### dataclasses — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `dataclasses.dataclass` | 用 dataclass 定义数据结构 | 输入「字段名 + 类型（+ 默认值）」，输出一个类：自动生成 `__init__`、`__repr__`、`__eq__` | `from dataclasses import dataclass, field` | `py.dataclass.define` |
+
+### datetime — 4 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `datetime.diff` | 算两个时间差多少 | 输入两个时间对象，输出一个 `timedelta`（天数 + 秒数）；用 `.days` / `.total_seconds()` 取具体数值 | `from datetime import datetime` | `py.datetime.diff` |
+| `datetime.format` | 把时间格式化成字符串 | 输入一个时间对象 + 格式串，输出字符串；反过来解析用 `strptime` | `from datetime import datetime` | `py.datetime.format` |
+| `datetime.now` | 获取当前时间 | 拿到当前时间，并能格式化成字符串、算出两段代码之间的耗时 | `from datetime import datetime` | `py.datetime.now` |
+| `datetime.parse` | 把字符串解析成时间 | 输入日期时间字符串 + 格式串，输出 `datetime` 对象；格式对不上就抛 `ValueError` | `from datetime import datetime` | `py.datetime.parse` |
+
+### functools — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `functools.lru_cache` | 缓存函数结果 | 输入一个函数，输出「带记忆的同款函数」：参数相同就直接返回上次结果，不重新执行；`cache_info()` 能看到命中情况 | `from functools import lru_cache` | `py.functools.lru_cache` |
+
+### hashlib — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `hashlib.sha256()` | 计算文件哈希 | 算文件的指纹（MD5 或 SHA256），用来判断内容是否一致、有没有被改动 | `import hashlib` | `py.hash.digest` |
+
+### itertools — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `itertools.chain` | 串联多个列表一起处理 | 输入若干个可迭代对象，输出一条「依次取完所有元素」的流水线；**不复制数据** | `from itertools import chain` | `py.itertools.chain` |
+
+### json — 3 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `json.dumps` | 转成 JSON 字符串 | 输入字典/列表，输出 JSON 文本；要写文件用 `json.dump`（不带 s） | `import json` | `py.json.dumps` |
+| `json.load()` | 读取 JSON 文件 | 把 JSON 文件解析成 Python 的字典或列表 | `import json` | `py.json.read` |
+| `json.loads` | 从字符串解析 JSON | 输入一段 JSON 文本，输出对应的 Python 对象（dict / list）；格式不合法抛 `JSONDecodeError` | `import json` | `py.json.loads` |
+
+### logging — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `logging.basicConfig()` | 输出日志（比 print 规范） | 输入一条消息 + 级别，输出到控制台（或文件）；低于设定级别的消息**直接丢弃不处理** | `import logging` | `py.logging.basic` |
+| `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
+
+### os — 6 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `os.getcwd` | 获取当前工作目录 | 问程序“我现在站在哪个目录” | `import os` | `py.os.getcwd` |
+| `os.getenv` | 读取环境变量 | 输入变量名，输出它的值（字符串）；不存在时返回 `None` 或你给的默认值 | `import os` | `py.os.getenv` |
+| `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
+| `os.makedirs` | 创建目录（含上级） | 建目录 | `import os` | `py.os.makedirs` |
+| `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
+| `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
+
+### pathlib — 6 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `pathlib.Path.exists` | 判断文件或目录是否存在 | 问一个路径到底有没有东西，以及它是文件还是目录 | `from pathlib import Path` | `py.fs.exists` |
+| `pathlib.Path.read_text` | 读取文本文件 | 把整个文本文件一次读成字符串 | `from pathlib import Path` | `py.fs.read_text` |
+| `pathlib.Path.rglob` | 遍历文件夹里所有文件 | 递归列出目录下的所有文件，包括子目录里的 | `from pathlib import Path` | `py.fs.traverse_directory` |
+| `pathlib.Path.suffix` | 判断文件后缀 | 取出文件名的最后一个后缀，统一转成小写再比较，判断它是不是 `.py` 文件 | `from pathlib import Path` | `py.fs.check_extension` |
+| `pathlib.Path.suffix` | 获取文件后缀 | 从路径里取出最后一个后缀，返回带点号的字符串，比如 `".py"` | `from pathlib import Path` | `py.fs.get_extension` |
+| `pathlib.Path.write_text` | 写入文本文件 | 把字符串写进文件 | `from pathlib import Path` | `py.fs.write_text` |
+
+### random — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `random.choice` | 随机选一个 | 从序列里随机挑一个元素，或者生成一个随机整数 | `import random` | `py.random.choice` |
+| `random.shuffle` | 打乱列表顺序 | 把列表里元素的顺序随机重排 | `import random` | `py.random.shuffle` |
+
+### re — 3 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `re.fullmatch() / re.match()` | 判断字符串是否匹配正则 | 输入规则 + 字符串，输出匹配结果（`Match` 对象或 `None`）；用 `fullmatch` 才是“整串都符合” | `import re` | `py.regex.match` |
+| `regex.findall` | 提取所有匹配内容 | 输入规则 + 文本，输出**所有匹配结果的列表**（没有匹配就是空列表）；要位置和分组用 `finditer` | `import re` | `py.regex.findall` |
+| `regex.sub` | 正则替换 | 输入规则 + 替换内容 + 文本，输出替换后的新字符串；`count` 限制最多替换几次 | `import re` | `py.regex.sub` |
+
+### socket — 1 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
+
+### sqlite3 — 7 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
+| `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
+| `sqlite.delete` | 删除数据库记录 | 输入表名 + 条件，删除匹配的行；删空整表用 `DELETE FROM t`（不加 WHERE） | `import sqlite3` | `py.sqlite.delete` |
+| `sqlite.insert` | 往表里插入数据 | 输入表名 + 一行值，写入一条记录；用 `?` 占位符传参，**不要自己拼字符串** | `import sqlite3` | `py.sqlite.insert` |
+| `sqlite.select` | 查询数据库记录 | 输入 SQL + 参数，输出结果集；`fetchall` 全取、`fetchone` 取一条、`fetchmany(n)` 取 n 条 | `import sqlite3` | `py.sqlite.select` |
+| `sqlite.transaction` | 事务处理 | 把多条写操作打包：全部成功才 `commit()`，中途出错就 `rollback()`，数据库回到操作前 | `import sqlite3` | `py.sqlite.transaction` |
+| `sqlite.update` | 更新数据库记录 | 输入表名、要改的字段、条件，更新匹配的行；返回没值，但 `cur.rowcount` 告诉你改了几行 | `import sqlite3` | `py.sqlite.update` |
+
+### time — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `time.sleep` | 让程序等一会儿 | 输入秒数（可以是小数），让当前线程暂停那么久，没有返回值 | `import time` | `py.time.sleep` |
+| `time.timestamp` | 获取时间戳 | 拿到“从 1970-01-01 UTC 到现在过了多少秒”的浮点数，常用来做文件名或算耗时 | `import time` | `py.time.timestamp` |
+
+### typing — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `X ｜ None / typing.Optional` | 参数默认写 None 的套路 | 输入「参数名 + 类型 + 默认 None」，输出一个可选参数；函数体里再用 `if x is None` 换成真正的默认值 | `from typing import Optional` | `py.typing.default_none` |
+| `typing 类型标注` | 类型标注 | 输入函数/变量的声明，输出带类型说明的代码；**运行时不做检查**，只是给人和工具看的说明 | `from typing import Optional` | `py.typing.annotate` |

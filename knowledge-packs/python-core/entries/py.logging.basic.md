@@ -5,6 +5,9 @@ description: 用 logging 打带级别和时间的信息
 language: python
 category_id: programming.basics
 module: logging
+origin: stdlib
+import: "import logging"
+qualname: "logging.basicConfig()"
 
 object:
   id: log.record

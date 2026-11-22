@@ -5,6 +5,9 @@ description: 按规则把匹配到的部分换掉
 language: python
 category_id: programming.basics
 module: re
+origin: stdlib
+import: "import re"
+qualname: "regex.sub"
 
 object:
   id: regex.pattern

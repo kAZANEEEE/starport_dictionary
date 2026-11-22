@@ -5,6 +5,9 @@ description: 循环时同时拿到「第几个」和「元素」
 language: python
 category_id: programming.basics
 module: builtins
+origin: builtin
+import: ""
+qualname: "enumerate"
 
 object:
   id: list.element

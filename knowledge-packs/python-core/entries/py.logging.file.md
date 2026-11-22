@@ -5,6 +5,9 @@ description: 输出同时进控制台和文件，方便事后查
 language: python
 category_id: programming.basics
 module: logging
+origin: stdlib
+import: "import logging"
+qualname: "logging.handlers.RotatingFileHandler"
 
 object:
   id: log.record

@@ -5,6 +5,9 @@ description: 把 JSON 文件读成字典或列表
 language: python
 category_id: programming.filesystem
 module: json
+origin: stdlib
+import: "import json"
+qualname: "json.load()"
 
 object:
   id: json.object

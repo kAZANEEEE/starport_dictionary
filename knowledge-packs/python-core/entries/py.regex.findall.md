@@ -5,6 +5,9 @@ description: 用正则从一段文本里把符合条件的片段全部揪出来
 language: python
 category_id: programming.basics
 module: re
+origin: stdlib
+import: "import re"
+qualname: "regex.findall"
 
 object:
   id: regex.pattern

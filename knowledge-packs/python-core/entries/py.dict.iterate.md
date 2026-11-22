@@ -5,6 +5,9 @@ description: 逐个拿到字典里的键、值或键值对
 language: python
 category_id: programming.basics
 module: dict
+origin: builtin
+import: ""
+qualname: "dict.items()"
 
 object:
   id: dict.value

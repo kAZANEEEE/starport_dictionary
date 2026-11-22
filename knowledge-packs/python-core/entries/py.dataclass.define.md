@@ -5,6 +5,9 @@ description: 少写样板代码的数据类，自动生成初始化、打印、�
 language: python
 category_id: programming.basics
 module: dataclasses
+origin: stdlib
+import: "from dataclasses import dataclass, field"
+qualname: "dataclasses.dataclass"
 
 object:
   id: type.annotation

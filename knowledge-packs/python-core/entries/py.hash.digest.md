@@ -5,6 +5,9 @@ description: 算文件的 MD5/SHA256，用来校验是否被改过
 language: python
 category_id: programming.filesystem
 module: hashlib
+origin: stdlib
+import: "import hashlib"
+qualname: "hashlib.sha256()"
 
 object:
   id: hash.digest
