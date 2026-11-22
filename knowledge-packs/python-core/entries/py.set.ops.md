@@ -8,6 +8,13 @@ module: set
 origin: builtin
 import: ""
 qualname: "set 运算 & | -"
+signature: "a & b / a | b / a - b / a ^ b"
+args:
+  - name: "a, b"
+    required: true
+    accepts: "两个集合（列表也行，会自动转）"
+    nesting: "可以，可以连写多个"
+returns: "新集合：交、并、差、对称差；结果无序，元素必须可哈希"
 
 object:
   id: list.duplicate

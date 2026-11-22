@@ -8,6 +8,18 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.pop"
+signature: "d.pop(key, default)"
+args:
+  - name: "key"
+    required: true
+    accepts: "要取出并删掉的键"
+    nesting: "可以"
+  - name: "default"
+    required: false
+    default: "无"
+    accepts: "键不存在时返回什么；不给就抛 KeyError"
+    nesting: "可以"
+returns: "被删掉的那个值；同时字典里这一项消失"
 
 object:
   id: dict.value

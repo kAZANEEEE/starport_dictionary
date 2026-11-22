@@ -8,6 +8,17 @@ module: datetime
 origin: stdlib
 import: "from datetime import datetime"
 qualname: "datetime.parse"
+signature: "datetime.strptime(文本, 格式)"
+args:
+  - name: "文本"
+    required: true
+    accepts: "要解析的时间字符串"
+    nesting: "可以"
+  - name: "格式"
+    required: true
+    accepts: "必须和文本严格对应，多一个空格都会失败"
+    nesting: "一般直接写字面量"
+returns: "datetime 对象；格式对不上抛 ValueError"
 
 object:
   id: datetime.time

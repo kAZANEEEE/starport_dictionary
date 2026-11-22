@@ -8,6 +8,13 @@ module: set
 origin: builtin
 import: ""
 qualname: "set()"
+signature: "set(items)"
+args:
+  - name: "items"
+    required: true
+    accepts: "任何可迭代对象；元素必须可哈希（不能含列表）"
+    nesting: "可以"
+returns: "集合：元素唯一但**不保序**；要保序用 dict.fromkeys"
 
 object:
   id: list.duplicate

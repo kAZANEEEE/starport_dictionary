@@ -8,6 +8,13 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.items()"
+signature: "for k, v in d.items()"
+args:
+  - name: "d"
+    required: true
+    accepts: "要遍历的字典"
+    nesting: "可以"
+returns: "迭代器：items 给 (键, 值)；keys 给键；values 给值。遍历中不能改字典"
 
 object:
   id: dict.value

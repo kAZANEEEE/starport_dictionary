@@ -8,6 +8,18 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.fromkeys()"
+signature: "dict.fromkeys(keys, value=None)"
+args:
+  - name: "keys"
+    required: true
+    accepts: "键序列，元素必须可哈希"
+    nesting: "可以"
+  - name: "value"
+    required: false
+    default: "None"
+    accepts: "所有键共用的初始值"
+    nesting: "可以，但传可变对象会被所有键共享"
+returns: "新字典：每个键都对应同一个 value"
 
 object:
   id: dict.value

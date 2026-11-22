@@ -8,6 +8,13 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.update() / dict | dict"
+signature: "a | b  /  a.update(b)  /  {**a, **b}"
+args:
+  - name: "a, b"
+    required: true
+    accepts: "两个字典（或任何键值对映射）"
+    nesting: "可以，可以链式 a | b | c"
+returns: "合并后的字典：撞键时右边的值覆盖左边；update 原地改并返回 None"
 
 object:
   id: dict.value

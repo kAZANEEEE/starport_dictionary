@@ -8,6 +8,9 @@ module: datetime
 origin: stdlib
 import: "from datetime import datetime"
 qualname: "datetime.now"
+signature: "datetime.now()"
+args: []
+returns: "datetime 对象（不带时区）：能拆年月日、能相减、能格式化"
 
 object:
   id: datetime.time

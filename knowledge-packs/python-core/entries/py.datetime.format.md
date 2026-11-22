@@ -8,6 +8,13 @@ module: datetime
 origin: stdlib
 import: "from datetime import datetime"
 qualname: "datetime.format"
+signature: "dt.strftime(格式)"
+args:
+  - name: "格式"
+    required: true
+    accepts: "如 \"%Y-%m-%d %H:%M:%S\"；%m 是月、%M 是分"
+    nesting: "一般直接写字面量"
+returns: "字符串：格式化后的时间文本"
 
 object:
   id: datetime.time

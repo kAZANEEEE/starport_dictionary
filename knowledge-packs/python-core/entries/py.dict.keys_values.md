@@ -8,6 +8,13 @@ module: dict
 origin: builtin
 import: ""
 qualname: "dict.keys() / dict.values() / dict.items()"
+signature: "d.keys() / d.values() / d.items()"
+args:
+  - name: "d"
+    required: true
+    accepts: "任意字典"
+    nesting: "可以"
+returns: "视图对象（不是列表）：能遍历、能判断存在，但没有下标；要列表先 list(...)"
 
 object:
   id: dict.value
