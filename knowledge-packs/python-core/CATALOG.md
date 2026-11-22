@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 103 条**
+**共 106 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 43 |
-| 标准库（要 import） | 60 |
+| 内置能力（不用 import） | 44 |
+| 标准库（要 import） | 62 |
 
-## 内置能力（不用 import） — 43 条
+## 内置能力（不用 import） — 44 条
 
 _Python 自带，直接写就行_
 
@@ -65,7 +65,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 12 条
+### str — 13 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -77,13 +77,14 @@ _Python 自带，直接写就行_
 | `str.partition()` | 按分隔符切成三段 | 输入分隔符，输出**固定三个**元素：分隔符左边、分隔符本身、分隔符右边 | — | `py.string.partition` |
 | `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
 | `str.split()` | 分割字符串 | 按分隔符把字符串切成列表 | — | `py.string.split` |
+| `str.splitlines()` | 按行切分文本 | 输入一段多行文本，输出每行一个元素的列表；自动识别 `\n`、`\r\n`、`\r` 等换行，并且**不会留下末尾空元素** | — | `py.string.splitlines` |
 | `str.startswith() / str.endswith()` | 判断开头或结尾 | 输入字符串 + 一个或多个候选，输出 `True/False`：是不是以它们开头（或结尾） | — | `py.string.startswith` |
 | `str.strip()` | 去掉首尾空白 | 输入一个字符串，输出**首尾**空白被删掉的版本（中间的空格保留），返回新字符串 | — | `py.string.strip` |
 | `str.upper() / str.lower()` | 转换大小写 | 输入字符串，输出大小写变换后的**新字符串**；原字符串不变 | — | `py.string.upper_lower` |
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 60 条
+## 标准库（要 import） — 62 条
 
 _标准库里现成的，import 之后可用_
 
@@ -153,7 +154,7 @@ _标准库里现成的，import 之后可用_
 | `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 9 条
+### os — 10 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -162,6 +163,7 @@ _标准库里现成的，import 之后可用_
 | `os.getenv` | 读取环境变量 | 输入变量名，输出它的值（字符串）；不存在时返回 `None` 或你给的默认值 | `import os` | `py.os.getenv` |
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
 | `os.makedirs` | 创建目录（含上级） | 建目录 | `import os` | `py.os.makedirs` |
+| `os.path.getmtime()` | 取文件修改时间 | 输入文件路径，输出时间戳（浮点秒数）；配合 `datetime.fromtimestamp` 变成人能看的时间 | `import os` | `py.os.get_mtime` |
 | `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
 | `os.remove() / os.unlink()` | 删除文件 | 输入文件路径，把它从磁盘上移除；文件不存在抛 `FileNotFoundError`，路径是目录则抛 `IsADirectoryError` | `import os` | `py.os.remove` |
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
@@ -208,11 +210,12 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 10 条
+### sqlite3 — 11 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `CREATE INDEX` | 给字段建索引 | 输入表名 + 列名，建立一个「值的排好序的对照表」，之后按这列查询不用扫全表 | `import sqlite3` | `py.sqlite.create_index` |
+| `DROP TABLE` | 删除表 | 输入表名，把整张表（结构 + 所有数据）从数据库删掉；只想清数据不删表用 `DELETE FROM 表` | `import sqlite3` | `py.sqlite.drop_table` |
 | `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
 | `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
 | `sqlite.delete` | 删除数据库记录 | 输入表名 + 条件，删除匹配的行；删空整表用 `DELETE FROM t`（不加 WHERE） | `import sqlite3` | `py.sqlite.delete` |
