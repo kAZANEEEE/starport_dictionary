@@ -8,6 +8,22 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.replace()"
+signature: "s.replace(old, new, count=-1)"
+args:
+  - name: "old"
+    required: true
+    accepts: "要被换掉的那段文字"
+    nesting: "可以，可以是变量"
+  - name: "new"
+    required: true
+    accepts: "换成什么"
+    nesting: "可以"
+  - name: "count"
+    required: false
+    default: "-1"
+    accepts: "最多换几次；不传就是全换"
+    nesting: "一般直接写数字"
+returns: "字符串：换好的**新**字符串；原字符串不变，所以要重新赋值"
 
 object:
   id: string.text

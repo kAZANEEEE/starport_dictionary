@@ -8,6 +8,13 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.startswith() / str.endswith()"
+signature: "s.startswith(prefix)；s.endswith(suffix)"
+args:
+  - name: "prefix / suffix"
+    required: true
+    accepts: "一个字符串，或一个元组（任意一个匹配就算中）"
+    nesting: "可以，元组写法很常用：(\".py\", \".pyw\")"
+returns: "True/False：是不是以它开头（或结尾），区分大小写"
 
 object:
   id: string.text

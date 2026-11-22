@@ -8,6 +8,13 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.join()"
+signature: "分隔符.join(字符串序列)"
+args:
+  - name: "字符串序列"
+    required: true
+    accepts: "全是字符串的可迭代对象；有数字要先转成字符串"
+    nesting: "可以，常见是列表推导式 [str(x) for x in nums]"
+returns: "字符串：连起来的一条（分隔符只出现在元素之间）"
 
 object:
   id: string.text

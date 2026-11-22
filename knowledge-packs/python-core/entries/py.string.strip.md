@@ -8,6 +8,14 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.strip()"
+signature: "s.strip(chars=None)；也有 lstrip / rstrip"
+args:
+  - name: "chars"
+    required: false
+    default: "None"
+    accepts: "要剥掉的字符集合；不传就剥掉所有空白字符"
+    nesting: "一般直接写字面量，如 \"\\n\" 或 \"xy\""
+returns: "字符串：剥好的新字符串；原字符串不变"
 
 object:
   id: string.text

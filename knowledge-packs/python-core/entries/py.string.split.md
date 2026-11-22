@@ -8,6 +8,19 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.split()"
+signature: "s.split(sep=None, maxsplit=-1)"
+args:
+  - name: "sep"
+    required: false
+    default: "None"
+    accepts: "分隔符；不传就按任意空白切并丢弃两端空白"
+    nesting: "一般直接写字面量"
+  - name: "maxsplit"
+    required: false
+    default: "-1"
+    accepts: "最多切几刀；剩下的整体保留"
+    nesting: "一般直接写数字"
+returns: "列表：切下来的各段（分隔符本身不出现）"
 
 object:
   id: string.text

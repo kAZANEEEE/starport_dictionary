@@ -8,6 +8,9 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.upper() / str.lower()"
+signature: "s.upper() / s.lower() / s.title() / s.casefold()"
+args: []
+returns: "字符串：转换后的新字符串；中文、数字、标点原样不变"
 
 object:
   id: string.text

@@ -8,6 +8,18 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.count()"
+signature: "s.count(sub, start=0, end=len(s))"
+args:
+  - name: "sub"
+    required: true
+    accepts: "要数的子串"
+    nesting: "可以"
+  - name: "start / end"
+    required: false
+    default: "整串"
+    accepts: "只在这个区间里数（含头不含尾）"
+    nesting: "可以"
+returns: "整数：出现了几次；不重叠计数，找不到返回 0（不报错）"
 
 object:
   id: string.text

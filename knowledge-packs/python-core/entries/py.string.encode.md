@@ -8,6 +8,19 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.encode() / bytes.decode()"
+signature: "s.encode(encoding=\"utf-8\")；b.decode(encoding)"
+args:
+  - name: "encoding"
+    required: false
+    default: "\"utf-8\""
+    accepts: "编码名，如 \"utf-8\"、\"gbk\"；解码时必须和编码时一致"
+    nesting: "一般直接写字面量"
+  - name: "errors"
+    required: false
+    default: "\"strict\""
+    accepts: "\"strict\" 报错、\"replace\" 换成替代符、\"ignore\" 丢弃"
+    nesting: "一般直接写字面量"
+returns: "bytes（编码后）或 str（解码后）；编码不匹配会抛 UnicodeDecodeError"
 
 object:
   id: string.text

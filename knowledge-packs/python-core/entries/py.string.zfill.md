@@ -8,6 +8,13 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.zfill()"
+signature: "s.zfill(width)"
+args:
+  - name: "width"
+    required: true
+    accepts: "目标总宽度（字符数）；已经够长就原样返回"
+    nesting: "一般直接写数字"
+returns: "字符串：左边补 0 到指定宽度；负数的 0 会补在负号后面（-5 → -05）"
 
 object:
   id: string.text

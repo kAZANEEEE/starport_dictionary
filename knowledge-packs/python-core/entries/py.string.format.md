@@ -8,6 +8,18 @@ module: str
 origin: builtin
 import: ""
 qualname: "f-string / str.format()"
+signature: "f\"{变量}\" / \"{0}\".format(值)"
+args:
+  - name: "变量 / 值"
+    required: true
+    accepts: "任意值；f-string 里可以直接写表达式"
+    nesting: "可以，f-string 里能写函数调用、切片、运算"
+  - name: "格式说明"
+    required: false
+    default: "无"
+    accepts: "写在冒号后：:.2f 两位小数、:03d 补零、:, 千分位"
+    nesting: "一般直接写字面量"
+returns: "字符串：填好空位的新字符串"
 
 object:
   id: string.text

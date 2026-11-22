@@ -8,6 +8,13 @@ module: str
 origin: builtin
 import: ""
 qualname: "str.find() / str.index()"
+signature: "s.find(sub) / s.index(sub) / s.rfind(sub)"
+args:
+  - name: "sub"
+    required: true
+    accepts: "要找的子串"
+    nesting: "可以"
+returns: "整数下标：find 找不到返回 -1；index 找不到抛 ValueError；rfind 从右往左找"
 
 object:
   id: string.text
