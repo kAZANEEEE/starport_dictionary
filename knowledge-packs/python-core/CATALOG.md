@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 120 条**
+**共 123 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 51 |
-| 标准库（要 import） | 69 |
+| 内置能力（不用 import） | 52 |
+| 标准库（要 import） | 71 |
 
-## 内置能力（不用 import） — 51 条
+## 内置能力（不用 import） — 52 条
 
 _Python 自带，直接写就行_
 
@@ -69,11 +69,12 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 16 条
+### str — 17 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `f-string / str.format()` | 格式化字符串 | 输入模板 + 变量，输出拼好的字符串 | — | `py.string.format` |
+| `split() + len()` | 统计有多少个词 | 英文：`len(text.split())` 就是词数 | — | `py.string.count_words` |
 | `str.casefold() 后比较` | 忽略大小写比较 | 输入两个字符串，先把它们都转成「统一的小写形式」，再比是否相等；`casefold()` 比 `lower()` 更彻底 | — | `py.string.case_compare` |
 | `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
 | `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
@@ -91,7 +92,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 69 条
+## 标准库（要 import） — 71 条
 
 _标准库里现成的，import 之后可用_
 
@@ -180,12 +181,13 @@ _标准库里现成的，import 之后可用_
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
 | `os.walk()` | 递归遍历目录树（os.walk） | 输入根目录，逐个产出 `(当前目录路径, 子目录名列表, 文件名列表)` 三元组；默认自顶向下 | `import os` | `py.os.walk` |
 
-### pathlib — 7 条
+### pathlib — 8 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `pathlib.Path.exists` | 判断文件或目录是否存在 | 问一个路径到底有没有东西，以及它是文件还是目录 | `from pathlib import Path` | `py.fs.exists` |
 | `pathlib.Path.read_text` | 读取文本文件 | 把整个文本文件一次读成字符串 | `from pathlib import Path` | `py.fs.read_text` |
+| `pathlib.Path.resolve()` | 转成绝对路径并规范化 | 输入任意路径，输出「相对当前工作目录算好、`.` 和 `..` 都消掉」的绝对路径 | `from pathlib import Path` | `py.os.path_resolve` |
 | `pathlib.Path.rglob` | 遍历文件夹里所有文件 | 递归列出目录下的所有文件，包括子目录里的 | `from pathlib import Path` | `py.fs.traverse_directory` |
 | `pathlib.Path.stat().st_size` | 获取文件大小 | 输入文件路径，输出它占的**字节数**（整数）；路径不存在抛 `FileNotFoundError` | `from pathlib import Path` | `py.fs.get_size` |
 | `pathlib.Path.suffix` | 判断文件后缀 | 取出文件名的最后一个后缀，统一转成小写再比较，判断它是不是 `.py` 文件 | `from pathlib import Path` | `py.fs.check_extension` |
@@ -221,7 +223,7 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 13 条
+### sqlite3 — 14 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -229,6 +231,7 @@ _标准库里现成的，import 之后可用_
 | `DROP TABLE` | 删除表 | 输入表名，把整张表（结构 + 所有数据）从数据库删掉；只想清数据不删表用 `DELETE FROM 表` | `import sqlite3` | `py.sqlite.drop_table` |
 | `SELECT ... LIMIT ? OFFSET ?` | 分页查询 | 输入「每页几条 + 跳过几条」，输出这一页的数据；**必须配 `ORDER BY`**，否则每次翻页顺序都可能变 | `import sqlite3` | `py.sqlite.pagination` |
 | `SELECT COUNT(*)` | 统计表里有多少行 | 输入表名（可带条件），输出行数；只返回一个数字，不把数据取出来 | `import sqlite3` | `py.sqlite.count_rows` |
+| `UPDATE ... SET a=?, b=?` | 一次更新多列 | 输入「列 = ?」的多组赋值 + 条件，一条 SQL 改多个字段；**没写的列保持原值** | `import sqlite3` | `py.sqlite.update_multi` |
 | `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
 | `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
 | `sqlite.delete` | 删除数据库记录 | 输入表名 + 条件，删除匹配的行；删空整表用 `DELETE FROM t`（不加 WHERE） | `import sqlite3` | `py.sqlite.delete` |
