@@ -7,6 +7,9 @@
 
 **Windows 桌面程序，双击即用，离线也能查。**
 
+📦 [**下载 V0.1（Windows x64 单文件 exe，约 40MB）**](https://github.com/kAZANEEEE/starport_dictionary/releases/download/v0.1.0/StarportDictionary-v0.1.0-win64.exe)
+　·　[全部版本](https://github.com/kAZANEEEE/starport_dictionary/releases)
+
 ---
 
 ## 为什么做这个
