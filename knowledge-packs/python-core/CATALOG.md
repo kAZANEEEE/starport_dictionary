@@ -3,12 +3,12 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 100 条**
+**共 103 条**
 
 | 层 | 条数 |
 |---|---|
 | 内置能力（不用 import） | 43 |
-| 标准库（要 import） | 57 |
+| 标准库（要 import） | 60 |
 
 ## 内置能力（不用 import） — 43 条
 
@@ -83,7 +83,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 57 条
+## 标准库（要 import） — 60 条
 
 _标准库里现成的，import 之后可用_
 
@@ -136,10 +136,11 @@ _标准库里现成的，import 之后可用_
 | `itertools.chain` | 串联多个列表一起处理 | 输入若干个可迭代对象，输出一条「依次取完所有元素」的流水线；**不复制数据** | `from itertools import chain` | `py.itertools.chain` |
 | `itertools.product` | 生成所有组合（笛卡尔积） | 输入两个（或多个）可迭代对象，输出「每种搭配都出现一次」的元组序列；总数 = 各列表长度的乘积 | `from itertools import product` | `py.itertools.product` |
 
-### json — 3 条
+### json — 4 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
+| `json.dump()` | 把数据写成 JSON 文件 | 输入 Python 对象 + 文件对象，把 JSON 文本写进文件；**`ensure_ascii=False` 才能保住中文** | `import json` | `py.json.write` |
 | `json.dumps` | 转成 JSON 字符串 | 输入字典/列表，输出 JSON 文本；要写文件用 `json.dump`（不带 s） | `import json` | `py.json.dumps` |
 | `json.load()` | 读取 JSON 文件 | 把 JSON 文件解析成 Python 的字典或列表 | `import json` | `py.json.read` |
 | `json.loads` | 从字符串解析 JSON | 输入一段 JSON 文本，输出对应的 Python 对象（dict / list）；格式不合法抛 `JSONDecodeError` | `import json` | `py.json.loads` |
@@ -193,6 +194,13 @@ _标准库里现成的，import 之后可用_
 | `re.fullmatch() / re.match()` | 判断字符串是否匹配正则 | 输入规则 + 字符串，输出匹配结果（`Match` 对象或 `None`）；用 `fullmatch` 才是“整串都符合” | `import re` | `py.regex.match` |
 | `regex.findall` | 提取所有匹配内容 | 输入规则 + 文本，输出**所有匹配结果的列表**（没有匹配就是空列表）；要位置和分组用 `finditer` | `import re` | `py.regex.findall` |
 | `regex.sub` | 正则替换 | 输入规则 + 替换内容 + 文本，输出替换后的新字符串；`count` 限制最多替换几次 | `import re` | `py.regex.sub` |
+
+### shutil — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `shutil.copy() / shutil.copytree()` | 复制文件或目录 | 输入源路径和目标路径，复制出副本；`copy2` 会连修改时间一起保留，`copytree` 复制整个目录 | `import shutil` | `py.shutil.copy` |
+| `shutil.rmtree()` | 删除整个目录 | 输入一个目录路径，把里面**所有文件和子目录**递归删掉；不进回收站，删了就没了 | `import shutil` | `py.shutil.rmtree` |
 
 ### socket — 1 条
 
