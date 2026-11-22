@@ -8,6 +8,17 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.create_table"
+signature: "cur.execute(\"CREATE TABLE IF NOT EXISTS 表名 (列 类型, ...)\")"
+args:
+  - name: "表名"
+    required: true
+    accepts: "新表的名字"
+    nesting: "不能参数化，必须写进 SQL"
+  - name: "列定义"
+    required: true
+    accepts: "如 id INTEGER PRIMARY KEY、name TEXT NOT NULL"
+    nesting: "可以有多个列，用逗号分隔"
+returns: "游标（可链式）：副作用是在数据库里建出这张表；要 commit"
 
 object:
   id: db.record

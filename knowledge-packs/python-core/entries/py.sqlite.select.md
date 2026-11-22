@@ -8,6 +8,18 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.select"
+signature: "cur.execute(\"SELECT ... WHERE 列 = ?\", (值,))"
+args:
+  - name: "SQL"
+    required: true
+    accepts: "查询语句；条件值用 ? 占位"
+    nesting: "字段名不能占位，只有值能"
+  - name: "参数"
+    required: false
+    default: "无"
+    accepts: "与 ? 对应的值的元组"
+    nesting: "可以"
+returns: "游标：再 fetchone（一条）/ fetchall（全部）/ 直接 for 迭代"
 
 object:
   id: db.record

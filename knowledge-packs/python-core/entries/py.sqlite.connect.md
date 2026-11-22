@@ -8,6 +8,18 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.connect"
+signature: "sqlite3.connect(path, timeout=5.0)"
+args:
+  - name: "path"
+    required: true
+    accepts: "数据库文件路径；不存在会自动新建；\":memory:\" 表示内存库"
+    nesting: "可以，常配合 Path 拼路径"
+  - name: "timeout"
+    required: false
+    default: "5.0"
+    accepts: "被别的连接锁住时最多等几秒"
+    nesting: "一般直接写数字"
+returns: "连接对象：用它开 cursor 执行 SQL；用完要 close()"
 
 object:
   id: sql.connection

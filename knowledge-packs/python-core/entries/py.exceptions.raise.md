@@ -8,6 +8,13 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "raise"
+signature: "raise 异常对象；或 raise 异常 from 原异常"
+args:
+  - name: "异常对象"
+    required: true
+    accepts: "内置异常或自定义异常实例，如 ValueError(\"端口不合法\")"
+    nesting: "可以，消息里能拼变量"
+returns: "无返回值：立刻中断当前函数，把异常交给调用方"
 
 object:
   id: error.condition

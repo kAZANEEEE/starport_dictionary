@@ -8,6 +8,13 @@ module: json
 origin: stdlib
 import: "import json"
 qualname: "json.load()"
+signature: "json.load(文件对象)"
+args:
+  - name: "文件对象"
+    required: true
+    accepts: "用 open 打开的文件对象（不是路径，也不是字符串）"
+    nesting: "可以，常见写成 json.load(open(p, encoding=\"utf-8\"))"
+returns: "dict 或 list：解析出来的 Python 对象；格式不合法抛 JSONDecodeError"
 
 object:
   id: json.object

@@ -8,6 +8,18 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "with ... as（上下文管理器）"
+signature: "with 管理器 as 变量: ..."
+args:
+  - name: "管理器"
+    required: true
+    accepts: "实现 __enter__ / __exit__ 的对象，如 open(...)、锁"
+    nesting: "可以，多个资源可用逗号并列"
+  - name: "as 变量"
+    required: false
+    default: "无"
+    accepts: "接住 __enter__ 的返回值（常用的是文件对象）"
+    nesting: "一般直接写 f"
+returns: "无返回值：语法结构。离开代码块时自动收尾，异常照常往外抛"
 
 object:
   id: error.condition

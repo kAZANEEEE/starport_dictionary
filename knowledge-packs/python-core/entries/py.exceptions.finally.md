@@ -8,6 +8,9 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "try / finally"
+signature: "try: ... finally: 收尾"
+args: []
+returns: "无返回值：finally 里的代码一定会执行（return/异常/正常结束都一样）"
 
 object:
   id: error.condition

@@ -8,6 +8,18 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.delete"
+signature: "cur.execute(\"DELETE FROM 表 WHERE 条件 = ?\", (条件值,))"
+args:
+  - name: "SQL"
+    required: true
+    accepts: "删除语句；省略 WHERE 就是清空整表"
+    nesting: "值用 ? 占位"
+  - name: "参数"
+    required: false
+    default: "无"
+    accepts: "条件值的元组"
+    nesting: "可以"
+returns: "游标：cur.rowcount 是删掉的行数；要 commit；文件不会因此变小"
 
 object:
   id: db.record

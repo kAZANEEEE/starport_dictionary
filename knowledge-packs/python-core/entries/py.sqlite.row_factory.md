@@ -8,6 +8,13 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite3.Row"
+signature: "con.row_factory = sqlite3.Row"
+args:
+  - name: "row_factory"
+    required: true
+    accepts: "sqlite3.Row，或任何「接收游标和行、返回对象」的可调用对象"
+    nesting: "一般直接用 sqlite3.Row"
+returns: "无（这是连接上的设置）；之后查询结果能按列名取，拼错列名抛 IndexError"
 
 object:
   id: db.record

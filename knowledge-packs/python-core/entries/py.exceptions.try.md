@@ -8,6 +8,18 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "try / except"
+signature: "try / except 类型 as e / else / finally"
+args:
+  - name: "异常类型"
+    required: true
+    accepts: "如 ValueError、OSError，可写元组一次接多种"
+    nesting: "可以，但要从具体到宽泛排序"
+  - name: "as 变量"
+    required: false
+    default: "无"
+    accepts: "接住后给这个异常起的名字，方便打印原因"
+    nesting: "一般直接写 e"
+returns: "无返回值：控制流结构。接住后要么处理、要么 raise 抛出去"
 
 object:
   id: error.condition

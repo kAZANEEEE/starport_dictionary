@@ -8,6 +8,17 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.insert"
+signature: "cur.execute(\"INSERT INTO 表 (列) VALUES (?)\", (值,))"
+args:
+  - name: "SQL"
+    required: true
+    accepts: "带 ? 占位符的插入语句"
+    nesting: "不能把值拼进去——那是注入的来源"
+  - name: "参数"
+    required: true
+    accepts: "元组或列表，顺序和 ? 对应；单个值要写成 (v,)"
+    nesting: "可以，值可以是变量、计算结果"
+returns: "游标：cur.lastrowid 能拿自增 id；要 commit 才落盘"
 
 object:
   id: db.record

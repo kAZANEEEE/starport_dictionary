@@ -8,6 +8,23 @@ module: json
 origin: stdlib
 import: "import json"
 qualname: "json.dumps"
+signature: "json.dumps(obj, ensure_ascii=True, indent=None)"
+args:
+  - name: "obj"
+    required: true
+    accepts: "字典、列表、数字、字符串、True/False/None"
+    nesting: "可以，嵌套结构也支持"
+  - name: "ensure_ascii"
+    required: false
+    default: "True"
+    accepts: "False = 中文原样输出；True = 转成 \\uXXXX"
+    nesting: "一般直接写 False"
+  - name: "indent"
+    required: false
+    default: "None"
+    accepts: "缩进空格数，给人看时用 2"
+    nesting: "一般直接写数字"
+returns: "字符串：JSON 文本；想直接写文件用 json.dump"
 
 object:
   id: json.object

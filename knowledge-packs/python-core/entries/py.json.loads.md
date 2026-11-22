@@ -8,6 +8,13 @@ module: json
 origin: stdlib
 import: "import json"
 qualname: "json.loads"
+signature: "json.loads(字符串)"
+args:
+  - name: "字符串"
+    required: true
+    accepts: "一段 JSON 文本（单引号/注释都非法）"
+    nesting: "可以，常见是接口返回的文本"
+returns: "dict / list / 数字 / 字符串：解析结果；格式不对抛 JSONDecodeError"
 
 object:
   id: json.object

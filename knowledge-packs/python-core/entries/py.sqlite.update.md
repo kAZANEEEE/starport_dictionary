@@ -8,6 +8,17 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.update"
+signature: "cur.execute(\"UPDATE 表 SET 列 = ? WHERE 条件 = ?\", (新值, 条件值))"
+args:
+  - name: "SQL"
+    required: true
+    accepts: "更新语句；**一定别忘 WHERE**"
+    nesting: "值用 ? 占位"
+  - name: "参数"
+    required: true
+    accepts: "与 ? 顺序对应的元组"
+    nesting: "可以"
+returns: "游标：cur.rowcount 是受影响行数（0 通常意味条件写错）；要 commit"
 
 object:
   id: db.record

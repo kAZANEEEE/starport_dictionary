@@ -8,6 +8,9 @@ module: sqlite3
 origin: stdlib
 import: "import sqlite3"
 qualname: "sqlite.transaction"
+signature: "try: ...; con.commit()  except: con.rollback()"
+args: []
+returns: "None：没有返回值；副作用是一批写操作要么全部生效、要么全部作废"
 
 object:
   id: db.record
