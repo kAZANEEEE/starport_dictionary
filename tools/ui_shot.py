@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-"""把三屏渲染成 PNG（离屏），用来肉眼验收视觉，不需要人工点。
+"""渲染三屏截图（等动画结束再抓，否则会抓到过渡中的叠影）。
 
     set PYTHONPATH=src
     set QT_QPA_PLATFORM=offscreen
+    set QT_QPA_FONTDIR=C:\Windows\Fonts
     py -3 tools/ui_shot.py
 """
 
@@ -18,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+from PySide6.QtTest import QTest  # noqa: E402
 from PySide6.QtWidgets import QApplication  # noqa: E402
 
 from starport_dictionary.api.factory import get_backend  # noqa: E402
@@ -26,6 +28,14 @@ from starport_dictionary.ui.theme import load_stylesheet  # noqa: E402
 
 OUT = ROOT / "build" / "ui"
 QUERY = "判断一个文件的后缀名"
+SETTLE_MS = 320           # 等过渡动画（170ms）+ 清理完成
+
+
+def settle(app: QApplication, ms: int = SETTLE_MS) -> None:
+    """真的等事件循环跑完，别用 processEvents 敷衍（deleteLater 不会执行）。"""
+    app.processEvents()
+    QTest.qWait(ms)
+    app.processEvents()
 
 
 def main() -> int:
@@ -36,32 +46,36 @@ def main() -> int:
     win = MainWindow(get_backend())
     win.resize(1120, 780)
     win.show()
-    app.processEvents()
+    settle(app, 200)
 
-    shots = []
     # 首页
-    win.stack.setCurrentIndex(PAGE_HOME)
     win.home.input.setText(QUERY)
-    app.processEvents()
-    shots.append(("01-home.png", PAGE_HOME))
+    settle(app, 120)
+    win.grab().save(str(OUT / "01-home.png"))
+    print("已渲染:", OUT / "01-home.png")
 
     # 结果页
     win.do_search(QUERY)
-    app.processEvents()
-    shots.append(("02-results.png", PAGE_RESULTS))
+    settle(app)
+    win.grab().save(str(OUT / "02-results.png"))
+    print("已渲染:", OUT / "02-results.png")
 
     # 详情页
-    best = win.results._shown_entry_id
-    win.open_entry(best)
-    app.processEvents()
-    shots.append(("03-detail.png", PAGE_DETAIL))
+    win.open_entry(win.results._shown_entry_id)
+    settle(app)
+    win.grab().save(str(OUT / "03-detail.png"))
+    print("已渲染:", OUT / "03-detail.png")
 
-    for name, idx in shots:
-        win.stack.setCurrentIndex(idx)
-        app.processEvents()
-        path = OUT / name
-        win.grab().save(str(path))
-        print("已渲染:", path)
+    # 回到结果页再回首页（顺便验证返回过渡不留残影）
+    win.go_results()
+    settle(app)
+    win.grab().save(str(OUT / "04-back-results.png"))
+    print("已渲染:", OUT / "04-back-results.png")
+
+    win.go_home()
+    settle(app)
+    win.grab().save(str(OUT / "05-back-home.png"))
+    print("已渲染:", OUT / "05-back-home.png")
     return 0
 
 

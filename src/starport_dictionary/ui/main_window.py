@@ -6,12 +6,13 @@ r"""主窗口：单窗口三屏 + 快捷键 + 后端调用。
 from __future__ import annotations
 
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QKeySequence, QShortcut
+from PySide6.QtGui import QIcon, QKeySequence, QShortcut
 from PySide6.QtWidgets import QLabel, QMainWindow, QStackedWidget, QVBoxLayout, QWidget
 
 from starport_dictionary.api.backend import SearchBackend
 from starport_dictionary.ui.store import FeedbackRecord, FeedbackStore, RecentStore
-from starport_dictionary.ui.theme import APP_NAME, APP_VERSION, StarfieldBackground
+from starport_dictionary.ui.theme import APP_NAME, APP_VERSION, StarfieldBackground, icon_path
+from starport_dictionary.ui.transitions import ScreenTransitions
 from starport_dictionary.ui.views import DetailView, HomeView, ResultsView
 
 PAGE_HOME, PAGE_RESULTS, PAGE_DETAIL = 0, 1, 2
@@ -26,6 +27,9 @@ class MainWindow(QMainWindow):
         self._last_query = ""
 
         self.setWindowTitle(f"{APP_NAME} {APP_VERSION}")
+        icon = icon_path()
+        if icon.is_file():
+            self.setWindowIcon(QIcon(str(icon)))
         self.resize(1080, 760)
         self.setMinimumSize(880, 620)
 
@@ -73,6 +77,8 @@ class MainWindow(QMainWindow):
         QShortcut(QKeySequence("Escape"), self, self.on_escape)
         QShortcut(QKeySequence("Ctrl+Q"), self, self.close)
 
+        self.transitions = ScreenTransitions(self.stack)
+
         self.home.set_recent(self.recent.load())
         self._update_status()
         self.home.focus_input()
@@ -102,12 +108,14 @@ class MainWindow(QMainWindow):
             self.results.input.selectAll()
 
     def go_home(self) -> None:
-        self.stack.setCurrentIndex(PAGE_HOME)
+        self.transitions.goto(PAGE_HOME, forward=False)
+        self.transitions = ScreenTransitions(self.stack)
+
         self.home.set_recent(self.recent.load())
         self.home.focus_input()
 
     def go_results(self) -> None:
-        self.stack.setCurrentIndex(PAGE_RESULTS)
+        self.transitions.goto(PAGE_RESULTS, forward=False)
 
     def on_escape(self) -> None:
         idx = self.stack.currentIndex()
@@ -124,7 +132,7 @@ class MainWindow(QMainWindow):
         self._last_query = q
         resp = self.backend.search(q, limit=8)
         self.results.show_response(resp)
-        self.stack.setCurrentIndex(PAGE_RESULTS)
+        self.transitions.goto(PAGE_RESULTS, forward=True)
         self.recent.add(q)
         self._update_status()
 
@@ -134,7 +142,7 @@ class MainWindow(QMainWindow):
             self.status.setText(f"条目 {entry_id} 未找到")
             return
         self.detail.show_entry(entry)
-        self.stack.setCurrentIndex(PAGE_DETAIL)
+        self.transitions.goto(PAGE_DETAIL, forward=True)
 
     def on_feedback(self, verdict: str) -> None:
         resp = getattr(self.results, "_response", None)

@@ -11,6 +11,7 @@ r"""三个页面：首页 / 结果 / 详情。
 from __future__ import annotations
 
 from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import (
     QFrame,
     QGridLayout,
@@ -121,6 +122,16 @@ class HomeView(QWidget):
         center = QVBoxLayout()
         center.setSpacing(14)
         center.setAlignment(Qt.AlignHCenter)
+
+        from starport_dictionary.ui.theme import icon_path
+
+        logo_file = icon_path()
+        if logo_file.is_file():
+            logo = QLabel(self)
+            pix = QPixmap(str(logo_file))
+            logo.setPixmap(pix.scaled(72, 72, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            logo.setAlignment(Qt.AlignCenter)
+            center.addWidget(logo)
 
         mark = QLabel("STARPORT DICTIONARY", self)
         mark.setObjectName("BrandMark")

@@ -116,3 +116,29 @@ def test_CtrlK回到搜索框(win):
     QTest.keyClick(win, Qt.Key_K, Qt.ControlModifier)
     assert win.stack.currentIndex() == PAGE_RESULTS      # 不切屏，只聚焦
     assert win.results.input.hasFocus() or True          # 焦点可能在窗口外，弱断言
+
+
+# ---------- 过渡动画 ----------
+def test_切屏会走过渡动画(win):
+    """返回不该是"瞬间跳回"——过场动画要有，且结束后不留残影。"""
+    from PySide6.QtTest import QTest
+
+    type_and_enter(win, "判断文件后缀")
+    win.open_entry("py.fs.check_extension")
+    QTest.qWait(300)
+    win.go_results()
+
+    overlays = [w for w in win.stack.findChildren(object) if w.__class__.__name__ == "QLabel"
+                and w.parent() is win.stack]
+    assert overlays, "切屏时应该有一层过渡贴图"
+
+    QTest.qWait(320)      # 等动画跑完
+    leftovers = [w for w in win.stack.findChildren(object) if w.__class__.__name__ == "QLabel"
+                 and w.parent() is win.stack]
+    assert not leftovers, "动画结束后过渡贴图必须清掉，否则会盖住界面"
+
+
+def test_过渡时长是克制的(win):
+    from starport_dictionary.ui.transitions import DURATION_MS
+
+    assert 100 <= DURATION_MS <= 260, "过渡太快没感觉，太慢会拖沓"

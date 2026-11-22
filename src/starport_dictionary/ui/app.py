@@ -22,7 +22,7 @@ from PySide6.QtWidgets import QApplication, QMessageBox
 from starport_dictionary.api.factory import get_backend
 from starport_dictionary.paths import data_root
 from starport_dictionary.ui.main_window import PAGE_HOME, MainWindow
-from starport_dictionary.ui.theme import APP_NAME, APP_VERSION, load_stylesheet
+from starport_dictionary.ui.theme import APP_NAME, APP_VERSION, icon_path, load_stylesheet
 
 SMOKE_QUERY = "判断一个文件的后缀名"
 
@@ -94,6 +94,9 @@ def main(argv: list[str] | None = None) -> int:
     app = QApplication(args)
     app.setApplicationName(APP_NAME)
     app.setStyleSheet(load_stylesheet())
+    icon = icon_path()
+    if icon.is_file():
+        app.setWindowIcon(QIcon(str(icon)))
 
     if smoke:
         return _run_smoke(app)

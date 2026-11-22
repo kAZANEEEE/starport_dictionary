@@ -28,6 +28,23 @@ APP_NAME = "Starport Dictionary"
 APP_VERSION = "0.1.0"
 
 
+def assets_dir() -> Path:
+    """图标等资源目录。打包后资源在 _MEIPASS/assets。"""
+    import sys
+
+    if getattr(sys, "frozen", False):
+        base = Path(getattr(sys, "_MEIPASS", Path(sys.executable).parent))
+        bundled = base / "assets"
+        if bundled.is_dir():
+            return bundled
+        return Path(sys.executable).parent / "assets"
+    return Path(__file__).resolve().parents[3] / "assets"
+
+
+def icon_path() -> Path:
+    return assets_dir() / "icon.png"
+
+
 def qss_path() -> Path:
     return Path(__file__).resolve().parent / "resources" / "dark.qss"
 
