@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 109 条**
+**共 112 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 45 |
-| 标准库（要 import） | 64 |
+| 内置能力（不用 import） | 46 |
+| 标准库（要 import） | 66 |
 
-## 内置能力（不用 import） — 45 条
+## 内置能力（不用 import） — 46 条
 
 _Python 自带，直接写就行_
 
@@ -66,7 +66,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 13 条
+### str — 14 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -74,6 +74,7 @@ _Python 自带，直接写就行_
 | `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
 | `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
+| `str.isdigit() / str.isnumeric() / str.isdecimal()` | 判断字符串是不是数字 | 输入字符串，输出它是否**全部由数字字符组成**；负号、小数点、空格都会让它判为 False | — | `py.string.isdigit` |
 | `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
 | `str.partition()` | 按分隔符切成三段 | 输入分隔符，输出**固定三个**元素：分隔符左边、分隔符本身、分隔符右边 | — | `py.string.partition` |
 | `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
@@ -85,7 +86,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 64 条
+## 标准库（要 import） — 66 条
 
 _标准库里现成的，import 之后可用_
 
@@ -139,7 +140,7 @@ _标准库里现成的，import 之后可用_
 | `itertools.chain` | 串联多个列表一起处理 | 输入若干个可迭代对象，输出一条「依次取完所有元素」的流水线；**不复制数据** | `from itertools import chain` | `py.itertools.chain` |
 | `itertools.product` | 生成所有组合（笛卡尔积） | 输入两个（或多个）可迭代对象，输出「每种搭配都出现一次」的元组序列；总数 = 各列表长度的乘积 | `from itertools import product` | `py.itertools.product` |
 
-### json — 4 条
+### json — 5 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -147,6 +148,7 @@ _标准库里现成的，import 之后可用_
 | `json.dumps` | 转成 JSON 字符串 | 输入字典/列表，输出 JSON 文本；要写文件用 `json.dump`（不带 s） | `import json` | `py.json.dumps` |
 | `json.load()` | 读取 JSON 文件 | 把 JSON 文件解析成 Python 的字典或列表 | `import json` | `py.json.read` |
 | `json.loads` | 从字符串解析 JSON | 输入一段 JSON 文本，输出对应的 Python 对象（dict / list）；格式不合法抛 `JSONDecodeError` | `import json` | `py.json.loads` |
+| `链式 .get() 取嵌套字段` | 安全地取嵌套字段 | 输入一串字段名，逐层往下取；**中间缺任何一层就返回兜底值，而不是抛异常** | `import json` | `py.json.get_nested` |
 
 ### logging — 3 条
 
@@ -156,7 +158,7 @@ _标准库里现成的，import 之后可用_
 | `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 10 条
+### os — 11 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -166,6 +168,7 @@ _标准库里现成的，import 之后可用_
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
 | `os.makedirs` | 创建目录（含上级） | 建目录 | `import os` | `py.os.makedirs` |
 | `os.path.getmtime()` | 取文件修改时间 | 输入文件路径，输出时间戳（浮点秒数）；配合 `datetime.fromtimestamp` 变成人能看的时间 | `import os` | `py.os.get_mtime` |
+| `os.path.split() / os.path.splitext()` | 拆开路径 | 输入一条路径字符串，输出它的组成部分；**只做字符串切分，不检查文件是否存在** | `import os` | `py.os.split_path` |
 | `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
 | `os.remove() / os.unlink()` | 删除文件 | 输入文件路径，把它从磁盘上移除；文件不存在抛 `FileNotFoundError`，路径是目录则抛 `IsADirectoryError` | `import os` | `py.os.remove` |
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
