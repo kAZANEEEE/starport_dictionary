@@ -44,37 +44,63 @@
 | 部分 | 状态 |
 |---|---|
 | 知识条目格式（YAML 头 + 六节正文） | 定了 |
-| 对象 / 动作受控词表 | 20 个对象、12 个动作 |
+| 对象 / 动作受控词表 | 47 个对象、12 个动作 |
 | Markdown 解析 + 严格校验 | 能用 |
 | 知识包加载 | 能用 |
-| 检索（别名 + IDF 加权） | 253 条说法：排第一 77%，进前三 82% |
-| 知识条目 | **16 条**（目标 20–30） |
-| 条目代码验真（真跑一遍） | 16 条全部实跑通过 |
-| SQLite / 索引 / AI / 界面 / 打包 | 还没做 |
+| 检索（别名 + IDF 加权） | 2013 条说法：召回@5 约 72% |
+| 知识条目 | **137 条**（26 个模块） |
+| 调用形状（签名 / 参数 / 返回值） | 137 条全覆盖 |
+| 条目代码验真（真跑一遍） | 137 条全部实跑通过 |
+| 知识目录 CATALOG.md | 自动生成 + 一致性测试防过期 |
+| 桌面界面（PySide6 三屏） | **能用** |
+| Windows EXE | **能打包，37.6 MB 单文件** |
+| AI 整理层 | 接口留好了，没接 |
+| SQLite / 索引 | 还没做 |
 
 ## 跑起来
 
-```bash
-set PYTHONPATH=src
-py -3 -m pytest -q      # 12 个测试
-py -3 demo_parse.py     # 读知识包 + 几种说法搜一遍
+### 桌面版（推荐）
+
+```
+dist\StarportDictionary.exe
 ```
 
-依赖只有 PyYAML。界面那块以后才要 PySide6。
+双击，输入一句大白话，看结果，复制代码。不需要装 Python，不需要命令行，知识库打包在 exe 里。
+
+### 开发期
+
+```bash
+set PYTHONPATH=src
+py -3 -m starport_dictionary.ui.app          # 开界面
+py -3 -m pytest -q                           # 40 个测试
+py -3 tools/api_demo.py 判断文件后缀          # 不开界面，看检索结果
+py -3 tools/verify_entries.py                # 137 条代码全部实跑一遍
+py -3 tools/gen_catalog.py                   # 重生成知识目录
+```
+
+依赖：PyYAML + PySide6（打包还要 PyInstaller）。
+打包与排错见 [`docs/BUILD.md`](docs/BUILD.md)，界面分层见 [`docs/UI_ARCHITECTURE.md`](docs/UI_ARCHITECTURE.md)。
 
 ## 目录
 
 ```
 src/starport_dictionary/
+    api/                         ★ 前端与后端的唯一契约（DTO / 协议 / 工厂）
+    ui/                          ★ 界面：三屏 + 深空主题 + 反馈（只认 api）
     models/entry.py              条目数据对象
     knowledge/parser.py          Markdown → 条目（校验都在这里）
-    knowledge/primitives.py     对象/动作受控词表（唯一事实源）
+    knowledge/primitives.py      对象/动作受控词表（唯一事实源）
     knowledge/loader.py          扫知识包
     search/baseline.py           别名匹配的检索基线
-knowledge-packs/python-core/     知识条目本体
-docs/                            编写规范、格式、词表
-tests/                           解析 + 检索测试
+knowledge-packs/python-core/     知识条目本体（137 条）
+    CATALOG.md                   自动生成的知识目录
+docs/                            编写规范、格式、词表、打包、界面架构
+tests/                           解析 + 检索 + api + 界面冒烟（40 个）
+tools/                           验真、目录生成、检索基准、界面截图
+run_starport.py                  打包入口
 ```
+
+**一条硬规矩：`ui/` 里不许 import `knowledge` 或 `search`。** 界面只认 `api` 层的 DTO，将来把检索换成 Rust 或者接 AI，只要实现同样的 `SearchBackend` 协议，界面一行不用改。
 
 ## 一条知识长什么样
 
@@ -113,9 +139,12 @@ status: tested
 
 ## 下一步
 
-先做 Python。条目攒到 20–30 条，把搜索质量量出来，再谈别的语言。
+桌面版 V0.1 立住了（搜索 → 结果 → 详情 → 复制，全程不用命令行）。接下来两件事：
 
-顺序上不赶：**内容对了，界面才有意义。**
+1. **补内容**：剩下的高频库（PySide6、openpyxl、jieba），目标先把 150 条走完
+2. **补查准**：现在召回@5 只有 72%，条目越多越低——词袋匹配到 137 条就到天花板了。真正的解法是接 AI 层（`ai/provider.py` 已经留好空实现），把候选重新排序
+
+顺序上不赶：**内容对了，界面才有意义。** 但界面能用了之后，该反过来催内容了。
 
 ## 许可
 
