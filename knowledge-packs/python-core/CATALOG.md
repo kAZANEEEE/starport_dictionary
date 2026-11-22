@@ -3,13 +3,13 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 135 条**
+**共 137 条**
 
 | 层 | 条数 |
 |---|---|
 | 内置能力（不用 import） | 56 |
 | 标准库（要 import） | 74 |
-| 第三方库（要 pip 装） | 5 |
+| 第三方库（要 pip 装） | 7 |
 
 ## 内置能力（不用 import） — 56 条
 
@@ -271,9 +271,16 @@ _标准库里现成的，import 之后可用_
 | `typing 类型标注` | 类型标注 | 输入函数/变量的声明，输出带类型说明的代码；**运行时不做检查**，只是给人和工具看的说明 | `from typing import Optional` | `py.typing.annotate` |
 
 
-## 第三方库（要 pip 装） — 5 条
+## 第三方库（要 pip 装） — 7 条
 
 _需要先 pip install 才能用_
+
+### PySide6 — 2 条
+
+| 全名 | 中文名 | 一句话效果 | 要写的 import | id |
+|---|---|---|---|---|
+| `QApplication + QMainWindow` | 打开一个窗口 | 输入无（或命令行参数），输出一个窗口；**必须调 `app.exec()` 才会真正进入界面循环并停在屏幕上** | `from PySide6.QtWidgets import QApplication, QMainWindow` | `py.qt.window` |
+| `QPushButton.clicked.connect()` | 按钮点击后做一件事 | 输入按钮文字 + 一个函数，输出绑定好的按钮：点击时那个函数被调用 | `from PySide6.QtWidgets import QPushButton` | `py.qt.button` |
 
 ### requests — 5 条
 
