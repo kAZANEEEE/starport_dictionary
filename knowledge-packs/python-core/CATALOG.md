@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 128 条**
+**共 130 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 55 |
-| 标准库（要 import） | 73 |
+| 内置能力（不用 import） | 56 |
+| 标准库（要 import） | 74 |
 
-## 内置能力（不用 import） — 55 条
+## 内置能力（不用 import） — 56 条
 
 _Python 自带，直接写就行_
 
@@ -72,7 +72,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 17 条
+### str — 18 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -82,6 +82,7 @@ _Python 自带，直接写就行_
 | `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
 | `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
+| `str.isalpha() / isspace() / isalnum() / isupper()` | 字符类型判断族 | 输入字符串，输出它是否**全部由某类字符组成**；有一个不合格就 False，空字符串也 False | — | `py.string.is_family` |
 | `str.isdigit() / str.isnumeric() / str.isdecimal()` | 判断字符串是不是数字 | 输入字符串，输出它是否**全部由数字字符组成**；负号、小数点、空格都会让它判为 False | — | `py.string.isdigit` |
 | `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
 | `str.ljust() / str.rjust() / str.center()` | 字符串对齐（补空格） | 输入字符串 + 目标宽度，输出补齐到该宽度的新字符串；够长就原样返回，不截断 | — | `py.string.align` |
@@ -95,7 +96,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 73 条
+## 标准库（要 import） — 74 条
 
 _标准库里现成的，import 之后可用_
 
@@ -119,13 +120,14 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `dataclasses.dataclass` | 用 dataclass 定义数据结构 | 输入「字段名 + 类型（+ 默认值）」，输出一个类：自动生成 `__init__`、`__repr__`、`__eq__` | `from dataclasses import dataclass, field` | `py.dataclass.define` |
 
-### datetime — 6 条
+### datetime — 7 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `datetime + timedelta` | 日期加减几天 | 输入一个时间 + 一个间隔，输出新的时间；原对象不变，返回的是新对象 | `from datetime import datetime, timedelta` | `py.datetime.add_days` |
 | `datetime.diff` | 算两个时间差多少 | 输入两个时间对象，输出一个 `timedelta`（天数 + 秒数）；用 `.days` / `.total_seconds()` 取具体数值 | `from datetime import datetime` | `py.datetime.diff` |
 | `datetime.format` | 把时间格式化成字符串 | 输入一个时间对象 + 格式串，输出字符串；反过来解析用 `strptime` | `from datetime import datetime` | `py.datetime.format` |
+| `datetime.fromtimestamp()` | 时间戳转成可读时间 | 输入秒数（浮点），输出本地的 `datetime` 对象；要字符串还得再 `.strftime()` | `from datetime import datetime` | `py.datetime.ts_to_str` |
 | `datetime.now` | 获取当前时间 | 拿到当前时间，并能格式化成字符串、算出两段代码之间的耗时 | `from datetime import datetime` | `py.datetime.now` |
 | `datetime.parse` | 把字符串解析成时间 | 输入日期时间字符串 + 格式串，输出 `datetime` 对象；格式对不上就抛 `ValueError` | `from datetime import datetime` | `py.datetime.parse` |
 | `datetime.weekday() / isoweekday()` | 判断星期几 | 输入一个日期，输出它是周几的数字；中文名字要自己映射（标准库不内置中文星期） | `from datetime import datetime` | `py.datetime.weekday` |
