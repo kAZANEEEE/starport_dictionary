@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 125 条**
+**共 128 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 54 |
-| 标准库（要 import） | 71 |
+| 内置能力（不用 import） | 55 |
+| 标准库（要 import） | 73 |
 
-## 内置能力（不用 import） — 54 条
+## 内置能力（不用 import） — 55 条
 
 _Python 自带，直接写就行_
 
@@ -41,7 +41,7 @@ _Python 自带，直接写就行_
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
 | `sorted(d.items(), key=lambda kv: kv[1])` | 按值排序字典 | 输入字典，输出按值排好的**列表**（`(键, 值)` 对）；字典本身不会被排序 | — | `py.dict.sort_by_value` |
 
-### list — 18 条
+### list — 19 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -63,6 +63,7 @@ _Python 自带，直接写就行_
 | `分批切片 items[i:i+n]` | 把列表分批 | 输入列表 + 每批大小，输出一个「列表的列表」；最后一组不足时就是短的 | — | `py.list.chunk` |
 | `切片 list[a:b]` | 取列表的一段 | 输入列表 + 起止下标（可带步长），输出**新列表**；起始含、结束不含，越界自动截断不报错 | — | `py.list.slice` |
 | `列表推导式` | 用推导式生成列表 | 输入“表达式 + 遍历 + 可选条件”，输出一个新列表，等价于 `for` 循环 + `append` | — | `py.list.comprehension` |
+| `列表推导式 [x for row in m for x in row]` | 展平嵌套列表 | 输入「列表的列表」，输出把它们接起来的一维列表；**只压一层** | — | `py.list.flatten` |
 
 ### set — 2 条
 
@@ -94,7 +95,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 71 条
+## 标准库（要 import） — 73 条
 
 _标准库里现成的，import 之后可用_
 
@@ -166,7 +167,7 @@ _标准库里现成的，import 之后可用_
 | `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 12 条
+### os — 13 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -177,6 +178,7 @@ _标准库里现成的，import 之后可用_
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
 | `os.makedirs` | 创建目录（含上级） | 建目录 | `import os` | `py.os.makedirs` |
 | `os.path.getmtime()` | 取文件修改时间 | 输入文件路径，输出时间戳（浮点秒数）；配合 `datetime.fromtimestamp` 变成人能看的时间 | `import os` | `py.os.get_mtime` |
+| `os.path.samefile()` | 判断两个路径是不是同一个文件 | 输入两个路径，输出它们是否指向**磁盘上同一个文件**；比较的是文件身份，不是路径文字 | `import os` | `py.os.same_file` |
 | `os.path.split() / os.path.splitext()` | 拆开路径 | 输入一条路径字符串，输出它的组成部分；**只做字符串切分，不检查文件是否存在** | `import os` | `py.os.split_path` |
 | `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
 | `os.remove() / os.unlink()` | 删除文件 | 输入文件路径，把它从磁盘上移除；文件不存在抛 `FileNotFoundError`，路径是目录则抛 `IsADirectoryError` | `import os` | `py.os.remove` |
@@ -225,7 +227,7 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 14 条
+### sqlite3 — 15 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -242,6 +244,7 @@ _标准库里现成的，import 之后可用_
 | `sqlite.transaction` | 事务处理 | 把多条写操作打包：全部成功才 `commit()`，中途出错就 `rollback()`，数据库回到操作前 | `import sqlite3` | `py.sqlite.transaction` |
 | `sqlite.update` | 更新数据库记录 | 输入表名、要改的字段、条件，更新匹配的行；返回没值，但 `cur.rowcount` 告诉你改了几行 | `import sqlite3` | `py.sqlite.update` |
 | `sqlite3.Cursor.executemany()` | 批量插入数据 | 输入一条带占位符的 SQL + 一批参数，把每项参数各执行一次；**一次调用完成全部插入** | `import sqlite3` | `py.sqlite.executemany` |
+| `sqlite3.Cursor.executescript()` | 一次执行多条 SQL | 输入一段含多条语句的 SQL 文本，逐条执行；**语句之间用分号分隔** | `import sqlite3` | `py.sqlite.executescript` |
 | `sqlite3.Row` | 查询结果按列名取值 | 输入连接（设置 `row_factory`），输出「既能下标、又能按列名取」的行对象；`dict(row)` 可转普通字典 | `import sqlite3` | `py.sqlite.row_factory` |
 
 ### tempfile — 1 条
