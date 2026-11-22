@@ -3,12 +3,12 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 78 条**
+**共 81 条**
 
 | 层 | 条数 |
 |---|---|
 | 内置能力（不用 import） | 33 |
-| 标准库（要 import） | 45 |
+| 标准库（要 import） | 48 |
 
 ## 内置能力（不用 import） — 33 条
 
@@ -73,7 +73,7 @@ _Python 自带，直接写就行_
 | `str.upper() / str.lower()` | 转换大小写 | 输入字符串，输出大小写变换后的**新字符串**；原字符串不变 | — | `py.string.upper_lower` |
 
 
-## 标准库（要 import） — 45 条
+## 标准库（要 import） — 48 条
 
 _标准库里现成的，import 之后可用_
 
@@ -83,12 +83,13 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `argparse.ArgumentParser` | 解析命令行参数 | 输入「参数定义」+ 实际的命令行字符串，输出一个带属性的对象（如 `args.name`）；格式不对会自动报错并打印帮助 | `import argparse` | `py.argparse.parse` |
 
-### collections — 2 条
+### collections — 3 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `collections.counter` | 统计每个元素出现几次 | 输入可迭代对象，输出一个“元素 → 次数”的字典，还带取 Top N 的方法 | `from collections import Counter, defaultdict` | `py.collections.counter` |
 | `collections.defaultdict` | 带默认值的字典 | 输入「默认值工厂」，输出一个字典：读不存在的键时**自动建一个默认值并写回字典**，所以能直接 `d[k].append(x)` | `from collections import Counter, defaultdict` | `py.collections.defaultdict` |
+| `collections.namedtuple` | 具名元组 | 输入「类型名 + 字段名列表」，输出一个类：实例既能按下标取，也能按字段名取；**不可变** | `from collections import namedtuple` | `py.collections.namedtuple` |
 
 ### dataclasses — 1 条
 
@@ -117,11 +118,12 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `hashlib.sha256()` | 计算文件哈希 | 算文件的指纹（MD5 或 SHA256），用来判断内容是否一致、有没有被改动 | `import hashlib` | `py.hash.digest` |
 
-### itertools — 1 条
+### itertools — 2 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `itertools.chain` | 串联多个列表一起处理 | 输入若干个可迭代对象，输出一条「依次取完所有元素」的流水线；**不复制数据** | `from itertools import chain` | `py.itertools.chain` |
+| `itertools.product` | 生成所有组合（笛卡尔积） | 输入两个（或多个）可迭代对象，输出「每种搭配都出现一次」的元组序列；总数 = 各列表长度的乘积 | `from itertools import product` | `py.itertools.product` |
 
 ### json — 3 条
 
@@ -138,7 +140,7 @@ _标准库里现成的，import 之后可用_
 | `logging.basicConfig()` | 输出日志（比 print 规范） | 输入一条消息 + 级别，输出到控制台（或文件）；低于设定级别的消息**直接丢弃不处理** | `import logging` | `py.logging.basic` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 6 条
+### os — 7 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -147,6 +149,7 @@ _标准库里现成的，import 之后可用_
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
 | `os.makedirs` | 创建目录（含上级） | 建目录 | `import os` | `py.os.makedirs` |
 | `os.path_join` | 拼接路径 | 输入若干路径片段，输出用**当前系统分隔符**接好的路径；用 `Path` 的重载 `/` 也行，还可读性更好 | `import os` | `py.os.path_join` |
+| `os.remove() / os.unlink()` | 删除文件 | 输入文件路径，把它从磁盘上移除；文件不存在抛 `FileNotFoundError`，路径是目录则抛 `IsADirectoryError` | `import os` | `py.os.remove` |
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
 
 ### pathlib — 6 条
