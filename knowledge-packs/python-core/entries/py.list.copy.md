@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "list.copy() / copy.deepcopy()"
+signature: "items.copy() / copy.deepcopy(items)"
+args:
+  - name: "items"
+    required: true
+    accepts: "要复制的列表（或嵌套结构）"
+    nesting: "可以"
+returns: "新列表：copy 是浅拷贝（内层共享）；deepcopy 层层独立"
 
 object:
   id: list.element

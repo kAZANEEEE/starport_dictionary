@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "list.extend()"
+signature: "items.extend(另一批)"
+args:
+  - name: "另一批"
+    required: true
+    accepts: "任何可迭代对象；字符串会被拆成单个字符"
+    nesting: "可以，可以是另一个列表、生成器、字典的键"
+returns: "None：原地把元素接到末尾（返回 None，别赋值接收）"
 
 object:
   id: list.element

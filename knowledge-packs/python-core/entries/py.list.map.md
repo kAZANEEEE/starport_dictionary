@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "map() / 列表推导式"
+signature: "[对每个元素做什么 for x in items]；map(函数, items)"
+args:
+  - name: "函数 / 表达式"
+    required: true
+    accepts: "对单个元素做的转换：str、int、lambda 或任意表达式"
+    nesting: "可以，map 可传 lambda，推导式可写任意表达式"
+returns: "列表（推导式）或迭代器（map）：元素个数和原来一样"
 
 object:
   id: list.element

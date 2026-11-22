@@ -8,6 +8,24 @@ module: list
 origin: builtin
 import: ""
 qualname: "切片 list[a:b]"
+signature: "items[start:stop:step]"
+args:
+  - name: "start"
+    required: false
+    default: "0"
+    accepts: "从哪个下标开始（含）；负数从末尾数"
+    nesting: "可以"
+  - name: "stop"
+    required: false
+    default: "到结尾"
+    accepts: "到哪个下标结束（**不含**）"
+    nesting: "可以"
+  - name: "step"
+    required: false
+    default: "1"
+    accepts: "步长；-1 表示倒着取"
+    nesting: "一般直接写数字"
+returns: "列表：新的片段（浅拷贝）；越界会自动截断、不报错"
 
 object:
   id: list.element

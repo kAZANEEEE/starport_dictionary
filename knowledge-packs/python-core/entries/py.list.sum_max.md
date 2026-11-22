@@ -8,6 +8,18 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "sum() / max() / min()"
+signature: "sum(序列) / max(序列) / min(序列)"
+args:
+  - name: "序列"
+    required: true
+    accepts: "数字序列；sum 还能给初始值"
+    nesting: "可以，常见是生成器表达式"
+  - name: "key"
+    required: false
+    default: "无"
+    accepts: "max/min 专用：按哪个字段比大小"
+    nesting: "可以，通常写 lambda"
+returns: "数字或元素本身：sum 空序列返回 0；max/min 空序列抛 ValueError"
 
 object:
   id: list.element

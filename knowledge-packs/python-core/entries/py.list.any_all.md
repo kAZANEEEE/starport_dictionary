@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "any() / all()"
+signature: "any(真假值序列) / all(真假值序列)"
+args:
+  - name: "真假值序列"
+    required: true
+    accepts: "一串可用于判断真假的值，常见是生成器表达式"
+    nesting: "可以，通常写成 (条件 for x in items)"
+returns: "True/False：any 至少一个真；all 全为真（空序列时 any 假、all 真）"
 
 object:
   id: list.element

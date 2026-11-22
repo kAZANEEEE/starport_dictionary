@@ -8,6 +8,17 @@ module: list
 origin: builtin
 import: ""
 qualname: "list.insert()"
+signature: "items.insert(下标, 元素)"
+args:
+  - name: "下标"
+    required: true
+    accepts: "插到哪个位置之前；负数从末尾数，越界等于加到末尾"
+    nesting: "可以"
+  - name: "元素"
+    required: true
+    accepts: "要插入的东西（整体插入）"
+    nesting: "可以"
+returns: "None：原地插入，已用元素全部后移"
 
 object:
   id: list.element

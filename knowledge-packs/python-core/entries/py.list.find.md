@@ -8,6 +8,17 @@ module: list
 origin: builtin
 import: ""
 qualname: "list.index() / in"
+signature: "x in items；items.index(x)"
+args:
+  - name: "x"
+    required: true
+    accepts: "要找的值，什么类型都行"
+    nesting: "可以，可以是变量或表达式"
+  - name: "items"
+    required: true
+    accepts: "列表（或任何可迭代对象）"
+    nesting: "可以"
+returns: "in 返回 True/False；index 返回第一次出现的下标，找不到抛 ValueError"
 
 object:
   id: list.element

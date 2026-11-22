@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "filter() / 列表推导式"
+signature: "[表达式 for x in items if 条件]；filter(判断函数, items)"
+args:
+  - name: "条件"
+    required: true
+    accepts: "返回真/假的表达式；真就留下"
+    nesting: "可以，可以是 and/or 组合的条件"
+returns: "列表（推导式）或迭代器（filter）：只含通过条件的元素"
 
 object:
   id: list.element

@@ -8,6 +8,18 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "zip"
+signature: "zip(a, b, ..., strict=False)"
+args:
+  - name: "a, b, ..."
+    required: true
+    accepts: "两个或多个可迭代对象"
+    nesting: "可以，可以是生成器、字典的键"
+  - name: "strict"
+    required: false
+    default: "False"
+    accepts: "True = 长度不一致直接报错；False = 按最短的截断"
+    nesting: "一般直接写 True/False"
+returns: "迭代器：每次给一组配对的元素；长度不同默认静默截断"
 
 object:
   id: list.element

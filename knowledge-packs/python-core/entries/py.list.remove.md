@@ -8,6 +8,13 @@ module: list
 origin: builtin
 import: ""
 qualname: "list.remove"
+signature: "items.remove(值) / items.pop(下标)"
+args:
+  - name: "值 / 下标"
+    required: true
+    accepts: "remove 收「要删的值」；pop 收「要删的位置」"
+    nesting: "可以"
+returns: "remove 返回 None；pop 返回被删掉的那个元素；值不存在/下标越界都会抛异常"
 
 object:
   id: list.element

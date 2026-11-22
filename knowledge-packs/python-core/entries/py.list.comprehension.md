@@ -8,6 +8,18 @@ module: list
 origin: builtin
 import: ""
 qualname: "列表推导式"
+signature: "[表达式 for x in 来源 if 条件]"
+args:
+  - name: "表达式"
+    required: true
+    accepts: "对每个元素做什么，如 n * 2"
+    nesting: "可以，可以嵌函数调用、切片、甚至另一个推导式"
+  - name: "条件"
+    required: false
+    default: "无"
+    accepts: "只要满足条件的元素（写在 for 后面）"
+    nesting: "可以，可多个条件用 and 连接"
+returns: "列表：立刻构造好的完整列表（数据大时改用生成器表达式）"
 
 object:
   id: list.element

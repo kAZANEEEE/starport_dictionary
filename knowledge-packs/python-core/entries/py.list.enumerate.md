@@ -8,6 +8,18 @@ module: builtins
 origin: builtin
 import: ""
 qualname: "enumerate"
+signature: "enumerate(items, start=0)"
+args:
+  - name: "items"
+    required: true
+    accepts: "任何可迭代对象"
+    nesting: "可以"
+  - name: "start"
+    required: false
+    default: "0"
+    accepts: "序号从几开始；给人看的编号一般写 1"
+    nesting: "一般直接写数字"
+returns: "迭代器：每次给 (序号, 元素) 两个值"
 
 object:
   id: list.element
