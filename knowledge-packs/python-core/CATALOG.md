@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 95 条**
+**共 100 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 40 |
-| 标准库（要 import） | 55 |
+| 内置能力（不用 import） | 43 |
+| 标准库（要 import） | 57 |
 
-## 内置能力（不用 import） — 40 条
+## 内置能力（不用 import） — 43 条
 
 _Python 自带，直接写就行_
 
@@ -27,10 +27,11 @@ _Python 自带，直接写就行_
 | `with ... as（上下文管理器）` | 用 with 自动收尾 | 输入一个「上下文管理器」，输出它的资源对象，并在离开代码块时**自动执行收尾**（即使抛异常） | — | `py.exceptions.with` |
 | `zip` | 同时遍历两个列表 | 输入两个（或多个）可迭代对象，输出「(第一个的第 i 个, 第二个的第 i 个)」这样的元组；**长度不同时按最短的截断** | — | `py.list.zip` |
 
-### dict — 7 条
+### dict — 8 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
+| `dict 推导式 {k: v for ...}` | 用推导式生成字典 | 输入「键表达式 + 值表达式 + 来源」，输出一个新字典；可加条件筛掉不要的项 | — | `py.dict.comprehension` |
 | `dict.fromkeys()` | 批量造一个字典 | 输入一批键 + 一个初值，输出字典：每个键都对应**同一个**初值对象；不传初值则都是 `None` | — | `py.dict.fromkeys` |
 | `dict.get` | 取字典里的值 | 按键取值 | — | `py.dict.get` |
 | `dict.items()` | 遍历字典 | 输入字典，逐个访问它的键、值或键值对；顺序等于插入顺序（3.7+） | — | `py.dict.iterate` |
@@ -39,7 +40,7 @@ _Python 自带，直接写就行_
 | `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
 
-### list — 12 条
+### list — 13 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -51,6 +52,7 @@ _Python 自带，直接写就行_
 | `list.index() / in` | 查找列表里的元素 | 判断某个值在不在列表里（`in`），或者取它第一次出现的下标（`index`） | — | `py.list.find` |
 | `list.insert()` | 在指定位置插入元素 | 输入下标 + 元素，把元素插到该下标**之前**（原元素和后面全部后移）；原地修改，返回 None | — | `py.list.insert` |
 | `list.remove` | 按值删除列表元素 | 输入一个值，`remove` 删掉**第一个相等**的元素（原地改，返回 None）；`pop` 按**下标**删并返回被删的元素 | — | `py.list.remove` |
+| `list.reverse() / reversed()` | 反转列表 | 把元素顺序颠倒 | — | `py.list.reverse` |
 | `map() / 列表推导式` | 批量转换列表元素 | 输入列表 + 一个转换操作，输出**每个元素都被转换过的新列表**，元素个数不变 | — | `py.list.map` |
 | `sorted() / list.sort()` | 给列表排序 | 把列表排成升序或降序，也能按自定义规则（比如字典的某个键）排 | — | `py.list.sort` |
 | `切片 list[a:b]` | 取列表的一段 | 输入列表 + 起止下标（可带步长），输出**新列表**；起始含、结束不含，越界自动截断不报错 | — | `py.list.slice` |
@@ -63,7 +65,7 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 11 条
+### str — 12 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -72,6 +74,7 @@ _Python 自带，直接写就行_
 | `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
 | `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
+| `str.partition()` | 按分隔符切成三段 | 输入分隔符，输出**固定三个**元素：分隔符左边、分隔符本身、分隔符右边 | — | `py.string.partition` |
 | `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
 | `str.split()` | 分割字符串 | 按分隔符把字符串切成列表 | — | `py.string.split` |
 | `str.startswith() / str.endswith()` | 判断开头或结尾 | 输入字符串 + 一个或多个候选，输出 `True/False`：是不是以它们开头（或结尾） | — | `py.string.startswith` |
@@ -80,7 +83,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 55 条
+## 标准库（要 import） — 57 条
 
 _标准库里现成的，import 之后可用_
 
@@ -104,10 +107,11 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `dataclasses.dataclass` | 用 dataclass 定义数据结构 | 输入「字段名 + 类型（+ 默认值）」，输出一个类：自动生成 `__init__`、`__repr__`、`__eq__` | `from dataclasses import dataclass, field` | `py.dataclass.define` |
 
-### datetime — 4 条
+### datetime — 5 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
+| `datetime + timedelta` | 日期加减几天 | 输入一个时间 + 一个间隔，输出新的时间；原对象不变，返回的是新对象 | `from datetime import datetime, timedelta` | `py.datetime.add_days` |
 | `datetime.diff` | 算两个时间差多少 | 输入两个时间对象，输出一个 `timedelta`（天数 + 秒数）；用 `.days` / `.total_seconds()` 取具体数值 | `from datetime import datetime` | `py.datetime.diff` |
 | `datetime.format` | 把时间格式化成字符串 | 输入一个时间对象 + 格式串，输出字符串；反过来解析用 `strptime` | `from datetime import datetime` | `py.datetime.format` |
 | `datetime.now` | 获取当前时间 | 拿到当前时间，并能格式化成字符串、算出两段代码之间的耗时 | `from datetime import datetime` | `py.datetime.now` |
@@ -196,10 +200,11 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 9 条
+### sqlite3 — 10 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
+| `CREATE INDEX` | 给字段建索引 | 输入表名 + 列名，建立一个「值的排好序的对照表」，之后按这列查询不用扫全表 | `import sqlite3` | `py.sqlite.create_index` |
 | `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
 | `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
 | `sqlite.delete` | 删除数据库记录 | 输入表名 + 条件，删除匹配的行；删空整表用 `DELETE FROM t`（不加 WHERE） | `import sqlite3` | `py.sqlite.delete` |
