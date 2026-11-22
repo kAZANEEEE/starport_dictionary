@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 87 条**
+**共 90 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 37 |
-| 标准库（要 import） | 50 |
+| 内置能力（不用 import） | 39 |
+| 标准库（要 import） | 51 |
 
-## 内置能力（不用 import） — 37 条
+## 内置能力（不用 import） — 39 条
 
 _Python 自带，直接写就行_
 
@@ -27,13 +27,14 @@ _Python 自带，直接写就行_
 | `with ... as（上下文管理器）` | 用 with 自动收尾 | 输入一个「上下文管理器」，输出它的资源对象，并在离开代码块时**自动执行收尾**（即使抛异常） | — | `py.exceptions.with` |
 | `zip` | 同时遍历两个列表 | 输入两个（或多个）可迭代对象，输出「(第一个的第 i 个, 第二个的第 i 个)」这样的元组；**长度不同时按最短的截断** | — | `py.list.zip` |
 
-### dict — 6 条
+### dict — 7 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `dict.fromkeys()` | 批量造一个字典 | 输入一批键 + 一个初值，输出字典：每个键都对应**同一个**初值对象；不传初值则都是 `None` | — | `py.dict.fromkeys` |
 | `dict.get` | 取字典里的值 | 按键取值 | — | `py.dict.get` |
 | `dict.items()` | 遍历字典 | 输入字典，逐个访问它的键、值或键值对；顺序等于插入顺序（3.7+） | — | `py.dict.iterate` |
+| `dict.keys() / dict.values() / dict.items()` | 拿字典的键或值列表 | 输入字典，输出键视图 / 值视图 / 键值对视图；**要真列表得 `list(...)` 套一层** | — | `py.dict.keys_values` |
 | `dict.pop` | 取出并删除字典里的项 | 输入键（+ 可选默认值），输出它的值并从字典移除；键不存在时：给了默认值就返回默认值，没给就抛 `KeyError` | — | `py.dict.pop` |
 | `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
@@ -61,12 +62,13 @@ _Python 自带，直接写就行_
 | `set 运算 & ｜ -` | 集合运算（交并差） | 输入两个集合（或能变成集合的序列），输出交、并、差的结果；**结果无序** | — | `py.set.ops` |
 | `set()` | 用集合去重 | 输入可迭代对象，输出一个**元素唯一**的集合；顺序不保证 | — | `py.set.dedupe` |
 
-### str — 10 条
+### str — 11 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `f-string / str.format()` | 格式化字符串 | 输入模板 + 变量，输出拼好的字符串 | — | `py.string.format` |
 | `str.count()` | 统计子串出现几次 | 输入字符串 + 子串，输出出现次数（整数）；**不重叠计数**，找不到返回 0 而不是报错 | — | `py.string.count` |
+| `str.encode() / bytes.decode()` | 字符串与字节互转 | 输入字符串 + 编码名，输出 `bytes`；反过来 `bytes.decode(编码)` 得到字符串 | — | `py.string.encode` |
 | `str.find() / str.index()` | 查找子串位置 | 输入字符串 + 子串，输出首次出现的下标；`find` 找不到返回 **-1**，`index` 找不到**抛异常** | — | `py.string.find` |
 | `str.join()` | 把列表拼成字符串 | 输入一个字符串列表 + 一个分隔符，输出把它们连起来的一个字符串（分隔符插在中间，不在末尾） | — | `py.string.join` |
 | `str.replace()` | 字符串替换 | 把字符串里的某段文字换成另一段，可以限制替换几次 | — | `py.string.replace` |
@@ -77,7 +79,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 50 条
+## 标准库（要 import） — 51 条
 
 _标准库里现成的，import 之后可用_
 
@@ -157,13 +159,14 @@ _标准库里现成的，import 之后可用_
 | `os.rename` | 重命名或移动文件 | 输入源路径 + 目标路径，改名字或挪位置；同盘可直接 `rename`，跨盘要用 `shutil.move` | `import os` | `py.os.rename` |
 | `os.walk()` | 递归遍历目录树（os.walk） | 输入根目录，逐个产出 `(当前目录路径, 子目录名列表, 文件名列表)` 三元组；默认自顶向下 | `import os` | `py.os.walk` |
 
-### pathlib — 6 条
+### pathlib — 7 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `pathlib.Path.exists` | 判断文件或目录是否存在 | 问一个路径到底有没有东西，以及它是文件还是目录 | `from pathlib import Path` | `py.fs.exists` |
 | `pathlib.Path.read_text` | 读取文本文件 | 把整个文本文件一次读成字符串 | `from pathlib import Path` | `py.fs.read_text` |
 | `pathlib.Path.rglob` | 遍历文件夹里所有文件 | 递归列出目录下的所有文件，包括子目录里的 | `from pathlib import Path` | `py.fs.traverse_directory` |
+| `pathlib.Path.stat().st_size` | 获取文件大小 | 输入文件路径，输出它占的**字节数**（整数）；路径不存在抛 `FileNotFoundError` | `from pathlib import Path` | `py.fs.get_size` |
 | `pathlib.Path.suffix` | 判断文件后缀 | 取出文件名的最后一个后缀，统一转成小写再比较，判断它是不是 `.py` 文件 | `from pathlib import Path` | `py.fs.check_extension` |
 | `pathlib.Path.suffix` | 获取文件后缀 | 从路径里取出最后一个后缀，返回带点号的字符串，比如 `".py"` | `from pathlib import Path` | `py.fs.get_extension` |
 | `pathlib.Path.write_text` | 写入文本文件 | 把字符串写进文件 | `from pathlib import Path` | `py.fs.write_text` |
