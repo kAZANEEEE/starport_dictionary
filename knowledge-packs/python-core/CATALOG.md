@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 106 条**
+**共 109 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 44 |
-| 标准库（要 import） | 62 |
+| 内置能力（不用 import） | 45 |
+| 标准库（要 import） | 64 |
 
-## 内置能力（不用 import） — 44 条
+## 内置能力（不用 import） — 45 条
 
 _Python 自带，直接写就行_
 
@@ -40,7 +40,7 @@ _Python 自带，直接写就行_
 | `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
 
-### list — 13 条
+### list — 14 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -48,6 +48,7 @@ _Python 自带，直接写就行_
 | `dict.fromkeys()` | 列表去重 | 把列表里重复的值去掉，只留第一次出现的位置，顺序不变 | — | `py.list.dedupe` |
 | `filter() / 列表推导式` | 按条件筛选列表 | 输入列表 + 一个判断条件，输出**只包含通过条件的元素的新列表**，原列表不变 | — | `py.list.filter` |
 | `list.copy() / copy.deepcopy()` | 复制列表（浅拷贝的坑） | 输入列表，输出一个新列表；**只复制最外层**，里面的可变元素仍和原列表共享 | — | `py.list.copy` |
+| `list.count()` | 数某个值出现几次 | 输入一个值，输出它在列表里出现了几次；找不到返回 0，不报错 | — | `py.list.count` |
 | `list.extend()` | 往列表里追加多个元素 | 输入可迭代对象，把它里面的元素**逐个**接到列表末尾；原地修改，返回 None | — | `py.list.extend` |
 | `list.index() / in` | 查找列表里的元素 | 判断某个值在不在列表里（`in`），或者取它第一次出现的下标（`index`） | — | `py.list.find` |
 | `list.insert()` | 在指定位置插入元素 | 输入下标 + 元素，把元素插到该下标**之前**（原元素和后面全部后移）；原地修改，返回 None | — | `py.list.insert` |
@@ -84,7 +85,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 62 条
+## 标准库（要 import） — 64 条
 
 _标准库里现成的，import 之后可用_
 
@@ -108,7 +109,7 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `dataclasses.dataclass` | 用 dataclass 定义数据结构 | 输入「字段名 + 类型（+ 默认值）」，输出一个类：自动生成 `__init__`、`__repr__`、`__eq__` | `from dataclasses import dataclass, field` | `py.dataclass.define` |
 
-### datetime — 5 条
+### datetime — 6 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -117,6 +118,7 @@ _标准库里现成的，import 之后可用_
 | `datetime.format` | 把时间格式化成字符串 | 输入一个时间对象 + 格式串，输出字符串；反过来解析用 `strptime` | `from datetime import datetime` | `py.datetime.format` |
 | `datetime.now` | 获取当前时间 | 拿到当前时间，并能格式化成字符串、算出两段代码之间的耗时 | `from datetime import datetime` | `py.datetime.now` |
 | `datetime.parse` | 把字符串解析成时间 | 输入日期时间字符串 + 格式串，输出 `datetime` 对象；格式对不上就抛 `ValueError` | `from datetime import datetime` | `py.datetime.parse` |
+| `datetime.weekday() / isoweekday()` | 判断星期几 | 输入一个日期，输出它是周几的数字；中文名字要自己映射（标准库不内置中文星期） | `from datetime import datetime` | `py.datetime.weekday` |
 
 ### functools — 1 条
 
@@ -210,12 +212,13 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 11 条
+### sqlite3 — 12 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `CREATE INDEX` | 给字段建索引 | 输入表名 + 列名，建立一个「值的排好序的对照表」，之后按这列查询不用扫全表 | `import sqlite3` | `py.sqlite.create_index` |
 | `DROP TABLE` | 删除表 | 输入表名，把整张表（结构 + 所有数据）从数据库删掉；只想清数据不删表用 `DELETE FROM 表` | `import sqlite3` | `py.sqlite.drop_table` |
+| `SELECT COUNT(*)` | 统计表里有多少行 | 输入表名（可带条件），输出行数；只返回一个数字，不把数据取出来 | `import sqlite3` | `py.sqlite.count_rows` |
 | `sqlite.connect` | 连接 SQLite 数据库 | 输入数据库文件路径，输出连接对象；文件不存在会**自动创建**，不是报错 | `import sqlite3` | `py.sqlite.connect` |
 | `sqlite.create_table` | 建表 | 输入表名 + 字段定义，创建一张表；用 `IF NOT EXISTS` 可重复执行不报错 | `import sqlite3` | `py.sqlite.create_table` |
 | `sqlite.delete` | 删除数据库记录 | 输入表名 + 条件，删除匹配的行；删空整表用 `DELETE FROM t`（不加 WHERE） | `import sqlite3` | `py.sqlite.delete` |
