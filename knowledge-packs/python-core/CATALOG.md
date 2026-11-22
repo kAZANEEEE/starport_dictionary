@@ -3,12 +3,12 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 93 条**
+**共 95 条**
 
 | 层 | 条数 |
 |---|---|
 | 内置能力（不用 import） | 40 |
-| 标准库（要 import） | 53 |
+| 标准库（要 import） | 55 |
 
 ## 内置能力（不用 import） — 40 条
 
@@ -80,7 +80,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 53 条
+## 标准库（要 import） — 55 条
 
 _标准库里现成的，import 之后可用_
 
@@ -148,10 +148,11 @@ _标准库里现成的，import 之后可用_
 | `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
-### os — 8 条
+### os — 9 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
+| `os.chdir()` | 切换工作目录 | 输入一个目录路径，把它设成当前工作目录；之后的相对路径都以它为基准 | `import os` | `py.os.chdir` |
 | `os.getcwd` | 获取当前工作目录 | 问程序“我现在站在哪个目录” | `import os` | `py.os.getcwd` |
 | `os.getenv` | 读取环境变量 | 输入变量名，输出它的值（字符串）；不存在时返回 `None` 或你给的默认值 | `import os` | `py.os.getenv` |
 | `os.listdir` | 列出目录里的东西 | 拿到一个目录下的所有条目名（文件和子目录混在一起，**不含子目录里的内容**） | `import os` | `py.os.listdir` |
@@ -195,7 +196,7 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 8 条
+### sqlite3 — 9 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -206,6 +207,7 @@ _标准库里现成的，import 之后可用_
 | `sqlite.select` | 查询数据库记录 | 输入 SQL + 参数，输出结果集；`fetchall` 全取、`fetchone` 取一条、`fetchmany(n)` 取 n 条 | `import sqlite3` | `py.sqlite.select` |
 | `sqlite.transaction` | 事务处理 | 把多条写操作打包：全部成功才 `commit()`，中途出错就 `rollback()`，数据库回到操作前 | `import sqlite3` | `py.sqlite.transaction` |
 | `sqlite.update` | 更新数据库记录 | 输入表名、要改的字段、条件，更新匹配的行；返回没值，但 `cur.rowcount` 告诉你改了几行 | `import sqlite3` | `py.sqlite.update` |
+| `sqlite3.Cursor.executemany()` | 批量插入数据 | 输入一条带占位符的 SQL + 一批参数，把每项参数各执行一次；**一次调用完成全部插入** | `import sqlite3` | `py.sqlite.executemany` |
 | `sqlite3.Row` | 查询结果按列名取值 | 输入连接（设置 `row_factory`），输出「既能下标、又能按列名取」的行对象；`dict(row)` 可转普通字典 | `import sqlite3` | `py.sqlite.row_factory` |
 
 ### time — 2 条
