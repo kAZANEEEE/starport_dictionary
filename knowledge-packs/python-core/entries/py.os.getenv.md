@@ -8,6 +8,18 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.getenv"
+signature: "os.getenv(\"变量名\", 默认值)"
+args:
+  - name: "变量名"
+    required: true
+    accepts: "环境变量名字，如 \"PATH\""
+    nesting: "可以"
+  - name: "默认值"
+    required: false
+    default: "None"
+    accepts: "取不到时返回什么"
+    nesting: "可以"
+returns: "字符串或默认值：环境变量的值**永远是字符串**，数字要自己 int()"
 
 object:
   id: env.variable

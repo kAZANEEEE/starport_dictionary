@@ -8,6 +8,18 @@ module: argparse
 origin: stdlib
 import: "import argparse"
 qualname: "argparse.ArgumentParser"
+signature: "ArgumentParser().add_argument(...).parse_args()"
+args:
+  - name: "位置参数"
+    required: true
+    accepts: "不带横线的名字，如 add_argument(\"path\")"
+    nesting: "可以，可给多个但顺序不能乱"
+  - name: "可选参数"
+    required: false
+    default: "params such as default/type"
+    accepts: "带横线的名字，如 add_argument(\"--count\", type=int, default=1)"
+    nesting: "可以，type 可写 int/float/str"
+returns: "Namespace 对象：args.path 这样取；写法不合法时自动打印帮助并退出"
 
 object:
   id: cli.args

@@ -8,6 +8,13 @@ module: itertools
 origin: stdlib
 import: "from itertools import chain"
 qualname: "itertools.chain"
+signature: "chain(a, b, ...)"
+args:
+  - name: "a, b, ..."
+    required: true
+    accepts: "任意多个可迭代对象"
+    nesting: "可以"
+returns: "迭代器：依次取完所有来源；不复制数据，所以只能遍历一次"
 
 object:
   id: list.element

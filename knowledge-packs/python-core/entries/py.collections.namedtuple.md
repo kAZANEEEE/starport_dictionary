@@ -8,6 +8,17 @@ module: collections
 origin: stdlib
 import: "from collections import namedtuple"
 qualname: "collections.namedtuple"
+signature: "namedtuple(\"类型名\", \"字段1 字段2\")"
+args:
+  - name: "类型名"
+    required: true
+    accepts: "给这个结构起的名字"
+    nesting: "一般直接写字面量"
+  - name: "字段名"
+    required: true
+    accepts: "空格或逗号分隔，如 \"x y\" 或 [\"x\", \"y\"]"
+    nesting: "一般直接写字面量"
+returns: "一个类：实例可按字段名取（p.x）也可按下标取（p[0]），不可变"
 
 object:
   id: type.annotation

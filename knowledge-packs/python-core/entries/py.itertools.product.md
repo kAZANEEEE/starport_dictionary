@@ -8,6 +8,18 @@ module: itertools
 origin: stdlib
 import: "from itertools import product"
 qualname: "itertools.product"
+signature: "product(a, b, repeat=1)"
+args:
+  - name: "a, b, ..."
+    required: true
+    accepts: "任意多个可迭代对象"
+    nesting: "可以"
+  - name: "repeat"
+    required: false
+    default: "1"
+    accepts: "自己和自己组合几次"
+    nesting: "一般直接写数字"
+returns: "迭代器：所有搭配的元组；总数是各列表长度的乘积（会爆炸，注意）"
 
 object:
   id: list.element

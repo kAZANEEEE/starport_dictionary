@@ -8,6 +8,13 @@ module: datetime
 origin: stdlib
 import: "from datetime import datetime"
 qualname: "datetime.diff"
+signature: "dt_a - dt_b"
+args:
+  - name: "两个时间"
+    required: true
+    accepts: "两个 datetime（时区要一致）"
+    nesting: "可以，可以和 timedelta 一起参与运算"
+returns: "timedelta：间隔。用 .days 取整天、.total_seconds() 取总秒数"
 
 object:
   id: datetime.time

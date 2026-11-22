@@ -8,6 +8,18 @@ module: os
 origin: stdlib
 import: "import os"
 qualname: "os.walk()"
+signature: "os.walk(根目录, topdown=True)"
+args:
+  - name: "根目录"
+    required: true
+    accepts: "从哪个目录开始往下走"
+    nesting: "可以"
+  - name: "topdown"
+    required: false
+    default: "True"
+    accepts: "True = 先父后子（可改 dirs 剪枝）；False = 反过来"
+    nesting: "一般直接写 True"
+returns: "生成器：每层给 (当前目录, 子目录名列表, 文件名列表)；只有名字没有路径"
 
 object:
   id: dir.list

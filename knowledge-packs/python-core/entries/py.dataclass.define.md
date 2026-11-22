@@ -8,6 +8,18 @@ module: dataclasses
 origin: stdlib
 import: "from dataclasses import dataclass, field"
 qualname: "dataclasses.dataclass"
+signature: "@dataclass  +  class 名字: 字段: 类型 = 默认值"
+args:
+  - name: "字段声明"
+    required: true
+    accepts: "带类型标注的类属性；有默认值的要写在后面"
+    nesting: "可以，可变默认值用 field(default_factory=list)"
+  - name: "frozen"
+    required: false
+    default: "False"
+    accepts: "True = 生成不可变对象，之后赋值会抛异常"
+    nesting: "一般直接写 True/False"
+returns: "一个类：自动带 __init__ / __repr__ / __eq__；asdict() 可转字典"
 
 object:
   id: type.annotation

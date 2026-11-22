@@ -8,6 +8,14 @@ module: typing
 origin: stdlib
 import: "from typing import Optional"
 qualname: "X | None / typing.Optional"
+signature: "def 函数(参数: 类型 | None = None)"
+args:
+  - name: "参数"
+    required: false
+    default: "None"
+    accepts: "默认值写 None，函数里再 if x is None: x = []"
+    nesting: "可以，但别把 [] 直接当默认值（会所有调用共享）"
+returns: "无返回值：这是写法约定；判断「传没传」要用 is None，不是 not x"
 
 object:
   id: type.annotation

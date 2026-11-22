@@ -8,6 +8,13 @@ module: collections
 origin: stdlib
 import: "from collections import Counter, defaultdict"
 qualname: "collections.defaultdict"
+signature: "defaultdict(工厂函数)"
+args:
+  - name: "工厂函数"
+    required: true
+    accepts: "list / int / set，或任何无参可调用对象"
+    nesting: "可以，写 lambda: 0 也行（注意是类名不是实例）"
+returns: "字典：缺键时自动造默认值并**写回**（和 get 的区别就在这）"
 
 object:
   id: dict.value

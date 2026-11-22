@@ -8,6 +8,14 @@ module: functools
 origin: stdlib
 import: "from functools import lru_cache"
 qualname: "functools.lru_cache"
+signature: "@lru_cache(maxsize=None)"
+args:
+  - name: "maxsize"
+    required: false
+    default: "128"
+    accepts: "最多缓存几条；None = 不限"
+    nesting: "一般直接写 None 或数字"
+returns: "装饰后的函数：参数相同直接返回上次结果；cache_info() 看命中情况"
 
 object:
   id: cache.result

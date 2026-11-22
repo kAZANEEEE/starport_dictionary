@@ -8,6 +8,13 @@ module: collections
 origin: stdlib
 import: "from collections import Counter, defaultdict"
 qualname: "collections.counter"
+signature: "Counter(可迭代对象)"
+args:
+  - name: "可迭代对象"
+    required: true
+    accepts: "任何可迭代对象；元素必须可哈希"
+    nesting: "可以，常见是列表或字符串"
+returns: "Counter（字典子类）：元素 → 次数；most_common(n) 取前 n 名"
 
 object:
   id: dict.value

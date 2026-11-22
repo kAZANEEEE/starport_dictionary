@@ -8,6 +8,14 @@ module: typing
 origin: stdlib
 import: "from typing import Optional"
 qualname: "typing 类型标注"
+signature: "def 函数(参数: 类型) -> 返回类型"
+args:
+  - name: "类型标注"
+    required: false
+    default: "无"
+    accepts: "int / str / list[int] / str | None 等"
+    nesting: "可以，能嵌套写 dict[str, list[int]]"
+returns: "无返回值：标注只存进函数的 __annotations__，运行时**不检查**类型"
 
 object:
   id: type.annotation
