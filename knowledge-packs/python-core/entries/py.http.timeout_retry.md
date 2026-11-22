@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: requests
 origin: thirdparty
+install: "pip install requests"
 import: "import requests"
 qualname: "requests.exceptions / 重试循环"
 signature: "try: requests.get(url, timeout=5) except requests.RequestException"

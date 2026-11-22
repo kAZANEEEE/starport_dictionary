@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: PySide6
 origin: thirdparty
+install: "pip install PySide6"
 import: "from PySide6.QtWidgets import QPushButton"
 qualname: "QPushButton.clicked.connect()"
 signature: "btn = QPushButton(\"文字\")  btn.clicked.connect(函数)"

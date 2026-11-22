@@ -79,6 +79,7 @@ class Entry:
     signature: str = ""     # 调用形状，如 sorted(iterable, *, key=None)
     args: tuple[Argument, ...] = ()   # 参数契约：填什么、能不能省、能不能嵌套
     returns: str = ""       # 返回什么：类型 + 一句话说明  # os / time / random / pathlib / PySide6 …（按库分册用）
+    install: str = ""       # 第三方库安装命令，如 pip install requests
     targets: tuple[str, ...] = ()
     constraints: tuple[Constraint, ...] = ()
     related_ids: tuple[str, ...] = ()

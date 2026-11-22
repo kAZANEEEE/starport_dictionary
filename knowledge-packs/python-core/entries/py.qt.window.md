@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: PySide6
 origin: thirdparty
+install: "pip install PySide6"
 import: "from PySide6.QtWidgets import QApplication, QMainWindow"
 qualname: "QApplication + QMainWindow"
 signature: "app = QApplication([])  →  win = QMainWindow()  →  app.exec()"

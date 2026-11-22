@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: requests
 origin: thirdparty
+install: "pip install requests"
 import: "import requests"
 qualname: "requests.post(json=...)"
 signature: "requests.post(url, json=数据, timeout=5)"

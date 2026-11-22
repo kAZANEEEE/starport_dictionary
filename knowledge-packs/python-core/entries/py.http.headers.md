@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: requests
 origin: thirdparty
+install: "pip install requests"
 import: "import requests"
 qualname: "requests.get(headers=...)"
 signature: "requests.get(url, headers={...})"

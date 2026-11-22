@@ -6,6 +6,7 @@ language: python
 category_id: programming.filesystem
 module: requests
 origin: thirdparty
+install: "pip install requests"
 import: "import requests"
 qualname: "requests.get(stream=True) + 分块写"
 signature: "requests.get(url, stream=True) → iter_content(块大小)"
