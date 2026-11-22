@@ -8,6 +8,23 @@ module: logging
 origin: stdlib
 import: "import logging"
 qualname: "logging.handlers.RotatingFileHandler"
+signature: "logger.addHandler(RotatingFileHandler(路径, maxBytes=, backupCount=))"
+args:
+  - name: "路径"
+    required: true
+    accepts: "日志文件路径；不存在会新建"
+    nesting: "可以"
+  - name: "maxBytes"
+    required: false
+    default: "0（不切分）"
+    accepts: "单个文件最大字节数，超了就切"
+    nesting: "一般直接写数字"
+  - name: "backupCount"
+    required: false
+    default: "0"
+    accepts: "最多保留几个备份文件"
+    nesting: "一般直接写数字"
+returns: "处理器对象：挂到 logger 上之后，日志会同时写进文件"
 
 object:
   id: log.record

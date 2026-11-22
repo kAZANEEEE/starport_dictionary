@@ -8,6 +8,13 @@ module: random
 origin: stdlib
 import: "import random"
 qualname: "random.randint()"
+signature: "random.randint(a, b)"
+args:
+  - name: "a, b"
+    required: true
+    accepts: "整数范围，**包含两端**；要不含右端用 randrange"
+    nesting: "可以，可以是变量"
+returns: "整数：a 到 b 之间（含两端）的一个随机数"
 
 object:
   id: random.number

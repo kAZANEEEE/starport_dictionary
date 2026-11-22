@@ -8,6 +8,13 @@ module: pathlib
 origin: stdlib
 import: "from pathlib import Path"
 qualname: "pathlib.Path.stat().st_size"
+signature: "os.path.getsize(path) / Path(path).stat().st_size"
+args:
+  - name: "path"
+    required: true
+    accepts: "文件路径；不存在会抛异常"
+    nesting: "可以"
+returns: "整数：字节数。目录拿到的是目录项本身大小，不是里面文件之和"
 
 object:
   id: file.size

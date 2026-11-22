@@ -8,6 +8,18 @@ module: socket
 origin: stdlib
 import: "import socket"
 qualname: "socket.create_connection()"
+signature: "socket.create_connection((主机, 端口), timeout=2)"
+args:
+  - name: "主机, 端口"
+    required: true
+    accepts: "地址和端口，如 (\"127.0.0.1\", 8000)"
+    nesting: "可以，可以是变量"
+  - name: "timeout"
+    required: false
+    default: "不限"
+    accepts: "最多等几秒；不设可能卡很久"
+    nesting: "一般直接写数字"
+returns: "连接对象（成功）或抛 OSError（失败）；只验证端口通不通，不验证接口是否正常"
 
 object:
   id: net.connection

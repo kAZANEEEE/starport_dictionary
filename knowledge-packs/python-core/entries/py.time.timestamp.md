@@ -8,6 +8,9 @@ module: time
 origin: stdlib
 import: "import time"
 qualname: "time.timestamp"
+signature: "time.time()"
+args: []
+returns: "浮点数：从 1970-01-01 UTC 到现在过了多少秒"
 
 object:
   id: datetime.time

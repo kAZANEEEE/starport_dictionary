@@ -8,6 +8,17 @@ module: re
 origin: stdlib
 import: "import re"
 qualname: "re.fullmatch() / re.match()"
+signature: "re.fullmatch(规则, 文本) / re.match(规则, 文本)"
+args:
+  - name: "规则"
+    required: true
+    accepts: "正则字符串，必须用 r\"...\" 原始字符串"
+    nesting: "可以，可以是 re.compile 过的对象"
+  - name: "文本"
+    required: true
+    accepts: "要检查的字符串"
+    nesting: "可以"
+returns: "Match 对象或 None；校验格式用 fullmatch（match 只要求从开头匹配）"
 
 object:
   id: regex.pattern

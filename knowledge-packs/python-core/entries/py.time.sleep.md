@@ -8,6 +8,13 @@ module: time
 origin: stdlib
 import: "import time"
 qualname: "time.sleep"
+signature: "time.sleep(秒)"
+args:
+  - name: "秒"
+    required: true
+    accepts: "可以是小数，如 0.5；精度受系统调度影响"
+    nesting: "可以，可以是变量"
+returns: "None：副作用是当前线程暂停；会阻塞界面，GUI 里要换成定时器"
 
 object:
   id: datetime.time

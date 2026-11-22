@@ -8,6 +8,13 @@ module: random
 origin: stdlib
 import: "import random"
 qualname: "random.choice"
+signature: "random.choice(序列)"
+args:
+  - name: "序列"
+    required: true
+    accepts: "非空的序列（列表、元组、字符串都行）"
+    nesting: "可以"
+returns: "序列里的某一个元素；空序列会抛 IndexError"
 
 object:
   id: random.number

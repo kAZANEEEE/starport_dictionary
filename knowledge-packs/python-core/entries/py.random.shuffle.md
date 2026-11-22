@@ -8,6 +8,13 @@ module: random
 origin: stdlib
 import: "import random"
 qualname: "random.shuffle"
+signature: "random.shuffle(items)"
+args:
+  - name: "items"
+    required: true
+    accepts: "可变序列（列表）；元组不行"
+    nesting: "可以"
+returns: "None：原地打乱；要「打乱后的副本」用 random.sample(items, len(items))"
 
 object:
   id: list.element

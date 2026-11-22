@@ -8,6 +8,13 @@ module: logging
 origin: stdlib
 import: "import logging"
 qualname: "logging.exception()"
+signature: "logging.exception(消息)"
+args:
+  - name: "消息"
+    required: true
+    accepts: "一句说明，堆栈会自动附在后面"
+    nesting: "可以，但建议用 logging.exception(\"x=%s\", x) 的惰性写法"
+returns: "None：写一条 ERROR 日志并带上当前异常的堆栈；只在 except 块里有效"
 
 object:
   id: log.record

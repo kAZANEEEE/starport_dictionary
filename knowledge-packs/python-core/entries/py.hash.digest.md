@@ -8,6 +8,18 @@ module: hashlib
 origin: stdlib
 import: "import hashlib"
 qualname: "hashlib.sha256()"
+signature: "hashlib.new(\"sha256\").update(字节).hexdigest()"
+args:
+  - name: "算法名"
+    required: false
+    default: "\"sha256\""
+    accepts: "\"sha256\"、\"md5\"、\"sha1\""
+    nesting: "可以，可以是变量"
+  - name: "字节"
+    required: true
+    accepts: "必须是 bytes（二进制读文件得到的那种），不能是字符串"
+    nesting: "可以，可以分块多次喂"
+returns: "字符串（hexdigest）：定长十六进制指纹；内容一变指纹就完全不同"
 
 object:
   id: hash.digest

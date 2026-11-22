@@ -8,6 +8,22 @@ module: re
 origin: stdlib
 import: "import re"
 qualname: "regex.sub"
+signature: "re.sub(规则, 替换内容, 文本, count=0)"
+args:
+  - name: "规则"
+    required: true
+    accepts: "正则字符串（r\"...\"）"
+    nesting: "可以"
+  - name: "替换内容"
+    required: true
+    accepts: "要换成什么；\\1 表示第一个分组（用 r\"\\1\"）"
+    nesting: "可以，也可以传一个函数按匹配动态决定"
+  - name: "count"
+    required: false
+    default: "0（全换）"
+    accepts: "最多替换几次"
+    nesting: "一般直接写数字"
+returns: "字符串：替换后的新字符串；原字符串不变"
 
 object:
   id: regex.pattern

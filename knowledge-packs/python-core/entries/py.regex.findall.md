@@ -8,6 +8,17 @@ module: re
 origin: stdlib
 import: "import re"
 qualname: "regex.findall"
+signature: "re.findall(规则, 文本)"
+args:
+  - name: "规则"
+    required: true
+    accepts: "正则字符串（r\"...\"）"
+    nesting: "可以"
+  - name: "文本"
+    required: true
+    accepts: "要在里面找的文本"
+    nesting: "可以"
+returns: "列表：所有匹配到的内容；规则里有分组时返回的是分组内容"
 
 object:
   id: regex.pattern

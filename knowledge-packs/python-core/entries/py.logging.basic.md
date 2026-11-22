@@ -8,6 +8,19 @@ module: logging
 origin: stdlib
 import: "import logging"
 qualname: "logging.basicConfig()"
+signature: "logging.basicConfig(level=logging.INFO, format=\"...\")"
+args:
+  - name: "level"
+    required: false
+    default: "WARNING"
+    accepts: "最低级别：DEBUG < INFO < WARNING < ERROR < CRITICAL"
+    nesting: "可以，写 logging.INFO 这类常量"
+  - name: "format"
+    required: false
+    default: "只有消息本体"
+    accepts: "日志格式模板，如 \"%(asctime)s %(levelname)s %(message)s\""
+    nesting: "一般直接写字面量"
+returns: "None：只做全局配置（且只在第一次调用时生效）；打日志用 logging.info 等"
 
 object:
   id: log.record
