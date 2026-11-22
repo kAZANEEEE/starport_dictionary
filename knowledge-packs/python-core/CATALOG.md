@@ -3,14 +3,14 @@
 > 由 `tools/gen_catalog.py` 从条目头生成。改条目内容或加条目后重跑脚本。
 > 手改这份会在下次生成时被覆盖。
 
-**共 90 条**
+**共 93 条**
 
 | 层 | 条数 |
 |---|---|
-| 内置能力（不用 import） | 39 |
-| 标准库（要 import） | 51 |
+| 内置能力（不用 import） | 40 |
+| 标准库（要 import） | 53 |
 
-## 内置能力（不用 import） — 39 条
+## 内置能力（不用 import） — 40 条
 
 _Python 自带，直接写就行_
 
@@ -39,13 +39,14 @@ _Python 自带，直接写就行_
 | `dict.setdefault` | 缺键时给个默认值 | 输入键 + 默认值，输出这个键的值：键存在原样返回，不存在就**写入默认值再返回** | — | `py.dict.setdefault` |
 | `dict.update() / dict ｜ dict` | 合并两个字典 | 输入两个字典，输出合并后的字典；**重复键以右边为准** | — | `py.dict.merge` |
 
-### list — 11 条
+### list — 12 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `any() / all()` | 判断有没有 / 是不是全都满足 | 输入一批真假值，输出一个布尔：`any` = 至少一个真，`all` = 全为真 | — | `py.list.any_all` |
 | `dict.fromkeys()` | 列表去重 | 把列表里重复的值去掉，只留第一次出现的位置，顺序不变 | — | `py.list.dedupe` |
 | `filter() / 列表推导式` | 按条件筛选列表 | 输入列表 + 一个判断条件，输出**只包含通过条件的元素的新列表**，原列表不变 | — | `py.list.filter` |
+| `list.copy() / copy.deepcopy()` | 复制列表（浅拷贝的坑） | 输入列表，输出一个新列表；**只复制最外层**，里面的可变元素仍和原列表共享 | — | `py.list.copy` |
 | `list.extend()` | 往列表里追加多个元素 | 输入可迭代对象，把它里面的元素**逐个**接到列表末尾；原地修改，返回 None | — | `py.list.extend` |
 | `list.index() / in` | 查找列表里的元素 | 判断某个值在不在列表里（`in`），或者取它第一次出现的下标（`index`） | — | `py.list.find` |
 | `list.insert()` | 在指定位置插入元素 | 输入下标 + 元素，把元素插到该下标**之前**（原元素和后面全部后移）；原地修改，返回 None | — | `py.list.insert` |
@@ -79,7 +80,7 @@ _Python 自带，直接写就行_
 | `str.zfill()` | 数字补零对齐 | 输入字符串 + 目标长度，输出左边补 0 到该长度的新字符串；已够长就原样返回 | — | `py.string.zfill` |
 
 
-## 标准库（要 import） — 51 条
+## 标准库（要 import） — 53 条
 
 _标准库里现成的，import 之后可用_
 
@@ -139,11 +140,12 @@ _标准库里现成的，import 之后可用_
 | `json.load()` | 读取 JSON 文件 | 把 JSON 文件解析成 Python 的字典或列表 | `import json` | `py.json.read` |
 | `json.loads` | 从字符串解析 JSON | 输入一段 JSON 文本，输出对应的 Python 对象（dict / list）；格式不合法抛 `JSONDecodeError` | `import json` | `py.json.loads` |
 
-### logging — 2 条
+### logging — 3 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
 | `logging.basicConfig()` | 输出日志（比 print 规范） | 输入一条消息 + 级别，输出到控制台（或文件）；低于设定级别的消息**直接丢弃不处理** | `import logging` | `py.logging.basic` |
+| `logging.exception()` | 记录异常堆栈到日志 | 输入一条说明，输出日志行 + **完整异常堆栈**；必须在 `except` 块里调用才有效 | `import logging` | `py.logging.exception` |
 | `logging.handlers.RotatingFileHandler` | 把日志写进文件 | 输入日志消息，输出到文件（可同时输出到控制台）；文件超过大小会自动切分 | `import logging` | `py.logging.file` |
 
 ### os — 8 条
@@ -193,7 +195,7 @@ _标准库里现成的，import 之后可用_
 |---|---|---|---|---|
 | `socket.create_connection()` | 检查网络能不能连上 | 尝试和某个地址的某个端口建立 TCP 连接，用“成不成功”判断可达性 | `import socket` | `py.net.check_connection` |
 
-### sqlite3 — 7 条
+### sqlite3 — 8 条
 
 | 全名 | 中文名 | 一句话效果 | 要写的 import | id |
 |---|---|---|---|---|
@@ -204,6 +206,7 @@ _标准库里现成的，import 之后可用_
 | `sqlite.select` | 查询数据库记录 | 输入 SQL + 参数，输出结果集；`fetchall` 全取、`fetchone` 取一条、`fetchmany(n)` 取 n 条 | `import sqlite3` | `py.sqlite.select` |
 | `sqlite.transaction` | 事务处理 | 把多条写操作打包：全部成功才 `commit()`，中途出错就 `rollback()`，数据库回到操作前 | `import sqlite3` | `py.sqlite.transaction` |
 | `sqlite.update` | 更新数据库记录 | 输入表名、要改的字段、条件，更新匹配的行；返回没值，但 `cur.rowcount` 告诉你改了几行 | `import sqlite3` | `py.sqlite.update` |
+| `sqlite3.Row` | 查询结果按列名取值 | 输入连接（设置 `row_factory`），输出「既能下标、又能按列名取」的行对象；`dict(row)` 可转普通字典 | `import sqlite3` | `py.sqlite.row_factory` |
 
 ### time — 2 条
 
